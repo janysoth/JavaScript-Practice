@@ -11,6 +11,7 @@
     box-sizing: border-box;
     border-spacing: 0;
     border: 1px grey solid;
+    text-align: center;
 }
 
 .odd-section {

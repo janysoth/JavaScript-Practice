@@ -56,33 +56,22 @@ const populateValues = (isSolvable, solution) => {
 
 const solve = () => {
     joinValues();
-    const data = submission.join('');
+    const data = {numbers: submission.join('')};
     console.log('data', data);
-    const options = {
-        method: 'POST',
-        url: 'https://solve-sudoku.p.rapidapi.com/',
-        headers: {
-            'content-type': 'application/json',
-            'X-RapidAPI-Key': process.env.RAPID_API_KEY,
-            'X-RapidAPI-Host': 'solve-sudoku.p.rapidapi.com'
-        },
-        data: {
-            puzzle: data
-        }
-    };
 
-    axios.request(options).then((response) => {
-        console.log(response.data);
-        populateValues(response.data.solvable, response.data.solution);
-    }).catch((error) => {
-        console.log(error);
-    });
-    // try {
-    //     const response = await axios.request(options);
-    //     console.log(response.data);
-    // } catch (error) {
-    //     console.error(error);
-    // }
+    fetch ('http://localhost:8000/solve', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })  .then(response => response.json())
+        .then(data => console.log(data))
+        .catch((error) => {
+            console.error('Error:', error);
+        })
+    
 }
 
 solveButton.addEventListener('click', solve);
