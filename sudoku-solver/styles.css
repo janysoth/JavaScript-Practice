@@ -1,0 +1,18 @@
+/* Anything in the div id of puzzle: */
+#puzzle {
+    width: 450px;
+    height: 450px;
+}
+
+/* Anything input inside of the div id of puzzle  */
+#puzzle input {
+    width: 50px;
+    height: 50px;
+    box-sizing: border-box;
+    border-spacing: 0;
+    border: 1px grey solid;
+}
+
+.odd-section {
+    background-color: goldenrod;
+}
