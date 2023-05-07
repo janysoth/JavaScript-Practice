@@ -19,10 +19,25 @@
     background-color: goldenrod;
 }
 
-button {
-    padding: 6px;
-    margin-top: 12px;
-    border-radius: 10px;
-    border-color: white;
+#solve-button {
     background-color: goldenrod;
+    color: white;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: none;
+
+}
+
+#solve-button:hover {
+    background-color: crimson;
+}
+
+h1 {
+    color: goldenrod;
+    text-decoration: underline;
+}
+
+p {
+    font-weight: bold;
 }
