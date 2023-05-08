@@ -3,7 +3,7 @@ const solveButton = document.querySelector('#solve-button');
 const solutionDisplay = document.querySelector('#solution');
 
 const squares = 81;
-const submission = [];
+let submission = [];
 
 for (let i = 0; i < squares; i++) {
     // Create Input Element:
@@ -14,6 +14,7 @@ for (let i = 0; i < squares; i++) {
     inputElement.setAttribute('min', 1);
     inputElement.setAttribute('max', 9);
 
+    // Add the color to the 5 small squares:
     if (
         ((i % 9 == 0 || i % 9 == 1 || i % 9 == 2) && i < 21) ||
         ((i % 9 == 6 || i % 9 == 7 || i % 9 == 8) && i < 27) ||
@@ -29,6 +30,7 @@ for (let i = 0; i < squares; i++) {
     puzzleBoard.appendChild(inputElement);
 }
 
+// To Get All of the User inputs for the squares: 
 const joinValues = () => {
     // To Grab all of the Input Elements: 
     const inputs = document.querySelectorAll('input');
@@ -42,6 +44,7 @@ const joinValues = () => {
     console.log(submission);
 }
 
+// To Display the Solution based on the User's Inputs for the squares:
 const populateValues = (isSolvable, solution) => {
     const inputs = document.querySelectorAll('input');
         if (isSolvable && solution) {
@@ -54,11 +57,14 @@ const populateValues = (isSolvable, solution) => {
         }
 }
 
+// To Solve the Sudoku's Problems: 
 const solve = () => {
     joinValues();
     const data = {numbers: submission.join('')};
     console.log('data', data);
 
+    // To Fetch the API from server.js from the back-end:
+    // Using localhost:8000, root solve:
     fetch ('http://localhost:8000/solve', {
         method: 'POST',
         headers: {
@@ -67,7 +73,11 @@ const solve = () => {
         },
         body: JSON.stringify(data)
     })  .then(response => response.json())
-        .then(data => console.log(data))
+        .then(data => {
+            console.log(data)
+            populateValues(data.solvable, data.solution);
+            submission = [];
+        })
         .catch((error) => {
             console.error('Error:', error);
         })

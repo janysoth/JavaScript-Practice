@@ -16,18 +16,16 @@ app.use(express.json());
 // Fetch the API from the backend:
 // Creating a new root:
 app.post('/solve', (req, res) => {
-  console.log('CCC', req);
   const options = {
     method: "POST",
     url: "https://solve-sudoku.p.rapidapi.com/",
     headers: {
       "content-type": "application/json",
       "X-RapidAPI-Host": "solve-sudoku.p.rapidapi.com",
-      "X-RapidAPI-Key": process.env.API_KEY
+      "X-RapidAPI-Key": process.env.API_KEY,
     },
     data: {
-      puzzle:
-        "2.............62....1....7...6..8...3...9...7...6..4...4....8....52.............3",
+      puzzle: req.body.numbers,
     },
   };
 
