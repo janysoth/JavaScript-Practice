@@ -1,10 +1,19 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ExchangeRate from "./ExchangeRate";
 
-function CurrencyConverter() {
+const CurrencyConverter = () => {
+  const [primaryCurrency, setPrimaryCurrency] = useState('');
+  const [secondaryCurrency, setSecondaryCurrency] = useState('');
   const currencies = ["BTC", "ETH", "USD", "XRP", "LTC", "ADA"];
-  // Set the value to option selected
-  const [chosenPrimaryCurrency, SetChosenPrimaryCurrency] = useState(null);
+
+  useEffect(() => {
+    console.log(primaryCurrency);
+  }, [primaryCurrency]);
+
+    useEffect(() => {
+      console.log(secondaryCurrency);
+    }, [secondaryCurrency]);
+
 
   return (
     <div className="currency-converter">
@@ -12,48 +21,48 @@ function CurrencyConverter() {
 
       <div className="input-box">
         <table>
-          <tbody>
-            <tr>
-              <td>Primary Currency:</td>
-              <td>
-                <input type="number" name="currency-amount-1" value={""} />
-              </td>
-              <td>
-                <select
-                  value={""}
-                  name="currency-option-1"
-                  className="currency-options"
-                >
-                  {currencies.map((currency, _index) => (
-                    <option key={_index}>{currency}</option>
-                  ))}
-                </select>
-              </td>
-            </tr>
-            <tr>
-              <td>Secondary Currency:</td>
-              <td>
-                <input type="number" name="currency-amount-2" value={""} />
-              </td>
-              <td>
-                <select
-                  value={""}
-                  name="currency-option-2"
-                  className="currency-options"
-                >
-                  {currencies.map((currency, _index) => (
-                    <option key={_index}>{currency}</option>
-                  ))}
-                </select>
-              </td>
-            </tr>
-          </tbody>
+          <tr>
+            <td>Primary Currency:</td>
+            <td>
+              <input type="number" name="currency-amount-1" value={""} />
+            </td>
+            <td>
+              <select
+                value={primaryCurrency}
+                name="currency-option-1"
+                className="currency-options"
+                onChange={(e) => setPrimaryCurrency(e.target.value)}
+              >
+                {currencies.map((currency) => (
+                  <option>{currency}</option>
+                ))}
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Secondary Currency:</td>
+            <td>
+              <input type="number" name="currency-amount-1" value={""} />
+            </td>
+            <td>
+              <select
+                value={secondaryCurrency}
+                name="currency-option-2"
+                className="currency-options"
+                onChange={(e) => setSecondaryCurrency(e.target.value)}
+              >
+                {currencies.map((currency) => (
+                  <option>{currency}</option>
+                ))}
+              </select>
+            </td>
+          </tr>
         </table>
       </div>
 
       <ExchangeRate />
     </div>
   );
-}
+};
 
 export default CurrencyConverter;
