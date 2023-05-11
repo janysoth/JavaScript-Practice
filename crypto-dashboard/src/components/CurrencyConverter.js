@@ -6,14 +6,6 @@ const CurrencyConverter = () => {
   const [secondaryCurrency, setSecondaryCurrency] = useState('');
   const currencies = ["BTC", "ETH", "USD", "XRP", "LTC", "ADA"];
 
-  useEffect(() => {
-    console.log(primaryCurrency);
-  }, [primaryCurrency]);
-
-    useEffect(() => {
-      console.log(secondaryCurrency);
-    }, [secondaryCurrency]);
-
 
   return (
     <div className="currency-converter">
