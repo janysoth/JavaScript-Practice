@@ -1,17 +1,11 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from "react";
-=======
 import { useState, useEffect } from "react";
->>>>>>> cb48c55 (Use useEffect to only set primaryCurrency and secondaryCurrrency once.)
+
 import ExchangeRate from "./ExchangeRate";
 
 const CurrencyConverter = () => {
-  const [primaryCurrency, setPrimaryCurrency] = useState('');
-  const [secondaryCurrency, setSecondaryCurrency] = useState('');
   const currencies = ["BTC", "ETH", "USD", "XRP", "LTC", "ADA"];
-<<<<<<< HEAD
 
-=======
   const [primaryCurrency, setPrimaryCurrency] = useState(null);
   const [secondaryCurrency, setSecondaryCurrency] = useState(null);
 
@@ -22,7 +16,6 @@ const CurrencyConverter = () => {
   useEffect(() => {
     console.log(secondaryCurrency);
   }, [secondaryCurrency]);
->>>>>>> cb48c55 (Use useEffect to only set primaryCurrency and secondaryCurrrency once.)
 
   return (
     <div className="currency-converter">
@@ -30,7 +23,6 @@ const CurrencyConverter = () => {
 
       <div className="input-box">
         <table>
-<<<<<<< HEAD
           <tr>
             <td>Primary Currency:</td>
             <td>
@@ -67,7 +59,6 @@ const CurrencyConverter = () => {
               </select>
             </td>
           </tr>
-=======
           <tbody>
             <tr>
               <td>Primary Currency</td>
@@ -108,7 +99,6 @@ const CurrencyConverter = () => {
               </td>
             </tr>
           </tbody>
->>>>>>> cb48c55 (Use useEffect to only set primaryCurrency and secondaryCurrrency once.)
         </table>
       </div>
 
