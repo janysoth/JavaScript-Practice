@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calculator App</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+      }
+
+      .calculator {
+        width: 300px;
+        margin: 0 auto;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+      }
+
+      h1 {
+        text-align: center;
+        margin-top: 0;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        height: 50px;
+        font-size: 24px;
+        text-align: right;
+        border: none;
+        background-color: #f2f2f2;
+        margin-bottom: 20px;
+        padding: 10px;
+        box-sizing: border-box;
+        border-radius: 5px;
+      }
+
+      button {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+        border: none;
+        background-color: #4caf50;
+        color: #fff;
+        border-radius: 5px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        transition: background-color 0.2s ease-in-out;
+      }
+
+      button:hover {
+        background-color: #3e8e41;
+      }
+
+      button:active {
+        background-color: #1e441e;
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .row:last-child {
+        margin-bottom: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="calculator">
+      <h1>Calculator App</h1>
+      <input type="text" id="result" readonly>
+      <div class="row">
+        <button onclick="clearResult()">C</button>
+        <button onclick="backspace()">CE</button>
+        <button onclick="insert('+')">+</button>
+        <button onclick="insert('-')">-</button>
+      </div>
+      <div class="row">
+        <button onclick="insert('7')">7</button>
+        <button onclick="insert('8')">8</button>
+        <button onclick="insert('9')">9</button>
+        <button onclick="insert('*')">x</button>
+      </div>
+      <div class="row">
+        <button onclick="insert('4')">4</button>
+        <button onclick="insert('5')">5</button>
+        <button onclick="insert('6')">6</button>
+        <button onclick="insert('/')">÷</button>
+      </div>
+      <div class="row">
+        <button onclick="insert('1')">1</button>
+        <button onclick="insert('2')">2</button>
+        <button onclick="insert('3')">3</button>
+        <button onclick="calculate()">=</button>
+      </div>
+      <div class="row">
+        <button onclick="insert('0')">0</button>
+        <button onclick="insert('.')">.</button>
+      </div>
+    </div>
+    <script>
+      let result = document.getElementById("result");
+
+      function insert(value) {
+        result.value += value;
+      }
+
+      function clearResult() {
+        result.value = "";
+      }
+
+      function backspace() {
+        result.value = result.value.slice(0, -1);
+      }
+
+      function calculate() {
+        try {
+          result.value = eval(result.value);
+        } catch (error) {
+          result.value = "Error";
+        }
+      }
+    </script>
+  </body>
+</html>
