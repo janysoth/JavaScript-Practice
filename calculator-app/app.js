@@ -41,6 +41,7 @@ function prepareExpression(expression) {
   expression = expression.replace("cos", "Math.cos");
   expression = expression.replace("tan", "Math.tan");
   expression = expression.replace("√", "Math.sqrt");
+  expression = expression.replace("÷", "/");
   return expression;
 }
 

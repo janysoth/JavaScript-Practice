@@ -11,7 +11,7 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 1rem;
-    width: 200px;
+    width: 15rem;
     background-color: goldenrod;
 }
 
@@ -29,6 +29,7 @@ body {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 0.5rem;
+
 }
 
 button {
@@ -38,6 +39,8 @@ button {
     font-size: 1.25rem;
     padding: 0.5rem;
     cursor: pointer;
+    border-radius: 50%;
+    
 }
 
 button:hover {
@@ -51,6 +54,7 @@ button:active {
 .equals {
     grid-column: 1 / span 4;
     background-color: #f0f0f0;
+    border-radius: 0%;
 }
 
 .equals:hover {
