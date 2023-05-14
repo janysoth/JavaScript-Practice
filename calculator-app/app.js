@@ -10,7 +10,7 @@ buttons.forEach((button) => {
 document.addEventListener("keydown", (event) => {
   const key = event.key;
   if (isAllowedKey(key)) {
-    event.preventDefault(); // Prevents default behavior for Enter key
+    event.preventDefault();
     handleInput(key === "Enter" ? "=" : key);
   }
 });
@@ -25,6 +25,10 @@ function handleInput(input) {
     } catch (error) {
       display.value = "Error";
     }
+  } else if (input === "+/-") {
+    display.value = -parseFloat(display.value);
+  } else if (input === "%") {
+    display.value = parseFloat(display.value) / 100;
   } else {
     display.value += input;
   }
