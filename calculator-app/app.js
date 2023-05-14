@@ -41,6 +41,7 @@ function prepareExpression(expression) {
   expression = expression.replace("cos", "Math.cos");
   expression = expression.replace("tan", "Math.tan");
   expression = expression.replace("√", "Math.sqrt");
+  expression = expression.replace("*", "*");
   expression = expression.replace("÷", "/");
   return expression;
 }
@@ -61,11 +62,28 @@ function isAllowedKey(key) {
     "+",
     "-",
     "/",
+    "*",
     "(",
     ")",
     "^",
     "Escape",
     "Enter",
+    "NumLock",
+    "Numpad0",
+    "Numpad1",
+    "Numpad2",
+    "Numpad3",
+    "Numpad4",
+    "Numpad5",
+    "Numpad6",
+    "Numpad7",
+    "Numpad8",
+    "Numpad9",
+    "NumpadAdd",
+    "NumpadSubtract",
+    "NumpadMultiply",
+    "NumpadDivide",
+    "NumpadDecimal",
   ];
   return allowedKeys.includes(key);
 }
