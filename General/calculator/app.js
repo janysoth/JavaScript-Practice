@@ -87,6 +87,34 @@ function toggleSign() {
   result.value = currentInput;
 }
 
+function handleKeyPress(event) {
+  const key = event.key;
+  if (key === "Enter") {
+    calculate();
+  } else if (key === "Backspace") {
+    deleteInput();
+  } else if (key === "+" || key === "-" || key === "*" || key === "/") {
+    handleOperator(key);
+  } else if (key === "%") {
+    handleOperator("%");
+  } else if (key === ".") {
+    appendInput(".");
+  } else if (
+      key === "0" ||
+      key === "1" ||
+      key === "2" ||
+      key === "3" ||
+      key === "4" ||
+      key === "5" ||
+      key === "6" ||
+      key === "7" ||
+      key === "8" ||
+      key === "9"
+    ) {
+    appendInput(key);
+  }
+}
+
 clear.addEventListener("click", clearInput);
 backspace.addEventListener("click", deleteInput);
 percent.addEventListener("click", () => handleOperator("%"));
@@ -107,3 +135,5 @@ equals.addEventListener("click", calculate);
 zero.addEventListener("click", () => appendInput("0"));
 decimal.addEventListener("click", () => appendInput("."));
 plusMinus.addEventListener("click", toggleSign);
+
+document.addEventListener("keydown", handleKeyPress);
