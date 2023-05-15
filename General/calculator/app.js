@@ -93,6 +93,8 @@ function handleKeyPress(event) {
     calculate();
   } else if (key === "Backspace") {
     deleteInput();
+  } else if (key === "Escape") {
+    clearInput();
   } else if (key === "+" || key === "-" || key === "*" || key === "/") {
     handleOperator(key);
   } else if (key === "%") {
