@@ -18,6 +18,8 @@ document.addEventListener("keydown", (event) => {
 function handleInput(input) {
   if (input === "C" || input === "Escape") {
     display.value = "";
+  } else if (input === "⌫" || input === "Backspace") {
+    display.value = display.value.slice(0, -1);
   } else if (input === "=") {
     try {
       const expression = prepareExpression(display.value);
@@ -35,14 +37,9 @@ function handleInput(input) {
 }
 
 function prepareExpression(expression) {
-  expression = expression.replace("π", Math.PI);
-  expression = expression.replace("^", "**");
-  expression = expression.replace("sin", "Math.sin");
-  expression = expression.replace("cos", "Math.cos");
-  expression = expression.replace("tan", "Math.tan");
-  expression = expression.replace("√", "Math.sqrt");
-  expression = expression.replace("*", "*");
+  expression = expression.replace("x", "*");
   expression = expression.replace("÷", "/");
+  expression = expression.replace(/[^-()\d/*+.]/g, "");
   return expression;
 }
 
@@ -68,6 +65,7 @@ function isAllowedKey(key) {
     "^",
     "Escape",
     "Enter",
+    "Backspace",
     "NumLock",
     "Numpad0",
     "Numpad1",
