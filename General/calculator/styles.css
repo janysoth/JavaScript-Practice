@@ -57,6 +57,10 @@ button {
   background-color: goldenrod;
 }
 
+.equal {
+  background-color: lightskyblue;
+}
+
 button:hover {
   background-color: #e6e6e6;
 }
