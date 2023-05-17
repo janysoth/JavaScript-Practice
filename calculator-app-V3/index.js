@@ -17,7 +17,12 @@ class Calculator {
     }
 
     appendNumber(number){
-
+        // To Allow the User to Only Put One ".":
+        // If there's already a "." there, the  function will stop:
+        if (number === '.' && this.currentOperand.includes('.')) return;
+        
+        // Convert to String in order to display on the Output:
+        this.currentOperand = this.currentOperand.toString() + number.toString();
     }
 
     chooseOperation(operation){
@@ -29,7 +34,7 @@ class Calculator {
     }
 
     updateDisplay(){
-
+        this.currentOperandTextElement.innerText = this.currentOperand;
     }
 
 }
@@ -43,3 +48,16 @@ const previousOperandTextElement = document.querySelector('[data-previous-operan
 const currentOperandTextElement = document.querySelector('[data-current-operand]');
 
 
+// Create a new Calculator Class:
+const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement);
+
+// To Loop All of the buttons: 
+numberButtons.forEach(button => {
+    // For Every Button, We add an EventListner: 
+    button.addEventListener('click', () => {
+        // To Add a Number when User Click on a Button:
+        calculator.appendNumber(button.innerText);
+        // To Update the Display when User Click on a Button:
+        calculator.updateDisplay();
+    })
+})
