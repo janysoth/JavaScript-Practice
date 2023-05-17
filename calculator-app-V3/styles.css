@@ -7,7 +7,7 @@
 body {
     padding: 0;
     margin:  0;
-    background: linear-gradient(to right, #13e3b6, #00aaff);
+    background: linear-gradient(to right, goldenrod, #00aaff);
 }
 
 .calculator-grid {
@@ -25,5 +25,5 @@ body {
     font-size: 2rem;
     border: 1px solid white;
     outline: none;
-    background-color: rgba(255, 255, 255, .75);
+    background-color: rgba(255, 255, 255, .50);
 }
