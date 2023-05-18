@@ -13,7 +13,7 @@ class Calculator {
     }
 
     delete(){
-
+        this.currentOperand = this.currentOperand.toString().slice(0, -1);
     }
 
     appendNumber(number){
@@ -118,4 +118,15 @@ equalsButton.addEventListener('click', button  => {
     calculator.updateDisplay();
 });
 
+// When user click the AC Button:
+allClearButton.addEventListener('click', button  => {
+    calculator.clear();
+    calculator.updateDisplay();
+});
+
+// When user click the Delete Button:
+deleteButton.addEventListener('click', button  => {
+    calculator.delete();
+    calculator.updateDisplay();
+});
 
