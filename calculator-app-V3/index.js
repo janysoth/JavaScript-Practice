@@ -27,6 +27,9 @@ class Calculator {
 
     chooseOperation(operation){
         if(this.currentOperand === '') return;
+        if (this.previousOperand  !== '') {
+            this.compute();
+        }
         this.operation = operation;
         // Set the previousOperand to currentOperand: 
         this.previousOperand = this.currentOperand;
@@ -35,7 +38,37 @@ class Calculator {
     }
 
     compute(){
+        // The Result of the Compute Function:
+        let computation; 
+        const prev = parseFloat(this.previousOperand); //Covert previousOperand to a number
+        const current = parseFloat(this.currentOperand); // Covert currentOperand to a number
 
+        //  To Check if the User Click Anything: 
+        if(isNaN(prev) || isNaN(current)) return;
+        
+        // Use Switch function to run each operator: 
+        switch(this.operation){
+            case '+':
+                computation = prev + current;
+                break;
+            case '-':
+                computation = prev - current;
+                break;
+            case '*':
+                computation = prev * current;
+                break;
+            case '/':
+                computation = prev / current;
+                break;
+            // Default: like a else status, none of the case is excuted:
+            // Meaning we have an invalid operation, therefore no computation is executed:
+            default:
+                return;
+            
+        }
+        this.currentOperand = computation;
+        this.operation =  undefined;
+        this.previousOperand = '';
     }
 
     updateDisplay(){
@@ -78,3 +111,11 @@ operationButtons.forEach(button => {
         calculator.updateDisplay();
     })
 })
+
+// When user click the Equal Button:
+equalsButton.addEventListener('click', button  => {
+    calculator.compute();
+    calculator.updateDisplay();
+});
+
+
