@@ -29,7 +29,16 @@ body {
 }
 
 .calculator-grid > button:hover {
-    background-color: rgba(234, 157, 15, 0.8);
+    background-color: rgba(32, 233, 233, 0.8);
+}
+
+.calculator-grid .operation {
+    background-color: goldenrod;
+}
+
+.calculator-grid .equal-button {
+    grid-column: span 2;
+    background-color: goldenrod;
 }
 
 .span-two {
