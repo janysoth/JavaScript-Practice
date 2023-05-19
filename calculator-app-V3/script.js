@@ -1,14 +1,13 @@
-// Create a Calculator Class:
 class Calculator {
   constructor(previousOperandTextElement, currentOperandTextElement) {
     this.previousOperandTextElement = previousOperandTextElement;
     this.currentOperandTextElement = currentOperandTextElement;
-    this.clear(); // Clear everthing once you create a new Calculator class
+    this.clear(); // To Clear Everything Out
   }
-  // To Add all of the Functions Calculator Class Has:
+
   clear() {
-    this.previousOperand = "";
     this.currentOperand = "";
+    this.previousOperand = "";
     this.operation = undefined;
   }
 
@@ -18,10 +17,10 @@ class Calculator {
 
   appendNumber(number) {
     // To Allow the User to Only Put One ".":
-    // If there's already a "." there, the  function will stop:
+    // If there's already a "." there, the function will stop:
     if (number === "." && this.currentOperand.includes(".")) return;
 
-    // Convert to String in order to display on the Output:
+    // Convert to String in order to display on the output:
     this.currentOperand = this.currentOperand.toString() + number.toString();
   }
 
@@ -31,48 +30,51 @@ class Calculator {
       this.compute();
     }
     this.operation = operation;
-    // Set the previousOperand to currentOperand:
     this.previousOperand = this.currentOperand;
-    // Clear Out the currentOperand:
     this.currentOperand = "";
   }
 
   compute() {
-    // The Result of the Compute Function:
-    let computation;
-    const prev = parseFloat(this.previousOperand); //Covert previousOperand to a number
-    const current = parseFloat(this.currentOperand); // Covert currentOperand to a number
+    let result;
+    // Convert Both prev and current to numbers:
+    const prev = parseFloat(this.previousOperand);
+    const current = parseFloat(this.currentOperand);
 
-    //  To Check if the User Click Anything:
+    // Perform the Operation:
+    // Check if the User Click Anything:
     if (isNaN(prev) || isNaN(current)) return;
 
-    // Use Switch function to run each operator:
+    // Use Switch Function to Run Each Operator:
     switch (this.operation) {
       case "+":
-        computation = prev + current;
+        result = prev + current;
         break;
       case "-":
-        computation = prev - current;
+        result = prev - current;
         break;
       case "x":
-        computation = prev * current;
+        result = prev * current;
         break;
       case "÷":
-        computation = prev / current;
+        result = prev / current;
         break;
       // Default: like a else status, none of the case is excuted:
       // Meaning we have an invalid operation, therefore no computation is executed:
       default:
         return;
     }
-    this.currentOperand = computation;
+    this.currentOperand = result.toString();
+    if (this.currentOperand.includes(".")) {
+      // To Only Show 8 Decimals
+      this.currentOperand = parseFloat(this.currentOperand).toFixed(8);
+    }
     this.operation = undefined;
     this.previousOperand = "";
   }
 
-  // Helper Function to get display the value of input:
+  // Helper Function to Display of the Input Value:
   getDisplayNumber(number) {
-    // Turn the Number into String to be able to split
+    // Turn the Number into String to be able to Split
     // Between the Integer and Decimal Numbers:
     const stringNumber = number.toString();
 
@@ -83,7 +85,6 @@ class Calculator {
     const decimalDigits = stringNumber.split(".")[1];
 
     let integerDisplay;
-
     if (isNaN(integerDigits)) {
       integerDisplay = "";
     } else {
@@ -105,10 +106,36 @@ class Calculator {
         this.previousOperand
       )} ${this.operation}`;
     } else {
-      // To Clear the Previous Operand After The Calculation is Completed:
+      // To Clear the Previous Operand After the Calculation is Completed:
       this.previousOperandTextElement.innerText = "";
     }
   }
+}
+
+function handleNumberClick(calculator, button) {
+  calculator.appendNumber(button.innerText);
+  calculator.updateDisplay();
+}
+
+function handleOperationClick(calculator, button) {
+  calculator.chooseOperation(button.innerText);
+  calculator.updateDisplay();
+}
+
+function handleEqualsClick(calculator) {
+  calculator.compute();
+  calculator.updateDisplay();
+  calculator.clear();
+}
+
+function handleAllClearClick(calculator) {
+  calculator.clear();
+  calculator.updateDisplay();
+}
+
+function handleDeleteClick(calculator) {
+  calculator.delete();
+  calculator.updateDisplay();
 }
 
 const numberButtons = document.querySelectorAll("[data-number]");
@@ -123,49 +150,38 @@ const currentOperandTextElement = document.querySelector(
   "[data-current-operand]"
 );
 
-// Create a new Calculator Class:
+// Create a New Calculator Class:
 const calculator = new Calculator(
   previousOperandTextElement,
   currentOperandTextElement
 );
 
-// To Loop All of the buttons:
+// To Loop All of the Button 
+// To Add handNumberClick Functon:
 numberButtons.forEach((button) => {
-  // For Every Button, We add an EventListner:
   button.addEventListener("click", () => {
-    // To Add a Number when User Click on a Button:
-    calculator.appendNumber(button.innerText);
-    // To Update the Display when User Click on a Button:
-    calculator.updateDisplay();
+    handleNumberClick(calculator, button);
   });
 });
 
-// To Loop All of the buttons:
+// When User Click On Any Operator:
 operationButtons.forEach((button) => {
-  // For Every Button, We add an EventListner:
   button.addEventListener("click", () => {
-    // To Add a Number when User Click on a Button:
-    calculator.chooseOperation(button.innerText);
-    // To Update the Display when User Click on a Button:
-    calculator.updateDisplay();
+    handleOperationClick(calculator, button);
   });
 });
 
-// When user click the Equal Button:
-equalsButton.addEventListener("click", (button) => {
-  calculator.compute();
-  calculator.updateDisplay();
-  calculator.clear();
+// When User Click the Equal Button:
+equalsButton.addEventListener("click", () => {
+  handleEqualsClick(calculator);
 });
 
-// When user click the AC Button:
-allClearButton.addEventListener("click", (button) => {
-  calculator.clear();
-  calculator.updateDisplay();
+// When User Click the AC Button:
+allClearButton.addEventListener("click", () => {
+  handleAllClearClick(calculator);
 });
 
-// When user click the Delete Button:
-deleteButton.addEventListener("click", (button) => {
-  calculator.delete();
-  calculator.updateDisplay();
+// When User Click the Delete Button:
+deleteButton.addEventListener("click", () => {
+  handleDeleteClick(calculator);
 });
