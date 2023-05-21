@@ -35,9 +35,9 @@ class Calculator {
   }
 
   compute() {
-    // To Store the Result Aftet Calculation: 
+    // To Store the Result Aftet Calculation:
     let result;
-    
+
     // Covert Both Variables to Numbers in order to calculate:
     const prev = parseFloat(this.previousOperand);
     const current = parseFloat(this.currentOperand);
@@ -132,7 +132,7 @@ function handleNumberClick(calculator, button) {
 
 function handleOperationClick(calculator, button) {
   // If the Users Did Not Click on Any Number
-  // Prior to Click on the Operator Button: 
+  // Prior to Click on the Operator Button:
   if (calculator.currentOperand === "") return;
 
   // Allow User to Compute Wihout Clicking on Equal Button
@@ -164,11 +164,20 @@ function handleDeleteClick(calculator) {
   calculator.updateDisplay();
 }
 
+function handlePlusMinusClick(calculator) {
+  // Multiply the current operand by -1 to toggle its sign
+  calculator.currentOperand = (
+    parseFloat(calculator.currentOperand) * -1
+  ).toString();
+  calculator.updateDisplay();
+}
+
 const numberButtons = document.querySelectorAll("[data-number]");
 const operationButtons = document.querySelectorAll("[data-operation]");
 const equalsButton = document.querySelector("[data-equals]");
 const deleteButton = document.querySelector("[data-delete]");
 const allClearButton = document.querySelector("[data-all-clear]");
+const plusMinusButton = document.querySelector("[plus-minus]");
 const previousOperandTextElement = document.querySelector(
   "[data-previous-operand]"
 );
@@ -210,4 +219,8 @@ allClearButton.addEventListener("click", () => {
 // When User Click the Delete Button:
 deleteButton.addEventListener("click", () => {
   handleDeleteClick(calculator);
+});
+
+plusMinusButton.addEventListener('click', () => {
+  handlePlusMinusClick(calculator);
 });

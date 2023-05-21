@@ -37,7 +37,7 @@ body {
 }
 
 .calculator-grid .equal-button {
-    grid-column: span 2;
+    /* grid-column: span 2; */
     background-color: goldenrod;
 }
 
@@ -47,7 +47,7 @@ body {
 
 .output {
     grid-column: 1 / -1; /*-1: the last column*/
-    background-color: rgba(0, 0, 0, .75); /*.75 is 75% transparency*/
+    background-color: rgba(0, 0, 0, 0.75); /*.75 is 75% transparency*/
     display: flex;
     align-items: flex-end;
     justify-content: space-around;
