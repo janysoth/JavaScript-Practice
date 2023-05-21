@@ -1,3 +1,4 @@
+// 
 class Calculator {
   constructor(previousOperandTextElement, currentOperandTextElement) {
     this.previousOperandTextElement = previousOperandTextElement;
@@ -24,6 +25,9 @@ class Calculator {
     this.currentOperand = this.currentOperand.toString() + number.toString();
   }
 
+  // Sets the Operations and Stores Current Operand 
+  // As Previous Operand. If there's a Previous Operand
+  // It will call the Compute Function:
   chooseOperation(operation) {
     if (this.currentOperand === "") return;
     if (this.previousOperand !== "") {
@@ -45,7 +49,8 @@ class Calculator {
     // To Check if User Click on Any Number:
     if (isNaN(prev) || isNaN(current)) return;
 
-    // Use Switch Function to Run Each Opeartor:
+    // Use Switch Statements to Handle Different Operations
+    // and Update the Current Operand with the Results:
     switch (this.operation) {
       case "+":
         result = prev + current;
