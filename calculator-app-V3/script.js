@@ -113,19 +113,34 @@ class Calculator {
 }
 
 function handleNumberClick(calculator, button) {
+  // This When User Click Any Button After Calculation
+  // The Result will be cleared:
+  if (calculator.previousOperand === "") {
+    calculator.currentOperand = "";
+  }
   calculator.appendNumber(button.innerText);
   calculator.updateDisplay();
 }
 
 function handleOperationClick(calculator, button) {
-  calculator.chooseOperation(button.innerText);
-  calculator.updateDisplay();
+  // To Check if There is a previousOperand:
+  if (calculator.previousOperand === "") {
+    calculator.chooseOperation(button.innerText);
+    calculator.updateDisplay();
+  } else {
+    calculator.compute();
+    calculator.updateDisplay();
+    calculator.chooseOperation(button.innerText);
+  }
 }
 
 function handleEqualsClick(calculator) {
   calculator.compute();
   calculator.updateDisplay();
-  calculator.clear();
+  
+  // The previousOperand and Operation Will Be Clear:
+  calculator.previousOperand = "";
+  calculator.operation = undefined;
 }
 
 function handleAllClearClick(calculator) {
