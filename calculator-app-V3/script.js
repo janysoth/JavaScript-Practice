@@ -29,7 +29,7 @@ class Calculator {
   // As Previous Operand. If there's a Previous Operand
   // It will call the Compute Function:
   chooseOperation(operation) {
-    if (this.currentOperand === "") return;
+    if (this.currentOperand === "" || this.currentOperand ===".") return;
     if (this.previousOperand !== "") {
       this.compute();
     }
