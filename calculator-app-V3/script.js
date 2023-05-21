@@ -35,16 +35,17 @@ class Calculator {
   }
 
   compute() {
+    // To Store the Result Aftet Calculation: 
     let result;
-    // Convert Both prev and current to numbers:
+    
+    // Covert Both Variables to Numbers in order to calculate:
     const prev = parseFloat(this.previousOperand);
     const current = parseFloat(this.currentOperand);
 
-    // Perform the Operation:
-    // Check if the User Click Anything:
+    // To Check if User Click on Any Number:
     if (isNaN(prev) || isNaN(current)) return;
 
-    // Use Switch Function to Run Each Operator:
+    // Use Switch Function to Run Each Opeartor:
     switch (this.operation) {
       case "+":
         result = prev + current;
@@ -63,13 +64,20 @@ class Calculator {
       default:
         return;
     }
+
     this.currentOperand = result.toString();
     if (this.currentOperand.includes(".")) {
-      // To Only Show 8 Decimals
-      this.currentOperand = parseFloat(this.currentOperand).toFixed(8);
+      const decimalDigits = this.currentOperand.split(".")[1];
+
+      // Only show necessary decimal points for the result
+      if (decimalDigits.length > 8) {
+        this.currentOperand = parseFloat(result.toFixed(8));
+      }
     }
+
     this.operation = undefined;
     this.previousOperand = "";
+    this.result = this.currentOperand;
   }
 
   // Helper Function to Display of the Input Value:
@@ -113,31 +121,34 @@ class Calculator {
 }
 
 function handleNumberClick(calculator, button) {
-  // This When User Click Any Button After Calculation
-  // The Result will be cleared:
-  if (calculator.previousOperand === "") {
+  // To Clear Result When User Click Any Number after Calculation is Completed:
+  if (calculator.currentOperand === calculator.result) {
     calculator.currentOperand = "";
   }
+
   calculator.appendNumber(button.innerText);
   calculator.updateDisplay();
 }
 
 function handleOperationClick(calculator, button) {
-  // To Check if There is a previousOperand:
-  if (calculator.previousOperand === "") {
-    calculator.chooseOperation(button.innerText);
-    calculator.updateDisplay();
-  } else {
+  // If the Users Did Not Click on Any Number
+  // Prior to Click on the Operator Button: 
+  if (calculator.currentOperand === "") return;
+
+  // Allow User to Compute Wihout Clicking on Equal Button
+  // If previousOperand is not blank:
+  if (calculator.previousOperand !== "") {
     calculator.compute();
-    calculator.updateDisplay();
-    calculator.chooseOperation(button.innerText);
   }
+
+  calculator.chooseOperation(button.innerText);
+  calculator.updateDisplay();
 }
 
 function handleEqualsClick(calculator) {
   calculator.compute();
   calculator.updateDisplay();
-  
+
   // The previousOperand and Operation Will Be Clear:
   calculator.previousOperand = "";
   calculator.operation = undefined;
@@ -171,7 +182,7 @@ const calculator = new Calculator(
   currentOperandTextElement
 );
 
-// To Loop All of the Button 
+// To Loop All of the Button
 // To Add handNumberClick Functon:
 numberButtons.forEach((button) => {
   button.addEventListener("click", () => {
