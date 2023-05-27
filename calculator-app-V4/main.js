@@ -29,3 +29,31 @@ numbersEl.forEach((number) => {
     display2El.innerText = dis2Num;
   });
 });
+
+// Create an EventListener for All of the Operation Buttons:
+operationEl.forEach((operation) => {
+  operation.addEventListener("click", (e) => {
+    // To Check To See If there is Any Number Prior
+    if (!dis2Num) return;
+    // Set haveDot to false because there's only Number No Decimal Yet:
+    haveDot = false;
+    const operationName = e.target.innerText;
+    if (dis1Num && dis2Num && lastOperation) {
+      mathOperation();
+    } else {
+      result = parseFloat(dis2Num);
+    }
+    clearVar(operationName);
+    lastOperation = operationName;
+    console.log(result);
+  });
+});
+
+// To Move currentOperand to previousOperand:
+function clearVar(name = "") {
+  dis1Num += dis2Num + " " + name + " ";
+  display1El.innerText = dis1Num;
+  display2El.innerText = "";
+  dis2Num = "";
+  tempResultEl.innerText = result;
+}
