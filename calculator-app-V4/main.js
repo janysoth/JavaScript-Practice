@@ -59,7 +59,7 @@ function moveDisplay(name = "") {
 }
 
 // To Compute The Result: 
-// Use parseFloat to convert to numbers: 
+// Use parseFloat to convert to Numbers: 
 function compute() {
   switch (lastOperation) {
     case "x":
@@ -79,3 +79,15 @@ function compute() {
       break;
   }
 }
+
+// Add EventListener to Equal Sign:
+equalEl.addEventListener('click', ()=> {
+  if (!dis2Num || !dis1Num) return;
+  haveDot = false;
+  compute();
+  moveDisplay();
+  display2El.innerText = result;
+  tempResultEl.innerText = '';
+  dis2Num = result;
+  dis1Num = '';
+})
