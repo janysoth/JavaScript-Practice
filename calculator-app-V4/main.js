@@ -39,21 +39,43 @@ operationEl.forEach((operation) => {
     haveDot = false;
     const operationName = e.target.innerText;
     if (dis1Num && dis2Num && lastOperation) {
-      mathOperation();
+      compute();
     } else {
       result = parseFloat(dis2Num);
     }
-    clearVar(operationName);
+    moveDisplay(operationName);
     lastOperation = operationName;
-    console.log(result);
   });
 });
 
 // To Move currentOperand to previousOperand:
-function clearVar(name = "") {
-  dis1Num += dis2Num + " " + name + " ";
+function moveDisplay(name = "") {
+  //dis1Num += dis2Num + " " + name + " ";
+  dis1Num += `${dis2Num} ${name} `;
   display1El.innerText = dis1Num;
   display2El.innerText = "";
   dis2Num = "";
   tempResultEl.innerText = result;
+}
+
+// To Compute The Result: 
+// Use parseFloat to convert to numbers: 
+function compute() {
+  switch (lastOperation) {
+    case "x":
+      result = parseFloat(result) * parseFloat(dis2Num);
+      break;
+    case "/":
+      result = parseFloat(result) / parseFloat(dis2Num);
+      break;
+    case "+":
+      result = parseFloat(result) + parseFloat(dis2Num);
+      break;
+    case "-":
+      result = parseFloat(result) - parseFloat(dis2Num);
+      break;
+    case "%":
+      result = parseFloat(result) * (parseFloat(dis2Num)/100);
+      break;
+  }
 }
