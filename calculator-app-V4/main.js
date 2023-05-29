@@ -6,7 +6,7 @@ const numbersEl = document.querySelectorAll(".number");
 const operationEl = document.querySelectorAll(".operation");
 const equalEl = document.querySelector(".equal");
 
-const clearEl = document.querySelector(".all-clear");
+const clearAllEl = document.querySelector(".all-clear");
 const clearLastEl = document.querySelector(".last-entity-clear");
 
 let dis1Num = "";
@@ -56,7 +56,7 @@ function moveDisplay(name = "") {
   display1El.innerText = dis1Num;
   display2El.innerText = "";
   dis2Num = "";
-  tempResultEl.innerText = result;
+  tempResultEl.innerText = `Result = ${result}`;
 }
 
 // To Compute The Result: 
@@ -93,7 +93,8 @@ equalEl.addEventListener('click', ()=> {
   dis1Num = '';
 })
 
-clearEl.addEventListener('click', clearAll);
+// Add EventListener to clearAll Button: 
+clearAllEl.addEventListener('click', clearAll);
 
 function clearAll () {
   dis1Num = '';
