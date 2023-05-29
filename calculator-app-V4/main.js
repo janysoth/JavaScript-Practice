@@ -20,6 +20,7 @@ numbersEl.forEach((number) => {
   number.addEventListener("click", (e) => {
     // To Check if there's a decimal point
     // To Allow the User to Only Put One Decimal Point:
+    if(dis2Num === result) clearAll();
     if (e.target.innerText === "." && !haveDot) {
       haveDot = true;
     } else if (e.target.innerText === "." && haveDot) {
@@ -92,11 +93,13 @@ equalEl.addEventListener('click', ()=> {
   dis1Num = '';
 })
 
-clearEl.addEventListener('click', ()=>{
+clearEl.addEventListener('click', clearAll);
+
+function clearAll () {
   dis1Num = '';
   dis2Num = '';
   display1El.innerText ='';
   display2El.innerText ='';
   result = '';
   tempResultEl.innerText = '';
-});
+}
