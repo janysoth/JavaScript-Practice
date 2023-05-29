@@ -8,6 +8,7 @@ const equalEl = document.querySelector(".equal");
 
 const clearAllEl = document.querySelector(".all-clear");
 const clearLastEl = document.querySelector(".last-entity-clear");
+const deleteLastEl = document.querySelector(".delete-last-num");
 
 let dis1Num = "";
 let dis2Num = "";
@@ -20,7 +21,7 @@ numbersEl.forEach((number) => {
   number.addEventListener("click", (e) => {
     // To Check if there's a decimal point
     // To Allow the User to Only Put One Decimal Point:
-    if(dis2Num === result) clearAll();
+    if (dis2Num === result) clearAll();
     if (e.target.innerText === "." && !haveDot) {
       haveDot = true;
     } else if (e.target.innerText === "." && haveDot) {
@@ -76,13 +77,13 @@ function compute() {
       result = parseFloat(result) - parseFloat(dis2Num);
       break;
     case "%":
-      result = parseFloat(result) * (parseFloat(dis2Num)/100);
+      result = parseFloat(result) * (parseFloat(dis2Num) / 100);
       break;
   }
 }
 
 // Add EventListener to Equal Sign:
-equalEl.addEventListener('click', ()=> {
+equalEl.addEventListener('click', () => {
   if (!dis2Num || !dis1Num) return;
   haveDot = false;
   compute();
@@ -96,11 +97,27 @@ equalEl.addEventListener('click', ()=> {
 // Add EventListener to clearAll Button: 
 clearAllEl.addEventListener('click', clearAll);
 
-function clearAll () {
+function clearAll() {
   dis1Num = '';
   dis2Num = '';
-  display1El.innerText ='';
-  display2El.innerText ='';
+  display1El.innerText = '';
+  display2El.innerText = '';
   result = '';
   tempResultEl.innerText = '';
 }
+
+// To Clear Last Number:
+clearLastEl.addEventListener('click', () => {
+  display2El.innerText = '';
+  dis2Num = '';
+});
+
+// To Delete Last Number: 
+deleteLastEl.addEventListener('click', () => {
+  dis2Num = dis2Num.toString().slice(0, -1);
+  display2El.innerText = dis2Num;
+})
+
+
+
+
