@@ -132,26 +132,26 @@ window.addEventListener('keydown', (e) => {
     e.key === '9' ||
     e.key === '.'
   ) {
-    clickButtonEl(e.key)
+    numButtonPress(e.key)
   } else if (
     e.key === '+' ||
     e.key === '-' ||
     e.key === '/' ||
     e.key === '%'
   ) {
-    clickOperation(e.key);
+    operationPress(e.key);
   }
   else if (e.key === '*') {
-    clickOperation('x')
+    operationPress('x')
   } else if (e.key == "Enter" || e.key === '=') {
-    clickEqual();
+    equalButtonPress();
   }
 
 })
 
 // Run a forEach Function to match the keypressed
 // Then run EventListener for Number Buttons:
-function clickButtonEl(key) {
+function numButtonPress(key) {
   numbersEl.forEach(button => {
     if (button.innerText === key) {
       button.click();
@@ -161,7 +161,7 @@ function clickButtonEl(key) {
 
 // Run a forEach Function to match the keypressed
 // Then run EventListener for Operation Buttons:
-function clickOperation(key) {
+function operationPress(key) {
   operationEl.forEach(operation => {
     if (operation.innerText === key) {
       operation.click()
@@ -169,7 +169,7 @@ function clickOperation(key) {
   })
 }
 
-function clickEqual() {
+function equalButtonPress() {
   equalEl.click();
 }
 
