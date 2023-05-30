@@ -1,4 +1,4 @@
-const display1El = document.querySelector(".display-1");
+const previousOperandEl = document.querySelector(".display-1");
 const display2El = document.querySelector(".display-2");
 const tempResultEl = document.querySelector(".temp-result");
 
@@ -10,169 +10,158 @@ const clearAllEl = document.querySelector(".all-clear");
 const clearLastEl = document.querySelector(".last-entity-clear");
 const deleteLastEl = document.querySelector(".delete-last-num");
 
-let dis1Num = "";
+let previousOperand = "";
 let dis2Num = "";
 let result = null;
 let lastOperation = "";
 let haveDot = false;
 
-// Create An EventListener for All of the Number Buttons:
+// Create an EventListener for All of the Number Buttons:
 numbersEl.forEach((number) => {
-  number.addEventListener("click", (e) => {
-    // To Check if there's a decimal point
-    // To Allow the User to Only Put One Decimal Point:
-    if (dis2Num === result) clearAll();
-    if (e.target.innerText === "." && !haveDot) {
-      haveDot = true;
-    } else if (e.target.innerText === "." && haveDot) {
-      return;
-    }
-    dis2Num += e.target.innerText;
-    display2El.innerText = dis2Num;
-  });
+  number.addEventListener("click", handleNumberClick);
 });
 
 // Create an EventListener for All of the Operation Buttons:
 operationEl.forEach((operation) => {
-  operation.addEventListener("click", (e) => {
-    // To Check To See If there is Any Number Prior
-    if (!dis2Num) return;
-    // Set haveDot to false because there's only Number No Decimal Yet:
-    haveDot = false;
-    const operationName = e.target.innerText;
-    if (dis1Num && dis2Num && lastOperation) {
-      compute();
-    } else {
-      result = parseFloat(dis2Num);
-    }
-    moveDisplay(operationName);
-    lastOperation = operationName;
-  });
+  operation.addEventListener("click", handleOperationClick);
 });
 
-// To Move currentOperand to previousOperand:
+// Add EventListener to Equal Sign:
+equalEl.addEventListener("click", handleEqualClick);
+
+// Add EventListener to clearAll Button:
+clearAllEl.addEventListener("click", clearAll);
+
+// To Clear Last Number:
+clearLastEl.addEventListener("click", clearLast);
+
+// To Delete Last Number:
+deleteLastEl.addEventListener("click", deleteLast);
+
+// EventListener for Number Buttons:
+function handleNumberClick(e) {
+  if (dis2Num === result) clearAll();
+  if (e.target.innerText === "." && !haveDot) {
+    haveDot = true;
+  } else if (e.target.innerText === "." && haveDot) {
+    return;
+  }
+  dis2Num += e.target.innerText;
+  display2El.innerText = dis2Num;
+}
+
+// EventListener for Operation Buttons:
+function handleOperationClick(e) {
+  if (!dis2Num) return;
+  haveDot = false;
+  const operationName = e.target.innerText;
+  if (previousOperand && dis2Num && lastOperation) {
+    compute();
+  } else {
+    result = parseFloat(dis2Num);
+  }
+  moveDisplay(operationName);
+  lastOperation = operationName;
+}
+
+// Move currentOperand to previousOperand:
 function moveDisplay(name = "") {
-  //dis1Num += dis2Num + " " + name + " ";
-  dis1Num += `${dis2Num} ${name} `;
-  display1El.innerText = dis1Num;
+  previousOperand += `${dis2Num} ${name} `;
+  previousOperandEl.innerText = previousOperand;
   display2El.innerText = "";
   dis2Num = "";
   tempResultEl.innerText = `Result = ${result}`;
 }
 
-// To Compute The Result: 
-// Use parseFloat to convert to Numbers: 
+// Compute the Result:
 function compute() {
   switch (lastOperation) {
     case "x":
-      result = parseFloat(result) * parseFloat(dis2Num);
+      result *= parseFloat(dis2Num);
       break;
     case "/":
-      result = parseFloat(result) / parseFloat(dis2Num);
+      result /= parseFloat(dis2Num);
       break;
     case "+":
-      result = parseFloat(result) + parseFloat(dis2Num);
+      result += parseFloat(dis2Num);
       break;
     case "-":
-      result = parseFloat(result) - parseFloat(dis2Num);
+      result -= parseFloat(dis2Num);
       break;
     case "%":
-      result = parseFloat(result) * (parseFloat(dis2Num) / 100);
+      result *= parseFloat(dis2Num) / 100;
       break;
   }
 }
 
-// Add EventListener to Equal Sign:
-equalEl.addEventListener('click', () => {
-  if (!dis2Num || !dis1Num) return;
+// EventListener for Equal Sign:
+function handleEqualClick() {
+  if (!dis2Num || !previousOperand) return;
   haveDot = false;
   compute();
   moveDisplay();
   display2El.innerText = result;
-  tempResultEl.innerText = '';
+  tempResultEl.innerText = "";
   dis2Num = result;
-  dis1Num = '';
-})
-
-// Add EventListener to clearAll Button: 
-clearAllEl.addEventListener('click', clearAll);
-
-function clearAll() {
-  dis1Num = '';
-  dis2Num = '';
-  display1El.innerText = '';
-  display2El.innerText = '';
-  result = '';
-  tempResultEl.innerText = '';
+  previousOperand = "";
 }
 
-// To Clear Last Number:
-clearLastEl.addEventListener('click', () => {
-  display2El.innerText = '';
-  dis2Num = '';
-});
+// Clear All:
+function clearAll() {
+  previousOperand = "";
+  dis2Num = "";
+  previousOperandEl.innerText = "";
+  display2El.innerText = "";
+  result = null;
+  tempResultEl.innerText = "";
+}
 
-// To Delete Last Number: 
-deleteLastEl.addEventListener('click', () => {
+// Clear Last Number:
+function clearLast() {
+  display2El.innerText = "";
+  dis2Num = "";
+}
+
+// Delete Last Number:
+function deleteLast() {
   dis2Num = dis2Num.toString().slice(0, -1);
   display2El.innerText = dis2Num;
-})
+}
 
-window.addEventListener('keydown', (e) => {
-  if (
-    e.key === '0' ||
-    e.key === '1' ||
-    e.key === '2' ||
-    e.key === '3' ||
-    e.key === '4' ||
-    e.key === '5' ||
-    e.key === '6' ||
-    e.key === '7' ||
-    e.key === '8' ||
-    e.key === '9' ||
-    e.key === '.'
-  ) {
-    numButtonPress(e.key)
-  } else if (
-    e.key === '+' ||
-    e.key === '-' ||
-    e.key === '/' ||
-    e.key === '%'
-  ) {
-    operationPress(e.key);
+// EventListener for Keyboard Input:
+window.addEventListener("keydown", handleKeyboardInput);
+
+// Handle Keyboard Input:
+function handleKeyboardInput(e) {
+  const key = e.key;
+  if (/[0-9.]/.test(key)) {
+    handleNumberPress(key);
+  } else if (/[+\-*/%]/.test(key)) {
+    handleOperationPress(key);
+  } else if (key === "Enter" || key === "=") {
+    handleEqualPress();
   }
-  else if (e.key === '*') {
-    operationPress('x')
-  } else if (e.key == "Enter" || e.key === '=') {
-    equalButtonPress();
-  }
+}
 
-})
-
-// Run a forEach Function to match the keypressed
-// Then run EventListener for Number Buttons:
-function numButtonPress(key) {
-  numbersEl.forEach(button => {
+// EventListener for Number Buttons:
+function handleNumberPress(key) {
+  numbersEl.forEach((button) => {
     if (button.innerText === key) {
       button.click();
     }
-  })
+  });
 }
 
-// Run a forEach Function to match the keypressed
-// Then run EventListener for Operation Buttons:
-function operationPress(key) {
-  operationEl.forEach(operation => {
+// EventListener for Operation Buttons:
+function handleOperationPress(key) {
+  operationEl.forEach((operation) => {
     if (operation.innerText === key) {
-      operation.click()
+      operation.click();
     }
-  })
+  });
 }
 
-function equalButtonPress() {
+// EventListener for Equal Button:
+function handleEqualPress() {
   equalEl.click();
 }
-
-
-
-
