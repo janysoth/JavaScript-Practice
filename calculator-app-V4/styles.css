@@ -1,4 +1,7 @@
-* {
+/*-- To Ensure box-sizing applies to all elements --*/
+*,
+*::before,
+*::after {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -9,9 +12,8 @@ html {
 }
 
 section {
-  background-color: lightskyblue;
+  background-color: lightblue;
   min-height: 100vh;
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,7 +30,6 @@ section {
 .display {
   background-color: whitesmoke;
   height: 100px;
-  width: 100%;
   text-align: right;
   padding: 20px;
   font-size: 30px;
@@ -46,7 +47,7 @@ section {
 .temp-result {
   position: absolute;
   bottom: 0;
-  left: 5;
+  left: 5px;
   opacity: 0.4;
   font-size: 20px;
 }
@@ -54,13 +55,13 @@ section {
 .all_buttons {
   color: whitesmoke;
   display: grid;
-  grid-template: repeat(4, 1fr) / repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
 }
 
 .button {
   border: 0.5px solid rgba(44, 202, 234, 0.904);
   height: 100px;
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -73,5 +74,5 @@ section {
 }
 
 .btn-0 {
-  grid-column: 1/3; /* To Have It Take Up 2 Columns */
+  grid-column: span 2;
 }
