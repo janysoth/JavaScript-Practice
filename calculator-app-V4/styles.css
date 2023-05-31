@@ -25,6 +25,7 @@ section {
   background-color: lightcoral;
   border-radius: 8px;
   overflow: hidden;
+  border: 5px solid goldenrod;
 }
 
 .display {
