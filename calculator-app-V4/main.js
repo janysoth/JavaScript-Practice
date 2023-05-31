@@ -1,5 +1,5 @@
 const previousOperandEl = document.querySelector(".display-1");
-const display2El = document.querySelector(".display-2");
+const currentOperandEl = document.querySelector(".display-2");
 const tempResultEl = document.querySelector(".temp-result");
 
 const numbersEl = document.querySelectorAll(".number");
@@ -11,10 +11,10 @@ const clearLastEl = document.querySelector(".last-entity-clear");
 const deleteLastEl = document.querySelector(".delete-last-num");
 
 let previousOperand = "";
-let dis2Num = "";
+let currentOperand = "";
 let result = null;
 let lastOperation = "";
-let haveDot = false;
+let decimalPoint = false;
 
 // Create an EventListener for All of the Number Buttons:
 numbersEl.forEach((number) => {
@@ -40,25 +40,25 @@ deleteLastEl.addEventListener("click", deleteLast);
 
 // EventListener for Number Buttons:
 function handleNumberClick(e) {
-  if (dis2Num === result) clearAll();
-  if (e.target.innerText === "." && !haveDot) {
-    haveDot = true;
-  } else if (e.target.innerText === "." && haveDot) {
+  if (currentOperand === result) clearAll();
+  if (e.target.innerText === "." && !decimalPoint) {
+    decimalPoint = true;
+  } else if (e.target.innerText === "." && decimalPoint) {
     return;
   }
-  dis2Num += e.target.innerText;
-  display2El.innerText = dis2Num;
+  currentOperand += e.target.innerText;
+  currentOperandEl.innerText = currentOperand;
 }
 
 // EventListener for Operation Buttons:
 function handleOperationClick(e) {
-  if (!dis2Num) return;
-  haveDot = false;
+  if (!currentOperand) return;
+  decimalPoint = false;
   const operationName = e.target.innerText;
-  if (previousOperand && dis2Num && lastOperation) {
+  if (previousOperand && currentOperand && lastOperation) {
     compute();
   } else {
-    result = parseFloat(dis2Num);
+    result = parseFloat(currentOperand);
   }
   moveDisplay(operationName);
   lastOperation = operationName;
@@ -66,10 +66,10 @@ function handleOperationClick(e) {
 
 // Move currentOperand to previousOperand:
 function moveDisplay(name = "") {
-  previousOperand += `${dis2Num} ${name} `;
+  previousOperand += `${currentOperand} ${name} `;
   previousOperandEl.innerText = previousOperand;
-  display2El.innerText = "";
-  dis2Num = "";
+  currentOperandEl.innerText = "";
+  currentOperand = "";
   tempResultEl.innerText = `Result = ${result}`;
 }
 
@@ -77,55 +77,55 @@ function moveDisplay(name = "") {
 function compute() {
   switch (lastOperation) {
     case "x":
-      result *= parseFloat(dis2Num);
+      result *= parseFloat(currentOperand);
       break;
     case "/":
-      result /= parseFloat(dis2Num);
+      result /= parseFloat(currentOperand);
       break;
     case "+":
-      result += parseFloat(dis2Num);
+      result += parseFloat(currentOperand);
       break;
     case "-":
-      result -= parseFloat(dis2Num);
+      result -= parseFloat(currentOperand);
       break;
     case "%":
-      result *= parseFloat(dis2Num) / 100;
+      result *= parseFloat(currentOperand) / 100;
       break;
   }
 }
 
 // EventListener for Equal Sign:
 function handleEqualClick() {
-  if (!dis2Num || !previousOperand) return;
-  haveDot = false;
+  if (!currentOperand || !previousOperand) return;
+  decimalPoint = false;
   compute();
   moveDisplay();
-  display2El.innerText = result;
+  currentOperandEl.innerText = result;
   tempResultEl.innerText = "";
-  dis2Num = result;
+  currentOperand = result;
   previousOperand = "";
 }
 
 // Clear All:
 function clearAll() {
   previousOperand = "";
-  dis2Num = "";
+  currentOperand = "";
   previousOperandEl.innerText = "";
-  display2El.innerText = "";
+  currentOperandEl.innerText = "";
   result = null;
   tempResultEl.innerText = "";
 }
 
 // Clear Last Number:
 function clearLast() {
-  display2El.innerText = "";
-  dis2Num = "";
+  currentOperandEl.innerText = "";
+  currentOperand = "";
 }
 
 // Delete Last Number:
 function deleteLast() {
-  dis2Num = dis2Num.toString().slice(0, -1);
-  display2El.innerText = dis2Num;
+  currentOperand = currentOperand.toString().slice(0, -1);
+  currentOperandEl.innerText = currentOperand;
 }
 
 // EventListener for Keyboard Input:
