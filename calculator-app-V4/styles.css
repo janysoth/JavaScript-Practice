@@ -23,9 +23,9 @@ section {
   width: 90%;
   max-width: 400px;
   background-color: lightcoral;
-  border-radius: 8px;
+  border-radius: 20px;
   overflow: hidden;
-  border: 5px solid goldenrod;
+  border: 3px solid goldenrod;
 }
 
 .display {
@@ -71,9 +71,20 @@ section {
 }
 
 .button:hover {
-  background-color: rgb(30, 43, 46);
+  background-color: rgba(30, 43, 46, 0.4);
 }
 
-.btn-0 {
-  grid-column: span 2;
+.button:active {
+  background-color: rgba(186, 186, 186, 0.4);
 }
+
+/* .btn-0 {
+  grid-column: span 2;
+} */
+
+.btn-plus {
+  height: 100%;
+  grid-area: 4 /4 / 6 /5;
+}
+
+
