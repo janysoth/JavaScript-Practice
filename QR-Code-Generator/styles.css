@@ -10,17 +10,15 @@
 body {
     height: 100vh;
     background-color: #00695c;
-    padding: 2em 2em;
-    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .wrapper {
     background-color: #fff;
-    padding: 2em 2em;
-    position: absolute;
+    padding: 2em;
     width: 500px;
-    top: 50%;
-    left: 50%;
     border-radius: 15px;
     box-shadow: 0 1.5em 3em rgba(3, 21, 55, 0.3);
     justify-content: center;
