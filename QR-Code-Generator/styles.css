@@ -28,6 +28,7 @@ body {
 }
 
 #placement {
+    height: 50px;
     width: 100%;
     border: 2px solid #ccc;
     padding: 0.5em 1em;
@@ -36,7 +37,7 @@ body {
 }
 
 .options {
-    margin-top: 5px;
+    margin-top: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -72,27 +73,79 @@ select option {
     font-size: 1.12em;
 }
 
- .selected {
+.selected {
     display: none;
- }
+}
 
- .color-inp {
+.color-inp {
     appearance: none;
     background-color: transparent;
     width: 150px;
     height: 50px;
     outline: none;
     border: 1px solid #fff;
- }
+}
 
- .color-inp::-webkit-color-swatch {
+.color-inp::-webkit-color-swatch {
     border-radius: 0.3em;
     border: 0.18em solid #00796b;
- }
+}
 
- .color-inp::-moz-color-swatch {
+.color-inp::-moz-color-swatch {
     border-radius: 0.3em;
     border: 0.18em solid #00796b;
- }
+}
 
- 
+.box {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: -10px;
+}
+
+.box button,
+.box a {
+    font-size: 1em;
+    padding: 0.8em 2em;
+    border-radius: 0.5em;
+    margin-top: 1em;
+    width: 100%;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 4px;
+}
+
+.box button:disabled {
+    background-color: #00695c;
+    color: white;
+    border: 2px solid #00897b;
+    letter-spacing: 4px;
+    font-weight: bold;
+}
+
+.box button {
+    background-color: #00695c;
+    color: white;
+    border: 2px solid #00897b;
+}
+
+.box a {
+    background-color: #00695c;
+    color: white;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 0.18em solid #00897b;
+    padding-left: 35%;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    background-color: #cccccc58;
+    border-radius: 10px;
+}
+
+.hide {
+    display: none;
+}
