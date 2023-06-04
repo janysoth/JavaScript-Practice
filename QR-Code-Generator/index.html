@@ -12,7 +12,22 @@
 
 <body>
     <div class="wrapper">
+        <input type="text" id="placement" placeholder="QR Code Generator">
+        <div class="options">
+            <select class="size">
+                <option value="100">100 X 100</option>
+                <option value="200">200 X 200</option>
+                <option value="300" selected>300 X 300</option>
+            </select>
+            <input type="color" class="color-inp" id="color1">
+            <input type="color" class="color-inp" id="color2">
+        </div>
 
+        <div class="container"></div>
+        <div class="box">
+            <button id="generate" disabled>Generate</button>
+            <a href="#" id="download">Download</a>
+        </div>
     </div>
 
 
