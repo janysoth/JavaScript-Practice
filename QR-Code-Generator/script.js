@@ -11,31 +11,31 @@ let sizeChoice = 100;
 let BGColorChoice = "#000000";
 let FGColorChoice = "#ffffff";
 
-sizeOptions.addEventListener("change", () => {
+const updateSizeChoice = () => {
     sizeChoice = sizeOptions.value;
-});
+};
 
-BGColor.addEventListener("input", () => {
+const updateBGColorChoice = () => {
     BGColorChoice = BGColor.value;
-});
+};
 
-FGColor.addEventListener("input", () => {
+const updateFGColorChoice = () => {
     FGColorChoice = FGColor.value;
-});
+};
+
+sizeOptions.addEventListener("change", updateSizeChoice);
+BGColor.addEventListener("input", updateBGColorChoice);
+FGColor.addEventListener("input", updateFGColorChoice);
 
 userInput.addEventListener("input", () => {
-    if (userInput.value.trim().lenght < 1) {
-        submitBtn.disabled = true;
-        downloadBtn.href = "";
-        downloadBtn.classList.add("hide");
-    } else {
-        submitBtn.disabled = false;
-    }
+    const value = userInput.value.trim();
+    submitBtn.disabled = value.length < 1;
+    downloadBtn.href = "";
+    downloadBtn.classList.add("hide");
 });
 
 const inputFormatter = (value) => {
-    value = value.replace(/[^a-z0-9A-Z]+/g, "");
-    return value;
+    return value.replace(/[^a-z0-9A-Z]+/g, "");
 };
 
 const generateQRCode = async () => {
@@ -53,12 +53,12 @@ const generateQRCode = async () => {
     downloadBtn.href = src;
 
     let userValue = userInput.value;
-
     try {
         userValue = new URL(userValue).hostname;
     } catch (_) {
         userValue = inputFormatter(userValue);
     }
+
     downloadBtn.download = `${userValue}QR`;
     downloadBtn.classList.remove("hide");
 };
@@ -81,9 +81,3 @@ window.onload = () => {
 };
 
 submitBtn.addEventListener("click", generateQRCode);
-
-
-
-
-
-
