@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+/* Import Google Font - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 * {
     margin: 0;
@@ -13,25 +14,26 @@ body {
     justify-content: center;
     padding: 0 10px;
     min-height: 100vh;
-    background: #00897b;
+    background: #70c2f1;
 }
 
 .container {
     max-width: 690px;
     width: 100%;
     padding: 30px;
-    background-color: white;
+    background: #fff;
     border-radius: 7px;
-    box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.265);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.01);
 }
 
 .wrapper {
-    border-radius: 0px 0px 5px 5px;
+    border-radius: 5px;
     border: 1px solid #ccc;
 }
 
-.wraper .text-input {
+.wrapper .text-input {
     display: flex;
+    border-bottom: 1px solid #ccc;
 }
 
 .text-input .to-text {
@@ -67,8 +69,6 @@ li,
 .controls {
     list-style: none;
     padding: 12px 15px;
-    border: 1px solid #0000003c;
-    border-radius: 5px 5px 0px 0px;
 }
 
 .controls .row .icons {
@@ -78,6 +78,7 @@ li,
 .controls .row .icons i {
     width: 50px;
     color: goldenrod;
+    font-size: 14px;
     cursor: pointer;
     transition: transform 0.2s ease;
     justify-content: center;
@@ -96,6 +97,7 @@ li,
 .controls .row select {
     color: goldenrod;
     border: none;
+    outline: none;
     font-size: 18px;
     background: none;
     padding-left: 5px;
@@ -122,7 +124,7 @@ li,
 .controls .row select::-webkit-scrollbar-thumb {
     background: #999;
     border-radius: 8px;
-    border-right: 2px solid #fff;
+    border-right: 2px solid #ffffff;
 }
 
 .controls .exchange {
@@ -141,25 +143,24 @@ li,
     padding: 14px;
     outline: none;
     border: none;
+    color: #fff;
     cursor: pointer;
     margin-top: 20px;
     font-size: 17px;
     border-radius: 5px;
     background: goldenrod;
-    letter-spacing: 2px;
-    font-weight: 600;
 }
 
 .container button:hover {
     background: darkgoldenrod;
 }
 
-@media(max-width: 600px) {
+@media (max-width: 660px) {
     .container {
-        padding: 20px
+        padding: 20px;
     }
 
-    .wraper .text-input {
+    .wrapper .text-input {
         flex-direction: column;
     }
 
@@ -188,8 +189,4 @@ li,
     .controls .exchange {
         font-size: 14px;
     }
-
-
 }
-
-/* https: //www.codingnepalweb.com/language-translator-app-html-css-javascript/ */
