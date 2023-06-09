@@ -13,8 +13,14 @@
 <body>
     <h1>Hellow Vue!</h1>
     <div id="app">
-        <!-- Had to put {{}} to call the title in the data function object -->
-        <p>{{title}}</p>
+        <!-- Have to put {{}} to call the title in the data function object properties -->
+        <!-- Object properties in this #app, only accessible if it's mounted -->
+        <p>{{title}} - {{author}} - {{age}}</p>
+
+    </div>
+
+    <div id="car">
+        <p>{{model}} - {{make}} - {{year}}</p>
     </div>
     <script src="script.js"></script>
 </body>
