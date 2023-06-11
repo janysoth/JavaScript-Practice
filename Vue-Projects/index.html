@@ -17,6 +17,9 @@
         <!-- Object properties in this #app, only accessible if it's mounted -->
         <p>{{title}} - {{author}} - {{age}}</p>
 
+        <!-- Don't need double bracket because it's variable -->
+        <button v-on:click="age++">Increase The Age!</button>
+        <button v-on:click="age--">Decrease The Age!</button>
     </div>
 
     <div id="car">
