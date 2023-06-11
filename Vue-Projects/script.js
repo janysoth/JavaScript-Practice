@@ -1,4 +1,5 @@
 // Creating a Vue App
+// Similar to creating an object
 const app = Vue.createApp({
     // data functions
     // template: '<h2>I am a template</h2>'
@@ -7,6 +8,7 @@ const app = Vue.createApp({
     // Then you can call the object properties in HTML using {{}}
     data() {
         return {
+            showBooks: true,
             title: 'The Final Empire',
             author: 'Jonny Vorn Soth',
             age: 45
@@ -17,6 +19,12 @@ const app = Vue.createApp({
         changeTitle(title) {
             // this.title = 'Words of Randiance'
             this.title = title
+        },
+
+        // Change showBooks Boolean \
+        // This method being called in index.html
+        toggleShowBooks() {
+            this.showBooks = !this.showBooks
         }
     }
 
@@ -26,9 +34,16 @@ const app = Vue.createApp({
 const car = Vue.createApp({
     data() {
         return {
+            showCars: true,
             make: 'Honda',
             model: 'Civic',
             year: '2012'
+        }
+    },
+
+    methods: {
+        toggleShowCars() {
+            this.showCars = !this.showCars
         }
     }
 }).mount('#car')
