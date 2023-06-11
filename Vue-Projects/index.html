@@ -18,8 +18,11 @@
         <p>{{title}} - {{author}} - {{age}}</p>
 
         <!-- Don't need double bracket because it's variable -->
+        <!-- Shortcut for v:on = @ -->
         <button v-on:click="age++">Increase The Age!</button>
-        <button v-on:click="age--">Decrease The Age!</button>
+        <button @click="age--">Decrease The Age!</button>
+
+        <div @click=changeTitle('Oatbringer')>Change Book Title</div>
     </div>
 
     <div id="car">
