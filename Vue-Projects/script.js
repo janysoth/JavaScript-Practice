@@ -12,22 +12,22 @@ const app = Vue.createApp({
       title: "The Final Empire",
       author: "Jonny Vorn Soth",
       age: 45,
-    };
+    }
   },
   // Functions Properties
   methods: {
     changeTitle(title) {
       // this.title = 'Words of Randiance'
-      this.title = title;
+      this.title = title
     },
 
     // Change showBooks Boolean \
     // This method being called in index.html
     toggleShowBooks() {
-      this.showBooks = !this.showBooks;
+      this.showBooks = !this.showBooks
     },
   },
-});
+})
 
 // Create another Vue app and mount to a different div#
 const car = Vue.createApp({
@@ -37,16 +37,16 @@ const car = Vue.createApp({
       make: "Honda",
       model: "Civic",
       year: "2012",
-    };
+    }
   },
 
   methods: {
     toggleShowCars() {
-      this.showCars = !this.showCars;
+      this.showCars = !this.showCars
     },
   },
-}).mount("#car");
+}).mount("#car")
 
 // To mount the Vue app to #app
 // And control everything inside the div #app
-app.mount("#app");
+app.mount("#app")
