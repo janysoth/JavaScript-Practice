@@ -12,6 +12,8 @@ const app = Vue.createApp({
       title: "The Final Empire",
       author: "Jonny Vorn Soth",
       age: 45,
+      x: 0,
+      y: 0,
     }
   },
   // Functions Properties
@@ -26,26 +28,37 @@ const app = Vue.createApp({
     toggleShowBooks() {
       this.showBooks = !this.showBooks
     },
+
+    handleEvent(e, data) {
+      console.log(e, e.type)
+      if (data)
+        console.log(data)
+    },
+
+    handleMouseMove(e) {
+      this.x = e.offsetX
+      this.y = e.offsetY
+    }
   },
 })
 
-// Create another Vue app and mount to a different div#
-const car = Vue.createApp({
-  data() {
-    return {
-      showCars: true,
-      make: "Honda",
-      model: "Civic",
-      year: "2012",
-    }
-  },
+// // Create another Vue app and mount to a different div#
+// const car = Vue.createApp({
+//   data() {
+//     return {
+//       showCars: true,
+//       make: "Honda",
+//       model: "Civic",
+//       year: "2012",
+//     }
+//   },
 
-  methods: {
-    toggleShowCars() {
-      this.showCars = !this.showCars
-    },
-  },
-}).mount("#car")
+//   methods: {
+//     toggleShowCars() {
+//       this.showCars = !this.showCars
+//     },
+//   },
+// }).mount("#car")
 
 // To mount the Vue app to #app
 // And control everything inside the div #app

@@ -1,44 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Learning Vue</title>
-    <!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
-    <script src="https://unpkg.com/vue@3.0.2"></script>
-  </head>
 
-  <body>
-    <h1>Hellow Vue!</h1>
-    <div id="app">
-      <!-- Don't need double bracket because it's variable -->
-      <!-- Shortcut for v:on = @ -->
-      <!-- <button v-on:click="age++">Increase The Age!</button>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learning Vue</title>
+  <!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
+  <script src="https://unpkg.com/vue@3.0.2"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <h1>Hellow Vue!</h1>
+  <div id="app">
+    <!-- Don't need double bracket because it's variable -->
+    <!-- Shortcut for v:on = @ -->
+    <!-- <button v-on:click="age++">Increase The Age!</button>
             <button @click="age--">Decrease The Age!</button> -->
 
-      <!-- <div @click=changeTitle('Oatbringer')>Change Book Title</div> -->
+    <!-- <div @click=changeTitle('Oatbringer')>Change Book Title</div> -->
 
-      <!-- v-if= "true" is the same as using the if/else statement -->
-      <div v-if="showBooks">
-        <!-- Have to put {{}} to call the title in the data function object properties -->
-        <!-- Object properties in this #app, only accessible if it's mounted -->
-        <p>{{title}} - {{author}} - {{age}}</p>
-      </div>
-
-      <button @click="toggleShowBooks">
-        <span v-if="showBooks">Hide Books</span>
-        <!-- !showBooks is the same as: showBooks == false -->
-        <span v-if="!showBooks">Show Books</span>
-        <!-- <span v-if="showBooks == false">Show Books</span> -->
-      </button>
-
-      <!-- Using v-show -->
-      <!-- v-show won't remove the div from the DOM -->
-      <!-- But v-if does and is time consuming -->
-      <div v-show="showBooks">Currently Showing Books</div>
+    <!-- v-if= "true" is the same as using the if/else statement -->
+    <div v-if="showBooks">
+      <!-- Have to put {{}} to call the title in the data function object properties -->
+      <!-- Object properties in this #app, only accessible if it's mounted -->
+      <p>{{title}} - {{author}} - {{age}}</p>
     </div>
 
+    <button @click="toggleShowBooks">
+      <span v-if="showBooks">Hide Books</span>
+      <!-- !showBooks is the same as: showBooks == false -->
+      <span v-if="!showBooks">Show Books</span>
+      <!-- <span v-if="showBooks == false">Show Books</span> -->
+    </button>
+
+    <br>
+
+    <!-- Mouse Events -->
+    <div class="box" @mouseover="handleEvent($event, 5)">mouseover (enter)</div>
+    <div class="box" @mouseleave="handleEvent">mouseleave</div>
+    <div class="box" @dblclick="handleEvent">double click</div>
+    <div class="box" @mousemove="handleMouseMove">Position - x: {{ x }} y: {{ y }}</div>
+
+    <!-- Using v-show -->
+    <!-- v-show won't remove the div from the DOM -->
+    <!-- But v-if does and is time consuming -->
+    <!-- <div v-show="showBooks">Currently Showing Books</div> -->
+  </div>
+
+
+
+
+
+
+
+  <!-- 
     <div id="car">
       <div v-if="showCars">
         <p>{{model}} - {{make}} - {{year}}</p>
@@ -48,8 +65,9 @@
         <span v-if="showCars">Hide Cars</span>
         <span v-else>Show Cars</span>
       </button>
-    </div>
+    </div> -->
 
-    <script src="script.js"></script>
-  </body>
+  <script src="script.js"></script>
+</body>
+
 </html>
