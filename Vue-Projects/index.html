@@ -17,22 +17,31 @@
     <!-- Don't need double bracket because it's variable -->
     <!-- Shortcut for v:on = @ -->
     <!-- <button v-on:click="age++">Increase The Age!</button>
-            <button @click="age--">Decrease The Age!</button> -->
+      <button @click="age--">Decrease The Age!</button> -->
 
     <!-- <div @click=changeTitle('Oatbringer')>Change Book Title</div> -->
 
     <!-- v-if= "true" is the same as using the if/else statement -->
+
+    <!-- Attribute/Data Binding -->
+    <!-- Using v-bind:href -->
+    <!-- Shortcut for v-bind is ":" -->
+    <a :href="url">Visit Google</a>
+
     <div v-if="showBooks">
       <!-- Have to put {{}} to call the title in the data function object properties -->
       <!-- Object properties in this #app, only accessible if it's mounted -->
       <!-- <p>{{title}} - {{author}} - {{age}}</p> -->
+
+
+      <!-- Using For Loop to cycle through books object -->
       <ul>
-        <!-- Using For Loop to cycle through books object -->
         <li v-for="book in books">
           <h3>{{ book.title }}</h3>
           <p> {{ book.author }}</p>
         </li>
       </ul>
+      <!-------------------------------------------------->
     </div>
 
     <button @click="toggleShowBooks">

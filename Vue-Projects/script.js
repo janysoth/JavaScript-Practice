@@ -8,12 +8,20 @@ const app = Vue.createApp({
   // Then you can call the object properties in HTML using {{}}
   data() {
     return {
+      url: 'https://www.google.com',
       showBooks: true,
-      title: "The Final Empire",
-      author: "Jonny Vorn Soth",
-      age: 45,
-      x: 0,
-      y: 0,
+      // title: "The Final Empire",
+      // author: "Jonny Vorn Soth",
+      // age: 45,
+      // x: 0,
+      // y: 0,
+
+      books: [
+        { title: 'Name of the Wind', author: 'Patrick Rothfuss' },
+        { title: 'The Way of Kings', author: 'Brandon Sanderson' },
+        { title: 'The Final Empire', author: 'Brandon Sanderson' },
+
+      ],
     }
   },
   // Functions Properties
