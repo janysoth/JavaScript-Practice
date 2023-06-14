@@ -17,9 +17,9 @@ const app = Vue.createApp({
       // y: 0,
 
       books: [
-        { title: 'Name of the Wind', author: 'Patrick Rothfuss' },
-        { title: 'The Way of Kings', author: 'Brandon Sanderson' },
-        { title: 'The Final Empire', author: 'Brandon Sanderson' },
+        { title: 'Name of the Wind', author: 'Patrick Rothfuss', isFave: true },
+        { title: 'The Way of Kings', author: 'Brandon Sanderson', isFave: false },
+        { title: 'The Final Empire', author: 'Brandon Sanderson', isFave: true },
 
       ],
     }

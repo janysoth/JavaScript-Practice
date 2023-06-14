@@ -26,7 +26,7 @@
     <!-- Attribute/Data Binding -->
     <!-- Using v-bind:href -->
     <!-- Shortcut for v-bind is ":" -->
-    <a :href="url">Visit Google</a>
+    <!-- <a :href="url">Visit Google</a> -->
 
     <div v-if="showBooks">
       <!-- Have to put {{}} to call the title in the data function object properties -->
@@ -35,8 +35,10 @@
 
 
       <!-- Using For Loop to cycle through books object -->
+      <!-- Dynamic Class -->
+      <!-- Using v-bind shortcut: :class to generate the dynamic class -->
       <ul>
-        <li v-for="book in books">
+        <li v-for="book in books" :class="{fave: book.isFave}">
           <h3>{{ book.title }}</h3>
           <p> {{ book.author }}</p>
         </li>
