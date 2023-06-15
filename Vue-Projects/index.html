@@ -38,7 +38,7 @@
       <!-- Dynamic Class -->
       <!-- Using v-bind shortcut: :class to generate the dynamic class -->
       <ul>
-        <li v-for="book in books" :class="{fave: book.isFave}">
+        <li v-for="book in books" :class="{fave: book.isFave}" @click="toggleFave(book)">
           <h3>{{ book.title }}</h3>
           <p> {{ book.author }}</p>
         </li>
