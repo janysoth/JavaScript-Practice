@@ -52,6 +52,13 @@ const app = Vue.createApp({
       this.y = e.offsetY
     }
   },
+  // Computed Propeties:
+  // Depends on other data, and will update accordingly
+  computed: {
+    filteredBooks() {
+      return this.books.filter((book) => book.isFave)
+    }
+  }
 })
 
 // // Create another Vue app and mount to a different div#
