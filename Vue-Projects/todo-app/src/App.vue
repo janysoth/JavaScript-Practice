@@ -14,9 +14,9 @@
           placeholder="Add your to-do here... When done click SUBMIT or press ENTER.."
           @keydown.enter="addNewTodo"
         />
-        <button type="submit">Submit</button>
       </div>
     </form>
+    <button type="submit">Submit</button>
     <button @click="markAllDone">Mark All Done</button>
     <button @click="removeAll">Remove All</button>
     <ul>
