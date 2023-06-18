@@ -7,10 +7,12 @@
         <label>New To-Do:</label>
         <!-- Bind newTodo using model (One-Way Data Binding)-->
         <!-- Anything changes in the input, it will update newTodo -->
+        <!-- @keydown.enter - Press Enter to call addNewTodo Function -->
         <input
           v-model="newTodo"
           name="newTodo"
-          placeholder="Add your to-do here..."
+          placeholder="Add your to-do here... When done click SUBMIT or press ENTER.."
+          @keydown.enter="addNewTodo"
         />
         <button type="submit">Submit</button>
       </div>
@@ -43,14 +45,17 @@ export default {
     const newTodo = ref("");
     const todos = ref([]);
 
+    // Only to add new todo if the input is not blank:
     function addNewTodo() {
-      todos.value.push({
-        id: Date.now(),
-        done: false,
-        content: newTodo.value,
-      });
+      if (newTodo.value.trim() !== "") {
+        todos.value.push({
+          id: Date.now(),
+          done: false,
+          content: newTodo.value.trim(),
+        });
 
-      newTodo.value = "";
+        newTodo.value = "";
+      }
     }
 
     // To Mark As Done with strikethrough:
