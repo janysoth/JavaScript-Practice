@@ -3,11 +3,13 @@
     <h1>Vue 3 To-Do App</h1>
     <!-- To Prevent the page to reload -->
     <form @submit.prevent="addNewTodo">
-      <label>New To-Do</label>
-      <!-- Bind newTodo using model (One-Way Data Binding)-->
-      <!-- Anything changes in the input, it will update newTodo -->
-      <input v-model="newTodo" name="newTodo" />
-      <button>Submit</button>
+      <div class="input-wrapper">
+        <label>New To-Do</label>
+        <!-- Bind newTodo using model (One-Way Data Binding)-->
+        <!-- Anything changes in the input, it will update newTodo -->
+        <input v-model="newTodo" name="newTodo" />
+      </div>
+      <button type="submit">Submit</button>
     </form>
     <button @click="markAllDone">Mark All Done</button>
     <ul>
