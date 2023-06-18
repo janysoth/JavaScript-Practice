@@ -4,12 +4,16 @@
     <!-- To Prevent the page to reload -->
     <form @submit.prevent="addNewTodo">
       <div class="input-wrapper">
-        <label>New To-Do</label>
+        <label>New To-Do:</label>
         <!-- Bind newTodo using model (One-Way Data Binding)-->
         <!-- Anything changes in the input, it will update newTodo -->
-        <input v-model="newTodo" name="newTodo" />
+        <input
+          v-model="newTodo"
+          name="newTodo"
+          placeholder="Add your to-do here..."
+        />
+        <button type="submit">Submit</button>
       </div>
-      <button type="submit">Submit</button>
     </form>
     <button @click="markAllDone">Mark All Done</button>
     <ul>
