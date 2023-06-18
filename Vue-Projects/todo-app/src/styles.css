@@ -42,9 +42,10 @@ button[type="submit"] {
 }
 
 button {
-    display: flex;
+    display: inline;
     padding: 8px 16px;
     margin-top: 12px;
+    margin-right: 12px;
     background-color: #333;
     color: #fff;
     border: none;

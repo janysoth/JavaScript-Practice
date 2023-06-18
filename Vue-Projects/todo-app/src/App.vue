@@ -18,6 +18,7 @@
       </div>
     </form>
     <button @click="markAllDone">Mark All Done</button>
+    <button @click="removeAll">Remove All</button>
     <ul>
       <!-- To Pass the value, need v-bind (:) -->
       <li v-for="(todo, index) in todos" :key="todo.id" class="todo">
@@ -75,6 +76,10 @@ export default {
     function markAllDone() {
       todos.value.forEach((todo) => (todo.done = true));
     }
+
+    function removeAll() {
+      todos.value = [];
+    }
     return {
       newTodo,
       todos,
@@ -82,6 +87,7 @@ export default {
       toggleDone,
       removeTodo,
       markAllDone,
+      removeAll,
     };
   },
 };
