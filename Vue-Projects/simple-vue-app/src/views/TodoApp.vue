@@ -99,6 +99,7 @@ body {
   align-items: center;
   justify-content: center;
   max-block-size: 500px;
+  background-color: lightskyblue;
 }
 
 h1 {
