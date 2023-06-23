@@ -16,19 +16,26 @@
         />
       </div>
     </form>
-    <button type="submit">Submit</button>
+    <button type="submit" @click="addNewTodo">Submit</button>
     <button @click="markAllDone">Mark All Done</button>
     <button @click="removeAll">Remove All</button>
     <ul>
-      <!-- To Pass the value, need v-bind (:) -->
       <li v-for="(todo, index) in todos" :key="todo.id" class="todo">
-        <!-- Use class binding to change the class when Mark as Done -->
-        <!-- a .done class is created when todo.done is true -->
         <h3 :class="{ done: todo.done }" @click="toggleDone(todo)">
-          {{ todo.content }}
+          <!-- Use a conditional statement to display either the task or an input field based on the edit state -->
+          <template v-if="!todo.editing">
+            {{ todo.content }}
+          </template>
+          <template v-else>
+            <input v-model="todo.content" @keydown.enter="saveTask(todo)" />
+          </template>
         </h3>
-        <!-- To Remove todo using index (slice from the array) -->
-        <button @click="removeTodo(index)">Remove</button>
+        <div class="button-group">
+          <!-- Use a conditional statement to display either the "Edit" or "Save" button based on the edit state -->
+          <button v-if="!todo.editing" @click="editTask(todo)">Edit</button>
+          <button v-else @click="saveTask(todo)">Save</button>
+          <button @click="removeTodo(index)">Remove</button>
+        </div>
       </li>
     </ul>
   </div>
@@ -80,6 +87,15 @@ export default {
     function removeAll() {
       todos.value = [];
     }
+
+    function editTask(todo) {
+      todo.editing = true;
+    }
+
+    function saveTask(todo) {
+      todo.editing = false;
+      todo.done = false;
+    }
     return {
       newTodo,
       todos,
@@ -88,6 +104,8 @@ export default {
       removeTodo,
       markAllDone,
       removeAll,
+      editTask,
+      saveTask,
     };
   },
 };
@@ -107,14 +125,14 @@ h1 {
   color: #333;
 }
 
-form.add-todo-form {
+form {
   display: flex;
-  margin-bottom: 20px;
+  flex-direction: column;
+  align-items: center;
 }
 
 .input-wrapper {
-  flex-grow: 1;
-  margin-right: 10px;
+  margin-bottom: 20px;
 }
 
 label {
@@ -125,22 +143,31 @@ label {
 
 input {
   width: 100%;
-  padding: 8px;
+  padding: 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  max-width: 450px;
+  max-width: 750px;
+  box-sizing: border-box;
 }
 
 button[type="submit"] {
-  margin-left: 12px;
+  margin-left: 6px;
   display: inline;
+}
+
+.button-group {
+  display: flex;
+  align-items: center;
+}
+
+.button-group button {
+  flex-shrink: 0;
 }
 
 button {
   display: inline;
   padding: 8px 16px;
-  margin-top: 12px;
-  margin-right: 12px;
+  margin: 6px;
   background-color: #333;
   color: #fff;
   border: none;
