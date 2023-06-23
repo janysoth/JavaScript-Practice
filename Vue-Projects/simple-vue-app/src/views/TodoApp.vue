@@ -116,7 +116,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  max-block-size: 500px;
   background-color: lightskyblue;
 }
 
@@ -131,22 +130,22 @@ form {
   align-items: center;
 }
 
-.input-wrapper {
-  margin-bottom: 20px;
-}
-
 label {
   display: block;
   margin-bottom: 10px;
   font-weight: bold;
 }
 
-input {
-  width: 100%;
+.input-wrapper {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.input-wrapper input {
+  width: 350px !important;
   padding: 12px;
-  border: 1px solid #ccc;
+  border: 1px solid red;
   border-radius: 4px;
-  max-width: 750px;
   box-sizing: border-box;
 }
 
