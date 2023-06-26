@@ -26,12 +26,11 @@ export default {
 .todo-buttons {
   display: flex;
   justify-content: center;
-  margin-left: -20px;
-  margin-top: -20px;
 }
 
 .todo-buttons button {
   margin-right: 10px;
+  margin-bottom: 10px;
   padding: 8px 16px;
   background-color: #333;
   color: #fff;
@@ -39,6 +38,5 @@ export default {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-right: 10px;
 }
 </style>

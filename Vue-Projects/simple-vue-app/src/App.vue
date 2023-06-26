@@ -12,21 +12,17 @@
 </template>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: black;
-}
-
 nav {
   padding: 30px;
+  display: flex;
+  justify-content: center;
 }
 
 nav a {
   font-weight: bold;
   color: #2c3e50;
+  display: inline;
+  padding: 0 10px;
 }
 
 nav a.router-link-exact-active {

@@ -66,6 +66,36 @@ export default {
 </script>
 
 <style scoped>
+:root {
+  --primary: #ea40a4;
+  --business: #3a82ee;
+  --personal: var(--primary);
+  --light: #eee;
+  --grey: #888;
+  --dark: #313154;
+  --danger: #ff5b57;
+
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  --business-glow: 0px 0px 4px rgba(58, 130, 238, 0.75);
+  --personal-glow: 0px 0px 4px rgba(234, 64, 164, 0.75);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "montserrat", sans-serif;
+}
+
+input:not([type="radio"]):not([type="checkbox"]),
+button {
+  appearance: none;
+  border: none;
+  outline: none;
+  background: white;
+  cursor: initial;
+}
 .todo-app {
   display: flex;
   flex-direction: column;
@@ -96,16 +126,28 @@ label {
 }
 
 .input-wrapper {
-  margin-bottom: 20px;
   text-align: center;
 }
 
 .input-wrapper input {
-  width: 350px;
-  padding: 12px;
-  border: 1px solid red;
-  border-radius: 4px;
-  box-sizing: border-box;
+  display: block;
+  width: 300px;
+  padding: 1rem 1.5rem;
+  color: black;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow);
+  margin: none;
+}
+.input-wrapper input[type="text"] {
+  display: block;
+  width: 100%;
+  font-size: 1.125rem;
+  padding: 1rem 1.5rem;
+  color: var(--dark);
+  background-color: red;
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow);
 }
 
 button[type="submit"] {
@@ -128,6 +170,7 @@ button[type="submit"]:hover {
   list-style: none;
   padding: 0;
   margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .todos .done {

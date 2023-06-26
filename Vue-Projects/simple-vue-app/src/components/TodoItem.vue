@@ -52,7 +52,6 @@ export default {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
-  margin-left: -60px;
   padding: 8px;
   background-color: #fff;
   border-radius: 4px;
