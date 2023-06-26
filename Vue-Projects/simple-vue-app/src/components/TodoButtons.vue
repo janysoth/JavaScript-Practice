@@ -1,6 +1,7 @@
 <template>
-  <div class="button-group">
-    <button @click="markAllDone">Mark All Done</button>
+  <div class="todo-buttons">
+    <button @click="addNewTodo">Submit</button>
+    <!-- <button @click="markAllDone">Mark All Done</button> -->
     <button @click="removeAll">Remove All</button>
   </div>
 </template>
@@ -8,6 +9,9 @@
 <script>
 export default {
   methods: {
+    addNewTodo() {
+      this.$emit("add-new-todo");
+    },
     markAllDone() {
       this.$emit("mark-all-done");
     },
@@ -19,34 +23,22 @@ export default {
 </script>
 
 <style scoped>
-.button-group {
+.todo-buttons {
   display: flex;
-  align-items: center;
-  margin-top: 10px;
+  justify-content: center;
+  margin-left: -20px;
+  margin-top: -20px;
 }
 
-.button-group button {
-  margin-right: 6px;
-}
-
-button {
-  display: inline;
+.todo-buttons button {
+  margin-right: 10px;
   padding: 8px 16px;
-  margin: 6px;
   background-color: #333;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #555;
-}
-
-.todo .done {
-  text-decoration: line-through;
-  color: #999;
+  margin-right: 10px;
 }
 </style>

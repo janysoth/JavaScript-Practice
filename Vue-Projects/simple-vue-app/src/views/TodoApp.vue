@@ -1,25 +1,21 @@
 <template>
   <div class="todo-app">
     <h1>Vue 3 To-Do App</h1>
-    <form @submit.prevent="addNewTodo">
-      <div class="input-wrapper">
-        <label>Please Add New To-Do Below:</label>
-        <input
-          v-model="newTodo"
-          name="newTodo"
-          placeholder="Press ENTER or Click Submit to Add Task..."
-          @keydown.enter="addNewTodo"
-        />
-        <button type="submit" @click="addNewTodo">Submit</button>
-      </div>
-    </form>
-
-    <todo-list :todos="todos" @remove="removeTodo"></todo-list>
-
-    <todo-buttons
-      @mark-all-done="markAllDone"
-      @remove-all="removeAll"
-    ></todo-buttons>
+    <div class="input-wrapper">
+      <form @submit.prevent="addNewTodo">
+        <div class="input-wrapper">
+          <label>Please Add New To-Do Below:</label>
+          <input
+            v-model="newTodo"
+            name="newTodo"
+            placeholder="Press ENTER or Click Submit to Add Task..."
+            @keydown.enter="addNewTodo"
+          />
+        </div>
+      </form>
+      <todo-buttons @add-new-todo="addNewTodo" @remove-all="removeAll" />
+      <todo-list :todos="todos" @remove="removeTodo"></todo-list>
+    </div>
   </div>
 </template>
 
@@ -29,29 +25,29 @@ import TodoList from "@/components/TodoList.vue";
 import TodoButtons from "@/components/TodoButtons.vue";
 
 export default {
+  components: {
+    TodoList,
+    TodoButtons,
+  },
   setup() {
     const newTodo = ref("");
     const todos = ref([]);
 
     function addNewTodo() {
-      if (newTodo.value.trim() !== "") {
+      const trimmedTodo = newTodo.value.trim();
+      if (trimmedTodo !== "") {
         todos.value.push({
           id: Date.now(),
           done: false,
-          content: newTodo.value.trim(),
+          content: trimmedTodo,
           editing: false,
         });
-
         newTodo.value = "";
       }
     }
 
     function removeTodo(index) {
       todos.value.splice(index, 1);
-    }
-
-    function markAllDone() {
-      todos.value.forEach((todo) => (todo.done = true));
     }
 
     function removeAll() {
@@ -63,18 +59,13 @@ export default {
       todos,
       addNewTodo,
       removeTodo,
-      markAllDone,
       removeAll,
     };
-  },
-  components: {
-    TodoList,
-    TodoButtons,
   },
 };
 </script>
 
-<style>
+<style scoped>
 .todo-app {
   display: flex;
   flex-direction: column;
@@ -118,7 +109,7 @@ label {
 }
 
 button[type="submit"] {
-  margin-left: 6px;
+  margin-left: 0px;
   display: inline;
   padding: 8px 16px;
   background-color: #333;
@@ -168,6 +159,7 @@ button[type="submit"]:hover {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-right: 12px;
 }
 
 .todo-item button:hover {
@@ -201,11 +193,11 @@ button[type="submit"]:hover {
 .button-group {
   display: flex;
   align-items: center;
-  margin-top: 10px;
 }
 
 .button-group button {
   margin-right: 6px;
+  flex-shrink: 0;
 }
 
 .todo-buttons {

@@ -1,13 +1,13 @@
 <template>
-  <li :class="{ todo: true, done: todoCopy.done }">
-    <h3 :class="{ done: todoCopy.done }" @click="toggleDone">
-      <template v-if="!todoCopy.editing">{{ todoCopy.content }}</template>
+  <li :class="{ todo: true, done: todoItem.done }">
+    <h3 :class="{ done: todoItem.done }" @click="toggleDone">
+      <template v-if="!todoItem.editing">{{ todoItem.content }}</template>
       <template v-else>
-        <input v-model="todoCopy.content" @keydown.enter="saveTask" />
+        <input v-model="todoItem.content" @keydown.enter="saveTask" />
       </template>
     </h3>
     <div class="button-group">
-      <button v-if="!todoCopy.editing" @click="editTask">Edit</button>
+      <button v-if="!todoItem.editing" @click="editTask">Edit</button>
       <button v-else @click="saveTask">Save</button>
       <button @click="removeTodo">Remove</button>
     </div>
@@ -24,22 +24,22 @@ export default {
   },
   data() {
     return {
-      todoCopy: { ...this.todo },
+      todoItem: { ...this.todo },
     };
   },
   methods: {
     toggleDone() {
-      this.todoCopy.done = !this.todoCopy.done;
+      this.todoItem.done = !this.todoItem.done;
     },
     editTask() {
-      this.todoCopy.editing = true;
+      this.todoItem.editing = true;
     },
     saveTask() {
-      this.todoCopy.editing = false;
-      this.todoCopy.done = false;
+      this.todoItem.editing = false;
+      this.todoItem.done = false;
     },
     removeTodo() {
-      this.$emit("remove", this.todoCopy);
+      this.$emit("remove", this.todoItem);
     },
   },
 };
@@ -48,10 +48,11 @@ export default {
 <style scoped>
 .todo {
   display: flex;
-  width: 300px;
+  width: 400px;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
+  margin-left: -60px;
   padding: 8px;
   background-color: #fff;
   border-radius: 4px;
@@ -67,6 +68,8 @@ export default {
   padding: 4px 8px;
   background-color: #e74c3c;
   color: #fff;
+  margin-right: 8px;
+  border: none;
 }
 
 .todo button:hover {
