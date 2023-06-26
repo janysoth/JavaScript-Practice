@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import TodoApp from '../views/TodoApp.vue'
+import todoAppV2 from '../views/todoAppV2.vue'
 
 const routes = [
   {
@@ -21,6 +22,12 @@ const routes = [
     path: '/todo-app',
     name: 'todo-app',
     component: TodoApp
+  },
+
+  {
+    path: '/todo-app-v2',
+    name: 'todo-app-v2',
+    component: todoAppV2
   }
 ]
 
