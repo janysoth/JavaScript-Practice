@@ -1,9 +1,11 @@
 <script setup>
+import TodoCreator from "../components/TodoCreator.vue";
 </script>
 
 <template>
   <main>
-    <h1>Create To-Do</h1>
+    <h1>Create To-Do Here:</h1>
+    <TodoCreator />
   </main>
 </template>
 
@@ -19,6 +21,7 @@ main {
   h1 {
     margin-bottom: 16px;
     text-align: center;
+    text-decoration: underline;
   }
 }
 </style>
