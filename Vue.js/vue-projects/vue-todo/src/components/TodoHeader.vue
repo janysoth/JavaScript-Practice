@@ -20,7 +20,7 @@ import { RouterLink } from "vue-router";
   </div>
 </template>
 
-
+<!-- Scoped: only applied the style in this component -->
 <style lang="scss" scoped>
 header {
   background-color: #f1f1f1;
