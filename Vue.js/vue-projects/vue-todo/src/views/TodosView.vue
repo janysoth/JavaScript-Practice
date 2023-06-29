@@ -1,11 +1,19 @@
 <script setup>
+import { ref } from "vue";
 import TodoCreator from "../components/TodoCreator.vue";
+
+const todoList = ref([]);
+
+const createTodo = () => {};
 </script>
 
 <template>
   <main>
     <h1>Create To-Do Here:</h1>
-    <TodoCreator />
+
+    <!-- create-todo when the user click on the create button. -->
+    <!-- Then create "createTodo" function to call. -->
+    <TodoCreator @create-todo="createTodo" />
   </main>
 </template>
 
