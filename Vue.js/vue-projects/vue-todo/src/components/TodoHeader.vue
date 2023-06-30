@@ -13,6 +13,7 @@ import { RouterLink } from "vue-router";
         <!-- To Create Navigation Bar -->
         <ul class="nav-routes">
           <RouterLink to="/">Home</RouterLink>
+          <RouterLink to="/Calculator">Calculaor App</RouterLink>
           <RouterLink to="/About">About</RouterLink>
         </ul>
       </nav>
