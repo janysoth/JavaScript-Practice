@@ -1,20 +1,37 @@
 <script setup>
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 
 // Create emit to pass the info to the parent:
 const emit = defineEmits(["create-todo"]);
 
-const todo = ref("");
+// Create reactive to combine all of the properties together
+const todoState = reactive({
+  todo: "",
+  invalid: null,
+  errMsg: "",
+});
 
+// When Using reactive, no need to use .value
 const createTodo = () => {
-  emit("create-todo", todo.value);
+  todoState.invalid = true;
+  if (todoState.todo !== "") {
+    emit("create-todo", todoState.todo);
+    // To Return an empty string after user submut
+    todoState.todo = "";
+    return;
+  }
+  todoState.invalid = true;
+  todoState.errMsg = "Please Enter Your To-Do Item to start...";
 };
 </script> 
 
 <template>
-  <div class="input-wrap">
-    <input type="text" v-model="todo" />
-    <button @click="createTodo()">Create</button>
+  <div>
+    <div class="input-wrap">
+      <input type="text" v-model="todoState.todo" />
+      <button @click="createTodo()">Create</button>
+    </div>
+    <p class="err-msg">{{ todoState.errMsg }}</p>
   </div>
 </template>
 

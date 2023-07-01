@@ -1,10 +1,20 @@
 <script setup>
 import { ref } from "vue";
+import { uid } from "uid";
 import TodoCreator from "../components/TodoCreator.vue";
 
 const todoList = ref([]);
 
-const createTodo = () => {};
+// If the property name is the name as param
+// Only need to put one name
+const createTodo = (todo) => {
+  todoList.value.push({
+    id: uid(),
+    todo,
+    isCompleted: null,
+    isEditing: null,
+  });
+};
 </script>
 
 <template>
