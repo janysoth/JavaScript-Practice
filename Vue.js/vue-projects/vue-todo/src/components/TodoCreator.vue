@@ -13,10 +13,10 @@ const todoState = reactive({
 
 // When Using reactive, no need to use .value
 const createTodo = () => {
-  todoState.invalid = true;
+  todoState.invalid = null;
   if (todoState.todo !== "") {
     emit("create-todo", todoState.todo);
-    // To Return an empty string after user submut
+    // To Return an empty string after user submit
     todoState.todo = "";
     return;
   }
@@ -31,7 +31,8 @@ const createTodo = () => {
       <input type="text" v-model="todoState.todo" />
       <button @click="createTodo()">Create</button>
     </div>
-    <p class="err-msg">{{ todoState.errMsg }}</p>
+    <p v-if="todoState.invalid" class="err-msg">{{ todoState.errMsg }}</p>
+    <!-- <p v-else class="err-msg">{{ todoState.errMsg }}</p> -->
   </div>
 </template>
 
