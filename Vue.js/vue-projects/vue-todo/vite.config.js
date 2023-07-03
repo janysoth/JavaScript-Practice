@@ -11,6 +11,17 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
+    },
+    resolve: {
+      extensions: ['.js', '.ts', '.vue', '.json', '.html'],
+    },
+    module: {
+      rules: [
+        {
+          test: /\.html$/i,
+          loader: 'html-loader',
+        },
+      ],
+    },
   }
 })
