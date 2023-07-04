@@ -1,5 +1,6 @@
 <script setup>
 import { ref, reactive } from "vue";
+import TodoButton from "./TodoButton.vue";
 
 // Create emit to pass the info to the parent:
 const emit = defineEmits(["create-todo"]);
@@ -30,7 +31,7 @@ const createTodo = () => {
     <!-- Class Binding, Only input-err class apply when todoState.invalid is true -->
     <div class="input-wrap" :class="{ 'input-err': todoState.invalid }">
       <input type="text" v-model="todoState.todo" />
-      <button @click="createTodo()">Create</button>
+      <TodoButton @click="createTodo()"></TodoButton>
     </div>
     <!-- Use v-show if the item needs toggle often -->
     <!-- <p v-if="todoState.invalid" class="err-msg">{{ todoState.errMsg }}</p> -->
@@ -61,11 +62,6 @@ const createTodo = () => {
     &:focus {
       outline: none;
     }
-  }
-
-  button {
-    padding: 8px 16px;
-    border: none;
   }
 }
 
