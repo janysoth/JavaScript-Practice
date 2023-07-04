@@ -3,6 +3,7 @@
   <div>
     <button>
       <!-- Use slot to change the button name dynamically -->
+      <!-- Put in the name in case the user did not name the button -->
       <slot>Create</slot>
     </button>
   </div>
