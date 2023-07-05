@@ -18,10 +18,26 @@ const createTodo = (todo) => {
   });
 };
 
+// Mark the todo complete
 const toggleTodoComplete = (todoIndex) => {
   todoList.value[todoIndex].isCompleted =
     !todoList.value[todoIndex].isCompleted;
 };
+
+// To be able to edit the task:
+const toggleEditTodo = (todoIndex) => {
+  todoList.value[todoIndex].isEditing = !todoList.value[todoIndex].isEditing;
+};
+
+// To Update the todo after editing:
+// To Access todo property and set it to todoVal
+const updateTodo = (todoVal, todoIndex) => {
+  todoList.value[todoIndex].todo = todoVal;
+};
+
+// To Delete todo item:
+// s
+const deleteTodo = (todoId) => {};
 </script>
 
 <template>
@@ -39,6 +55,9 @@ const toggleTodoComplete = (todoIndex) => {
         :key="todo.id"
         :index="index"
         @toggle-complete="toggleTodoComplete(index)"
+        @edit-todo="toggleEditTodo"
+        @update-todo="updateTodo"
+        @delete-todo="deleteTodo"
       />
     </ul>
     <p v-else class="todos-msg">

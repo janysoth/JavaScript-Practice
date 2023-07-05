@@ -14,22 +14,36 @@ const props = defineProps({
   },
 });
 
-defineEmits(["toggle-complete"]);
+// Add each emit here:
+defineEmits(["toggle-complete", "edit-todo", "update-todo", "delete-todo"]);
 </script>
 
 <template>
   <li>
+    <!-- $emit is an inline emit -->
     <input
       type="checkbox"
       :checked="todo.isCompleted"
       @input="$emit('toggle-complete', index)"
     />
     <div class="todo">
-      <input v-if="todo.isEditing" type="text" :value="todo.todo" />
+      <!-- To save the item when the user click the check icon -->
+      <!-- $event.target.value = the value the user just edited -->
+      <!-- Listen for the change in the input and update the todo -->
+      <input
+        v-if="todo.isEditing"
+        type="text"
+        :value="todo.todo"
+        @input="$emit('update-todo', $event.target.value, index)"
+      />
+      <!-- This will update the class and put a strikethrough -->
       <span v-else :class="{ 'completed-todo': todo.isCompleted }">
         {{ todo.todo }}
       </span>
     </div>
+    <!-- Both icons call for the same function  -->
+    <!-- Check icon appear when isEditing is true and click the icon to save -->
+    <!-- Pencile icon appears when isEditing is false and click the icon to edit -->
     <div class="todo-actions">
       <Icon
         v-if="todo.isEditing"
@@ -37,6 +51,7 @@ defineEmits(["toggle-complete"]);
         class="icon check-icon"
         color="41b080"
         width="22"
+        @click="$emit('edit-todo', index)"
       />
       <Icon
         v-else
@@ -44,8 +59,15 @@ defineEmits(["toggle-complete"]);
         class="icon edit-icon"
         color="41b080"
         width="22"
+        @click="$emit('edit-todo', index)"
       />
-      <Icon icon="ph:trash" class="icon trash-icon" color="f95e5e" width="22" />
+      <Icon
+        icon="ph:trash"
+        class="icon trash-icon"
+        color="f95e5e"
+        width="22"
+        @click="$emit('delete-todo', todo.id)"
+      />
     </div>
   </li>
 </template>
