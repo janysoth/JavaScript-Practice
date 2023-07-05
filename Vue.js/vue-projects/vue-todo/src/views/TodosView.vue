@@ -36,8 +36,14 @@ const updateTodo = (todoVal, todoIndex) => {
 };
 
 // To Delete todo item:
-// s
-const deleteTodo = (todoId) => {};
+// Use filter function to filter out the particular todoId
+// Pass in todo item as param and filtering out
+// the element that matches todo.id
+const deleteTodo = (todo) => {
+  todoList.value = todoList.value.filter(
+    (todoFilter) => todoFilter.id !== todo.id
+  );
+};
 </script>
 
 <template>
