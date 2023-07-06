@@ -7,6 +7,22 @@ import TodoItem from "../components/TodoItem.vue";
 
 const todoList = ref([]);
 
+// To get Todo List from the LocalStorage:
+const fetchTodoList = () => {
+  const savedTodoList = JSON.parse(localStorage.getItem("todoList"));
+  if (savedTodoList) {
+    todoList.value = savedTodoList;
+  }
+};
+
+// This function will run each time the page loaded in:
+fetchTodoList();
+
+// Set Todo List to store in LocalStorage
+const setTodoListLocalStorage = () => {
+  localStorage.setItem("todoList", JSON.stringify(todoList.value));
+};
+
 // If the property name is the name as param
 // Only need to put one name
 const createTodo = (todo) => {
@@ -16,23 +32,38 @@ const createTodo = (todo) => {
     isCompleted: null,
     isEditing: null,
   });
+  // Call this method when a new todo created or updated,
+  // To save to LocalStorage:
+  setTodoListLocalStorage();
 };
 
 // Mark the todo complete
 const toggleTodoComplete = (todoIndex) => {
   todoList.value[todoIndex].isCompleted =
     !todoList.value[todoIndex].isCompleted;
+
+  // Call this method when a new todo created or updated,
+  // To save to LocalStorage:
+  setTodoListLocalStorage();
 };
 
 // To be able to edit the task:
 const toggleEditTodo = (todoIndex) => {
   todoList.value[todoIndex].isEditing = !todoList.value[todoIndex].isEditing;
+
+  // Call this method when a new todo created or updated,
+  // To save to LocalStorage:
+  setTodoListLocalStorage();
 };
 
 // To Update the todo after editing:
 // To Access todo property and set it to todoVal
 const updateTodo = (todoVal, todoIndex) => {
   todoList.value[todoIndex].todo = todoVal;
+
+  // Call this method when a new todo created or updated,
+  // To save to LocalStorage:
+  setTodoListLocalStorage();
 };
 
 // To Delete todo item:
@@ -43,6 +74,10 @@ const deleteTodo = (todo) => {
   todoList.value = todoList.value.filter(
     (todoFilter) => todoFilter.id !== todo.id
   );
+
+  // Call this method when a new todo created or updated,
+  // To save to LocalStorage:
+  setTodoListLocalStorage();
 };
 </script>
 
