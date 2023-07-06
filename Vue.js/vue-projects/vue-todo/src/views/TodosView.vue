@@ -77,7 +77,7 @@ const deleteTodo = (todo) => {
 
 <template>
   <main>
-    <h1>Create Todo</h1>
+    <h1>Create Todo:</h1>
     <TodoCreator @create-todo="createTodo">
       <template #button-content>Create</template>
     </TodoCreator>
@@ -115,6 +115,7 @@ main {
   h1 {
     margin-bottom: 16px;
     text-align: center;
+    text-decoration: underline;
   }
 
   .todo-list {
