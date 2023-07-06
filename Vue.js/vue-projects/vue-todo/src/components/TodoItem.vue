@@ -66,7 +66,7 @@ defineEmits(["toggle-complete", "edit-todo", "update-todo", "delete-todo"]);
         class="icon trash-icon"
         color="f95e5e"
         width="22"
-        @click="$emit('delete-todo', todo.id)"
+        @click="$emit('delete-todo', todo)"
       />
     </div>
   </li>

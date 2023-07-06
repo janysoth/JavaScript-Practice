@@ -1,11 +1,24 @@
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { uid } from "uid";
 import { Icon } from "@iconify/vue";
 import TodoCreator from "../components/TodoCreator.vue";
 import TodoItem from "../components/TodoItem.vue";
 
 const todoList = ref([]);
+
+// To Watch for any changes and updated to the LocalStorage
+// 1st param: the ref item, 2nd param: callback function
+// deep: to track changes deep within the object's properties
+watch(
+  todoList,
+  () => {
+    setTodoListLocalStorage();
+  },
+  {
+    deep: true,
+  }
+);
 
 // To get Todo List from the LocalStorage:
 const fetchTodoList = () => {
@@ -32,38 +45,23 @@ const createTodo = (todo) => {
     isCompleted: null,
     isEditing: null,
   });
-  // Call this method when a new todo created or updated,
-  // To save to LocalStorage:
-  setTodoListLocalStorage();
 };
 
 // Mark the todo complete
 const toggleTodoComplete = (todoIndex) => {
   todoList.value[todoIndex].isCompleted =
     !todoList.value[todoIndex].isCompleted;
-
-  // Call this method when a new todo created or updated,
-  // To save to LocalStorage:
-  setTodoListLocalStorage();
 };
 
 // To be able to edit the task:
 const toggleEditTodo = (todoIndex) => {
   todoList.value[todoIndex].isEditing = !todoList.value[todoIndex].isEditing;
-
-  // Call this method when a new todo created or updated,
-  // To save to LocalStorage:
-  setTodoListLocalStorage();
 };
 
 // To Update the todo after editing:
 // To Access todo property and set it to todoVal
 const updateTodo = (todoVal, todoIndex) => {
   todoList.value[todoIndex].todo = todoVal;
-
-  // Call this method when a new todo created or updated,
-  // To save to LocalStorage:
-  setTodoListLocalStorage();
 };
 
 // To Delete todo item:
@@ -74,10 +72,6 @@ const deleteTodo = (todo) => {
   todoList.value = todoList.value.filter(
     (todoFilter) => todoFilter.id !== todo.id
   );
-
-  // Call this method when a new todo created or updated,
-  // To save to LocalStorage:
-  setTodoListLocalStorage();
 };
 </script>
 
