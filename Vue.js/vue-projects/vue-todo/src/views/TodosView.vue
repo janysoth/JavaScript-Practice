@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from "vue";
+import { ref, watch, computed } from "vue";
 import { uid } from "uid";
 import { Icon } from "@iconify/vue";
 import TodoCreator from "../components/TodoCreator.vue";
@@ -19,6 +19,14 @@ watch(
     deep: true,
   }
 );
+
+// Computed function using getter function:
+// Computed function will track each time the todoList changes.
+// Use every method to loop through the array and check
+// the item to see if it's completed.
+const todoCompleted = computed(() => {
+  return todoList.value.every((todo) => todo.isCompleted);
+});
 
 // To get Todo List from the LocalStorage:
 const fetchTodoList = () => {
@@ -99,6 +107,11 @@ const deleteTodo = (todo) => {
       <Icon icon="noto-v1:sad-but-relieved-face" />
       <span>You have no To-Do's to complete! Add one!</span>
       <Icon icon="noto-v1:sad-but-relieved-face" />
+    </p>
+    <p v-if="todoCompleted && todoList.length > 0" class="todos-msg">
+      <Icon icon="noto-v1:party-popper" />
+      <span>You have completed all of your todo tasks. Yay!</span>
+      <Icon icon="noto-v1:party-popper" />
     </p>
   </main>
 </template>
