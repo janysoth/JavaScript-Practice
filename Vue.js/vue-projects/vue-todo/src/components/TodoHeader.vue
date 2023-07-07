@@ -8,11 +8,11 @@ import { RouterLink } from "vue-router";
       <nav class="container">
         <div class="branding">
           <img src="../assets/Vue_Logo_Black.png" alt="" />
-          <h1>Vue To-Do App</h1>
+          <h1>Jonny Vorn Soth</h1>
         </div>
         <!-- To Create Navigation Bar -->
         <ul class="nav-routes">
-          <RouterLink to="/">Home</RouterLink>
+          <RouterLink to="/">To-Do App</RouterLink>
           <RouterLink to="/Calculator">Calculaor App</RouterLink>
           <RouterLink to="/About">About</RouterLink>
         </ul>
