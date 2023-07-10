@@ -86,9 +86,7 @@ const deleteTodo = (todo) => {
 <template>
   <main>
     <h1>Create Todo:</h1>
-    <TodoCreator @create-todo="createTodo">
-      <template #button-content>Create</template>
-    </TodoCreator>
+    <TodoCreator @create-todo="createTodo"> </TodoCreator>
     <ul class="todo-list" v-if="todoList.length > 0">
       <!-- Need to put :key="todo.id" to make the error disappear -->
       <!-- :todo="todo" is a prop that's defined in TodoItem.vue -->

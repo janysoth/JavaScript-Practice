@@ -31,7 +31,7 @@ const createTodo = () => {
     <!-- Class Binding, Only input-err class apply when todoState.invalid is true -->
     <div class="input-wrap" :class="{ 'input-err': todoState.invalid }">
       <input type="text" v-model="todoState.todo" />
-      <TodoButton @click="createTodo()" />
+      <TodoButton @click="createTodo()">Submit</TodoButton>
     </div>
     <!-- Use v-show if the item needs toggle often -->
     <!-- <p v-if="todoState.invalid" class="err-msg">{{ todoState.errMsg }}</p> -->

@@ -15,5 +15,6 @@
 button {
   padding: 8px 16px;
   border: none;
+  background-color: lightgrey;
 }
 </style>

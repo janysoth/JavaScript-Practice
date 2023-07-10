@@ -1,16 +1,33 @@
 <template>
-  <div></div>
+  <div
+    class="relative flex justify-end items-center px-5 rounded-lg bg-gray-900"
+  >
+    <div class="overflow-hidden text-right">
+      <span
+        v-if="!error"
+        class="float-right whitespace-pre pr-5"
+        data-test="text"
+      >
+        {{ text }}
+      </span>
+      <span
+        v-else
+        class="float-right whitespace-nowrap text-red-400 pr-5"
+        data-test="error"
+      >
+        Invalid expression
+      </span>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
-
+import { defineComponent } from "vue";
 export default defineComponent({
-  setup() {
-    return {};
+  name: "Screen",
+  props: {
+    text: { type: String, default: "" },
+    error: { type: Boolean, default: false },
   },
 });
 </script>
-
-<style scoped>
-</style>
