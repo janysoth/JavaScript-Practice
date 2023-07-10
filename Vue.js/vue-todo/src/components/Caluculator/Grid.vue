@@ -1,16 +1,18 @@
 <template>
-  <div></div>
+  <div :class="`grid grid-rows-${rows} grid-cols-${cols} gap-${gap}`">
+    <slot></slot>
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  setup() {
-    return {};
+  name: "Grid",
+  props: {
+    rows: { type: [String, Number], required: true },
+    cols: { type: [String, Number], required: true },
+    gap: { type: [String, Number], defualt: 0 },
   },
 });
 </script>
-
-<style scoped>
-</style>
