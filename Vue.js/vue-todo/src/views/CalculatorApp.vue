@@ -1,34 +1,17 @@
 <template>
   <div
-    class="p-3"
-    style="max-width: 400px; margin: 50px auto; background: #234"
+    class="w-full h-full min-h-screen bg-white-800 text-gray-200 flex justify-center items-center font-mono text-2xl sm:text-3xl"
   >
-    <!-- Calculator Result -->
-    <div
-      class="w-full rounded m-1 p-3 text-right lead font-weight-bold text-white bg-vue-dark"
-    >
-      {{ calculatorValue }}
-    </div>
+    <Calculator />
   </div>
 </template>
 
-<script>
-export default {
-  name: "Calculator",
-  props: {
-    msg: String,
-  },
-  data() {
-    return {
-      calculatorValue: "0",
-    };
-  },
-};
+<script lang="ts">
+import { defineComponent } from "vue";
+import Calculator from "../components/Caluculator/Calculator.vue";
+
+export default defineComponent({
+  name: "App",
+  components: { Calculator },
+});
 </script>
-
-<style lang="scss" scoped>
-.bg-vue-dark {
-  background: #cad5e2;
-}
-</style>
-
