@@ -12,7 +12,8 @@ import { RouterLink } from "vue-router";
         </div>
         <!-- To Create Navigation Bar -->
         <ul class="nav-routes">
-          <RouterLink to="/">To-Do App</RouterLink>
+          <RouterLink to="/">Home</RouterLink>
+          <RouterLink to="/todo-app">To-Do App</RouterLink>
           <RouterLink to="/Calculator">Calculaor App</RouterLink>
           <RouterLink to="/About">About</RouterLink>
         </ul>

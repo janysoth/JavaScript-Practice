@@ -6,6 +6,11 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      name: 'Home',
+      component: () => import('../views/HomeView.vue')
+    },
+    {
+      path: '/todo-app',
       name: 'To-Do App',
       component: TodosView,
     },
