@@ -45,6 +45,7 @@ defineProps({
   opacity: 0;
 }
 
+/* Make the content of the Modal popping into the screen */
 .modal-inner-enter-active {
   transition: all 0.3s cubic-bezier(0.52, 0.02, 0.19, 1.02) 0.15s;
 }
@@ -53,6 +54,7 @@ defineProps({
   transition: all 0.3s cubic-bezier(0.52, 0.02, 0.19, 1.02);
 }
 
+/* Make the content of the Modal popping out of the screen */
 .modal-inner-enter-from {
   opacity: 0;
   transform: scale(0.8);
