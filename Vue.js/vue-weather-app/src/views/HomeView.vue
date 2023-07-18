@@ -28,10 +28,12 @@
         <template v-else>
           <!-- Use v-for to re-iterate throught the mapboxSearchResults -->
           <!-- Need v-bind the key with each searchResult id -->
+          <!-- previewCity(searchResult) to take the option that user click on -->
           <li
             v-for="searchResult in mapboxSearchResults"
             :key="searchResult.id"
             class="py-2 cursor-pointer"
+            @click="previewCity(searchResult)"
           >
             <!-- To get the searchResult from the v-for loop -->
             {{ searchResult.place_name }}
@@ -45,6 +47,13 @@
 <script setup>
 import { ref } from "vue";
 import axios from "axios";
+
+const previewCity = (searchResult) => {
+  console.log("Preview City:", searchResult);
+
+  const [city, state] = searchResult.place_name.split(",");
+  console.log(city, state);
+};
 
 const mapboxAPIKey =
   "pk.eyJ1IjoiamFueXNvdGgiLCJhIjoiY2xrNmh6aGxrMDFyajNkbjZtcG0zOW9ucCJ9.fJVr0w5o2-i_a2robqjz-g";
@@ -70,7 +79,6 @@ const getSearchResults = () => {
 
         // To Search the search box result
         mapboxSearchResults.value = result.data.features;
-        console.log(mapboxSearchResults.value);
       } catch {
         searchError.value = true;
       }
