@@ -12,6 +12,7 @@ const router = createRouter({
     },
     {
       // /:state/:city are params
+      // Use /: and param for the path
       path: '/weather/:state/:city',
       name: 'cityView',
       component: CityView

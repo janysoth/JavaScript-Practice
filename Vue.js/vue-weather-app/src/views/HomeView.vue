@@ -47,12 +47,29 @@
 <script setup>
 import { ref } from "vue";
 import axios from "axios";
+import { useRouter } from "vue-router";
+
+// This will route whatever user choose from the query
+const router = useRouter();
 
 const previewCity = (searchResult) => {
   console.log("Preview City:", searchResult);
 
+  // Use split function to seperate city and state
   const [city, state] = searchResult.place_name.split(",");
-  console.log(city, state);
+
+  // Router will route the user using  push function
+  // name: is the cityView.vue
+  // params: city and state
+  router.push({
+    name: "cityView",
+    params: { state: state.replaceAll(" ", ""), city: city },
+    query: {
+      lat: searchResult.geometry.coordinates[1],
+      lng: searchResult.geometry.coordinates[0],
+      preview: true,
+    },
+  });
 };
 
 const mapboxAPIKey =
