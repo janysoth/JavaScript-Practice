@@ -20,7 +20,7 @@
         <p v-if="searchError">Sorry, something went wrong, please try again.</p>
 
         <!-- Show the message when no option to select -->
-        <p v-if="!serverError && mapboxSearchResults.length === 0">
+        <p v-if="!searchError && mapboxSearchResults.length === 0">
           No results match your query, try a different term.
         </p>
 
