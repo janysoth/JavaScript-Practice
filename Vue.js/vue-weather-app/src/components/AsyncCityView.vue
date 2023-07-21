@@ -15,7 +15,9 @@
     <!-- Weather Overview -->
     <div class="flex flex-col text-white items-center py-12">
       <!-- To Show the City name using the params set for cityView -->
-      <h1 class="text-4xl mb-2">{{ route.params.city }}</h1>
+      <h1 class="text-4xl mb-2">
+        {{ route.params.city }}, {{ route.params.state }}
+      </h1>
 
       <!-- To Show Date & Time -->
       <p class="text-sm mb-12">
