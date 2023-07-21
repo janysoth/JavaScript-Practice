@@ -34,6 +34,11 @@
           })
         }}
       </p>
+
+      <!-- To Show Current Temperature -->
+      <p class="text-8xl mb-8">
+        {{ Math.round(weatherData.current.temp) }}&deg;F
+      </p>
     </div>
   </div>
 </template>
