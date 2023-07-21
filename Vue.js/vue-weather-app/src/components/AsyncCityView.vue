@@ -39,6 +39,17 @@
       <p class="text-8xl mb-8">
         {{ Math.round(weatherData.current.temp) }}&deg;F
       </p>
+
+      <!-- To Show Other Weather Information -->
+      <p>Feels Like: {{ Math.round(weatherData.current.feels_like) }}&deg;F</p>
+      <p class="capitalize">
+        {{ weatherData.current.weather[0].description }}
+      </p>
+      <img
+        class="w-[150px] h-auto"
+        :src="`http://openweathermap.org/img/wn/${weatherData.current.weather[0].icon}@2x.png`"
+        alt=""
+      />
     </div>
   </div>
 </template>
