@@ -2,10 +2,7 @@
   <div class="flex flex-col flex-1 items-center">
     <!-- Banner -->
     <!-- To show the preview of the city and not yet added to the application -->
-    <div
-      v-if="route.query.preview"
-      class="text-white p-4 bg-weather-secondary w-full text-center"
-    >
+    <div v-if="route.query.preview" class="text-white p-4 bg-weather-secondary w-full text-center">
       <p>
         You are currently previewing this city, click the "+" icon to start
         tracking this city.
@@ -45,12 +42,11 @@
       <p class="capitalize">
         {{ weatherData.current.weather[0].description }}
       </p>
-      <img
-        class="w-[150px] h-auto"
-        :src="`http://openweathermap.org/img/wn/${weatherData.current.weather[0].icon}@2x.png`"
-        alt=""
-      />
+      <img class="w-[150px] h-auto"
+        :src="`http://openweathermap.org/img/wn/${weatherData.current.weather[0].icon}@2x.png`" alt="" />
     </div>
+
+    <hr class="border-white border-opacity-10 border w-full" />
   </div>
 </template>
 
