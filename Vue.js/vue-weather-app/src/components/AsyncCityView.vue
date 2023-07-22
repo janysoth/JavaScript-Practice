@@ -47,6 +47,28 @@
     </div>
 
     <hr class="border-white border-opacity-10 border w-full" />
+
+    <!-- Hourly Weather -->
+    <div class="max-w-screen-md w-full py-12">
+      <div class="mx-8 text-white">
+        <h2 class="mb-4">Hourly Weather:</h2>
+        <!-- overflow-x-scroll: allow the user to scroll on the x-axis -->
+        <div class="flex gap-10 overflow-x-scroll">
+
+          <!-- To iterate the hourly temp using v-for -->
+          <div v-for="hourData in weatherData.hourly" :key="hourData.dt" class="flex flex-col gap-4 items-center">
+
+            <!-- Display items on the page -->
+            <p class="whitespace-nowrap text-md">
+              {{ new Date(hourData.currentTime).toLocaleTimeString("en-us", {
+                hour: "numeric",
+              })
+              }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
