@@ -20,8 +20,12 @@
           class="fa-solid fa-circle-info text-xl hover:text-weather-secondary duration-150 cursor-pointer"
           @click="toggleModal"
         ></i>
+
+        <!-- Plus Icon to add a city to Local Storage -->
         <i
           class="fa-solid fa-plus text-xl hover:text-weather-secondary duration-150 cursor-pointer"
+          @click="addCity"
+          v-if="route.query.preview"
         ></i>
       </div>
 
@@ -60,13 +64,54 @@
 </template>
 
 <script setup>
-import { RouterLink } from "vue-router";
+import { RouterLink, useRoute, useRouter } from "vue-router";
 import { ref } from "vue";
+import { uid } from "uid";
 import BaseModal from "./BaseModal.vue";
 
 const modalActive = ref(null);
 const toggleModal = () => {
   modalActive.value = !modalActive.value;
+};
+
+// To Store the Cities when the user click the "+"
+const savedCities = ref([]);
+
+// Use useRoute to ref view Router
+// Add those info of a city into savedCities
+const route = useRoute();
+
+// To Remove preview URL from the route
+const router = useRouter();
+
+const addCity = () => {
+  // To Check to see if there's any savedCities
+  // Then Add to the savedCities Array
+  if (localStorage.getItem("savedCities")) {
+    savedCities.value = JSON.parse(localStorage.getItem("savedCities"));
+  }
+
+  // To Add Each City's info into the object
+  const locationObj = {
+    id: uid(),
+    state: route.params.state,
+    city: route.params.city,
+    coords: {
+      lat: route.query.lat,
+      lng: route.query.lng,
+    },
+  };
+
+  // Add locationObj into the savedCities Array
+  savedCities.value.push(locationObj);
+
+  // Add savedCities to Local Storage using JSON.stringify
+  localStorage.setItem("savedCities", JSON.stringify(savedCities));
+
+  // To Delete preview URL from the link
+  let query = Object.assign({}, route.query);
+  delete query.preview;
+  router.replace({ query });
 };
 </script>
 
