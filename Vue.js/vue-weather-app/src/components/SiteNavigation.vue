@@ -1,6 +1,4 @@
-// To have this 
-  components: { BaseModal },component present on every page
-// Import this component in the App.vue
+
 <template>
   <header class="sticky top-0 bg-weather-primary shadow-lg">
     <nav
@@ -25,7 +23,7 @@
         <i
           class="fa-solid fa-plus text-xl hover:text-weather-secondary duration-150 cursor-pointer"
           @click="addCity"
-          v-if="route.query.preview"
+          v-if="route.query"
         ></i>
       </div>
 
@@ -69,29 +67,19 @@ import { ref } from "vue";
 import { uid } from "uid";
 import BaseModal from "./BaseModal.vue";
 
-const modalActive = ref(null);
-const toggleModal = () => {
-  modalActive.value = !modalActive.value;
-};
-
-// To Store the Cities when the user click the "+"
+// To Store all of the cities
 const savedCities = ref([]);
 
-// Use useRoute to ref view Router
-// Add those info of a city into savedCities
+// To Reference view route
 const route = useRoute();
-
-// To Remove preview URL from the route
 const router = useRouter();
 
 const addCity = () => {
-  // To Check to see if there's any savedCities
-  // Then Add to the savedCities Array
   if (localStorage.getItem("savedCities")) {
     savedCities.value = JSON.parse(localStorage.getItem("savedCities"));
   }
 
-  // To Add Each City's info into the object
+  // Variable to contain all of the city's info
   const locationObj = {
     id: uid(),
     state: route.params.state,
@@ -102,16 +90,19 @@ const addCity = () => {
     },
   };
 
-  // Add locationObj into the savedCities Array
   savedCities.value.push(locationObj);
 
-  // Add savedCities to Local Storage using JSON.stringify
-  localStorage.setItem("savedCities", JSON.stringify(savedCities));
+  // Update the localStorage with the new array
+  localStorage.setItem("savedCities", JSON.stringify("savedCities.value"));
 
-  // To Delete preview URL from the link
   let query = Object.assign({}, route.query);
   delete query.preview;
   router.replace({ query });
+};
+
+const modalActive = ref(null);
+const toggleModal = () => {
+  modalActive.value = !modalActive.value;
 };
 </script>
 
