@@ -1,5 +1,6 @@
 <template>
   <main class="container text-white">
+    <!-- Search Input -->
     <div class="pt-4 mb-8 relative">
       <!-- Use v-model to capture the variable below -->
       <input
@@ -41,6 +42,17 @@
         </template>
       </ul>
     </div>
+
+    <!-- CityList Component -->
+    <div class="flex flex-col gap-4">
+      <!-- Need to use Suspense component for Top-Level await -->
+      <Suspense>
+        <CityList />
+        <template #fallback>
+          <p>Loading...</p>
+        </template>
+      </Suspense>
+    </div>
   </main>
 </template>
 
@@ -48,6 +60,7 @@
 import { ref } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
+import CityList from "../components/CityList.vue";
 
 // This will route whatever user choose from the query
 const router = useRouter();
