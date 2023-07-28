@@ -1,10 +1,15 @@
 <template>
-  <div></div>
+  <div>
+    <div v-for="city in savedCities" :key="city.id">
+      <CityCard :city="city" />
+    </div>
+  </div>
 </template>
 
 <script setup>
 import axios from "axios";
 import { ref } from "vue";
+import CityCard from "./CityCard.vue";
 
 const savedCities = ref([]);
 
@@ -18,7 +23,7 @@ const getCities = async () => {
     savedCities.value.forEach((city) => {
       requests.push(
         axios.get(
-          `https://api.openweathermap.org/data/3.0/weather?lat=${city.coords.lat}&lon=${city.coords.lng}&appid=d5d4f9caa31dc0bc654d876b1d629d6e&units=imperial`
+          `https://api.openweathermap.org/data/2.5/weather?lat=${city.coords.lat}&lon=${city.coords.lng}&appid=d5d4f9caa31dc0bc654d876b1d629d6e&units=imperial`
         )
       );
     });
