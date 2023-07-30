@@ -4,9 +4,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "weather-primary": "#00668A",
-        "weather-secondary": "#004E71",
+        "weather-primary": "#032ea1",
+        "weather-secondary": "#0E86D4",
+        "cambodia-red": "#e00025",
+        "cambodia-blue": "#032ea1",
       },
+      maxWidth: {
+        '50': '50px',
+      }
     },
     fontFamily: {
       Roboto: ["Roboto, sans-serif"],
