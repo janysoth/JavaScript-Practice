@@ -113,12 +113,19 @@
         </div>
       </div>
     </div>
+
+    <!-- An option to remove the city -->
+    <div class="flex items-center gap-2 py-12 text-white cursor-pointer duration-150 hover:text-red-500"
+      @click="removeCity">
+      <i class="fa-solid fa-trash" />
+      <p>Remove City</p>
+    </div>
   </div>
 </template>
 
 <script setup>
 import axios from "axios";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 const route = useRoute();
 
@@ -149,5 +156,22 @@ const getWeatherData = async () => {
 
 const weatherData = await getWeatherData();
 
-console.log(weatherData);
+// Use Router to re-direct the user back to the homepage after remove the city
+const router = useRouter();
+
+const removeCity = () => {
+  // To get savedCities from localStorage
+  const cities = JSON.parse(localStorage.getItem('savedCities'));
+
+  // To remove the city from the array based on the query.id
+  const updatedCities = cities.filter((city) => city.id !== route.query.id);
+
+  // To update the localStorage with the updatedCities
+  localStorage.setItem("savedCities", JSON.stringify(updatedCities));
+
+  // Route the user back to the Home Page
+  router.push({
+    name: "home",
+  });
+};
 </script>

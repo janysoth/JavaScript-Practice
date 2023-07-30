@@ -44,7 +44,7 @@
           <p>
             If you no longer wish to track a city, simply select
             the city within the home page. At the bottom of the
-            page, there will be am option to delete the city.
+            page, there will be an option to delete the city.
           </p>
         </div>
       </BaseModal>
@@ -86,6 +86,7 @@ const addCity = () => {
 
   let query = Object.assign({}, route.query);
   delete query.preview;
+  query.id = locationObj.id;
   router.replace({ query });
 };
 
