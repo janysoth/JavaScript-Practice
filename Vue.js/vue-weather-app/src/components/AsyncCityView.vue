@@ -50,7 +50,7 @@
     <hr class="border-white border-opacity-10 border w-full" />
 
     <!-- Hourly Weather -->
-    <div class="max-w-screen-md w-full py-12">
+    <div class="max-w-screen-md w-full py-8">
       <div class="mx-8 text-white">
         <h2 class="mb-4">Hourly Weather:</h2>
         <!-- overflow-x-scroll: allow the user to scroll on the x-axis -->
@@ -82,12 +82,13 @@
     <hr class="border-white border-opacity-10 border w-full" />
 
     <!-- Weekly Weather -->
-    <div class="max-w-screen-md w-full py-12">
+    <div class="max-w-screen-md w-full py-8">
       <div class="mx-8 text-white">
-        <h2 class="mb-4">7-Day Forecast:</h2>
+        <h2 class="mb-4">Weekly Forecast:</h2>
 
-        <!-- // To get the days from the weatherData Array using v-for -->
-        <div v-for="day in weatherData.daily" :key="day.dt" class="flex items-center">
+        <!-- To get the days from the weatherData Array using v-for -->
+        <!-- Only show the next 7 days forecase using slice method and passing index for key-binding -->
+        <div v-for="(day, index) in weatherData.daily.slice(0, 7)" :key="index" class="flex items-center">
 
           <!-- To Display Day of the Week-->
           <p class="flex-1">
