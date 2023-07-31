@@ -39,7 +39,7 @@ const getCities = async () => {
     const weatherData = await Promise.all(requests);
 
     // Flicker Delay to load the data (1000 = 1sec)
-    await new Promise((res) => setTimeout(res, 1000));
+    await new Promise((res) => setTimeout(res, 750));
 
     // Take the weaterData from the API and match with the savedCities
     weatherData.forEach((value, index) => {

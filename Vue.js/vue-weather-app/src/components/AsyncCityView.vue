@@ -148,6 +148,9 @@ const getWeatherData = async () => {
       hour.currentTime = utc + 1000 * weatherData.data.timezone_offset;
     });
 
+    // Flicker Delay to load the data (750 = 0.75sec)
+    await new Promise((res) => setTimeout(res, 750));
+
     return weatherData.data;
   } catch (err) {
     console.log(err);
