@@ -54,10 +54,12 @@
       <div class="mx-8 text-white">
         <h2 class="mb-4">Hourly Weather:</h2>
         <!-- overflow-x-scroll: allow the user to scroll on the x-axis -->
-        <div class="flex gap-10 overflow-x-scroll">
+        <div class="flex gap-10">
 
           <!-- To iterate the hourly temp using v-for -->
-          <div v-for="hourData in weatherData.hourly" :key="hourData.dt" class="flex flex-col gap-4 items-center">
+          <!-- Only to show the next 9 hours using slice method -->
+          <div v-for="(hourData, index) in weatherData.hourly.slice(0, 9)" :key="index"
+            class="flex flex-col gap-4 items-center">
 
             <!-- Display items on the page -->
             <p class="whitespace-nowrap text-md">
