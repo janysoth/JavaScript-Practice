@@ -3,20 +3,12 @@
     <!-- Search Input -->
     <div class="pt-4 mb-8 relative">
       <!-- Use v-model to capture the variable below -->
-      <input
-        type="text"
-        v-model="searchQuery"
-        @input="getSearchResults"
-        placeholder="Search For A City or State..."
-        class="py-2 px-1 w-full bg-transparent border-b focus:border-weather-secondary focus:outline-none focus:shadow-[0px_1px_0_0_#004E71]"
-      />
+      <input type="text" v-model="searchQuery" @input="getSearchResults" placeholder="Search For A City or State..."
+        class="py-2 px-1 w-full bg-transparent border-b focus:border-weather-secondary focus:outline-none focus:shadow-[0px_1px_0_0_#004E71]" />
 
       <!-- To show mapboxSearchResults on the page -->
       <!-- Use v-if to show the options if the search input is NOT empty -->
-      <ul
-        class="absolute bg-weather-secondary text-white w-full shadow-md py-2 px-1 top[6px]"
-        v-if="mapboxSearchResults"
-      >
+      <ul class="absolute bg-weather-secondary text-white w-full shadow-md py-2 px-1 top[6px]" v-if="mapboxSearchResults">
         <!-- Show the error message -->
         <p v-if="searchError">Sorry, something went wrong, please try again.</p>
 
@@ -30,12 +22,8 @@
           <!-- Use v-for to re-iterate throught the mapboxSearchResults -->
           <!-- Need v-bind the key with each searchResult id -->
           <!-- previewCity(searchResult) to take the option that user click on -->
-          <li
-            v-for="searchResult in mapboxSearchResults"
-            :key="searchResult.id"
-            class="py-2 cursor-pointer"
-            @click="previewCity(searchResult)"
-          >
+          <li v-for="searchResult in mapboxSearchResults" :key="searchResult.id" class="py-2 cursor-pointer"
+            @click="previewCity(searchResult)">
             <!-- To get the searchResult from the v-for loop -->
             {{ searchResult.place_name }}
           </li>
@@ -49,7 +37,7 @@
       <Suspense>
         <CityList />
         <template #fallback>
-          <p>Loading...</p>
+          <CityCardSkeleton />
         </template>
       </Suspense>
     </div>
@@ -61,6 +49,7 @@ import { ref } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 import CityList from "../components/CityList.vue";
+import CityCardSkeleton from "../components/CityCardSkeleton.vue";
 
 // This will route whatever user choose from the query
 const router = useRouter();

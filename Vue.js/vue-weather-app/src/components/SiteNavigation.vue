@@ -4,7 +4,7 @@
       <RouterLink :to="{ name: 'home' }">
         <div class="flex items-center gap-3">
           <!-- <i class="fa-solid fa-sun text-2xl" src="../assets/CambodiaFlag.png"></i> -->
-          <img src="../assets/CambodiaFlag.png" alt="" class="max-w-50" />
+          <img src="../assets/CambodiaFlag.png" alt="" class="max-w-[75px]" />
           <p class="text-2xl">The Local Weather</p>
         </div>
       </RouterLink>
