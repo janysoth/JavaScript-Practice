@@ -7,7 +7,7 @@ import { RouterLink } from "vue-router";
     <header>
       <nav class="container">
         <div class="branding">
-          <img src="../assets/Vue_Logo_Black.png" alt="" />
+          <img src="../assets/CambodiaFlag.png" alt="" />
           <h1>Jonny Vorn Soth</h1>
         </div>
         <!-- To Create Navigation Bar -->
