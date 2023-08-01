@@ -14,7 +14,8 @@ import { RouterLink } from "vue-router";
         <ul class="nav-routes">
           <RouterLink to="/">Home</RouterLink>
           <RouterLink to="/todo-app">To-Do App</RouterLink>
-          <RouterLink to="/Calculator">Calculaor App</RouterLink>
+          <RouterLink to="/Calculator">Calculator App</RouterLink>
+          <RouterLink to="/WeatherApp">Weather App</RouterLink>
           <RouterLink to="/About">About</RouterLink>
         </ul>
       </nav>
