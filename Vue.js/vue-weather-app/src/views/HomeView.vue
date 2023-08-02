@@ -3,12 +3,30 @@
     <!-- Search Input -->
     <div class="pt-4 mb-8 relative">
       <!-- Use v-model to capture the variable below -->
-      <input type="text" v-model="searchQuery" @input="getSearchResults" placeholder="Search For A City or State..."
-        class="py-2 px-1 w-full bg-transparent border-b focus:border-weather-secondary focus:outline-none focus:shadow-[0px_1px_0_0_#004E71]" />
+      <input
+        type="text"
+        v-model="searchQuery"
+        @input="getSearchResults"
+        placeholder="Search For A City or State..."
+        class="py-2 px-1 w-full bg-transparent border-b focus:border-weather-secondary focus:outline-none focus:shadow-[0px_1px_0_0_#004E71]"
+      />
+
+      <div class="flex justify-center items-center mt-2 mb-2">
+        <!-- Add a button to clear saved cities -->
+        <button
+          @click="clearSavedCities"
+          class="px-4 py-2 bg-red-500 text-white rounded cursor-pointer"
+        >
+          Clear Saved Cities
+        </button>
+      </div>
 
       <!-- To show mapboxSearchResults on the page -->
       <!-- Use v-if to show the options if the search input is NOT empty -->
-      <ul class="absolute bg-weather-secondary text-white w-full shadow-md py-2 px-1 top[6px]" v-if="mapboxSearchResults">
+      <ul
+        class="absolute bg-weather-secondary text-white w-full shadow-md py-2 px-1 top[6px]"
+        v-if="mapboxSearchResults"
+      >
         <!-- Show the error message -->
         <p v-if="searchError">Sorry, something went wrong, please try again.</p>
 
@@ -22,8 +40,12 @@
           <!-- Use v-for to re-iterate throught the mapboxSearchResults -->
           <!-- Need v-bind the key with each searchResult id -->
           <!-- previewCity(searchResult) to take the option that user click on -->
-          <li v-for="searchResult in mapboxSearchResults" :key="searchResult.id" class="py-2 cursor-pointer"
-            @click="previewCity(searchResult)">
+          <li
+            v-for="searchResult in mapboxSearchResults"
+            :key="searchResult.id"
+            class="py-2 cursor-pointer"
+            @click="previewCity(searchResult)"
+          >
             <!-- To get the searchResult from the v-for loop -->
             {{ searchResult.place_name }}
           </li>
@@ -108,6 +130,17 @@ const getSearchResults = () => {
     // If it's not true: searchQuery is empty
     mapboxSearchResults.value = null;
   }, 300);
+};
+
+// Function to clear saved cities from localStorage
+const clearSavedCities = () => {
+  localStorage.removeItem("savedCities");
+  // Optionally, you can also reset any local variable or state used to track saved cities in the application.
+  // For example, if you have a variable `savedCities`:
+  // savedCities.value = [];
+
+  // Refresh the page
+  window.location.reload();
 };
 </script>
 
