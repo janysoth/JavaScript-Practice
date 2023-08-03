@@ -13,6 +13,23 @@ module.exports = {
       animation: {
         pulse: "pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       },
+      colors: {
+        "weather-primary": "#00668A",
+        "weather-secondary": "#004E71",
+      },
+    },
+    fontFamily: {
+      Roboto: ["Roboto, sans-serif"],
+    },
+    container: {
+      padding: "2rem",
+      center: true,
+    },
+
+    screens: {
+      sm: "640px",
+      md: "768px",
+      lg: "896px",
     },
   },
   variants: {

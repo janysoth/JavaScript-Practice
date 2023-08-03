@@ -5,7 +5,8 @@ import App from './App.vue'
 import router from './router'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './index.css'
-import "tailwindcss/tailwind.css"
+// import "tailwindcss/tailwind.css"
+import "./assets/tailwind.css"
 
 const app = createApp(App)
 
