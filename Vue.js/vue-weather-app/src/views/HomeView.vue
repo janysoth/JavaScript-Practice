@@ -15,8 +15,9 @@
         <!-- Add a button to clear saved cities -->
         <button
           @click="clearSavedCities"
-          class="px-4 py-2 bg-red-500 text-white rounded cursor-pointer"
+          class="flex items-center gap-2 text-white cursor-pointer duration-150 hover:text-red-500"
         >
+          <i class="fa-solid fa-trash" />
           Clear Saved Cities
         </button>
       </div>
