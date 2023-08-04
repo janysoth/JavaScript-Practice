@@ -16,6 +16,9 @@ module.exports = {
       colors: {
         "weather-primary": "#00668A",
         "weather-secondary": "#004E71",
+        "cambodia-red": "#e00025",
+        "cambodia-blue": "#032ea1",
+        "light-blue": "#7EC8E3",
       },
     },
     fontFamily: {
