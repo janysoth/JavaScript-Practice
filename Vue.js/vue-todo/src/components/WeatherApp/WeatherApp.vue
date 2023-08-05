@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col min-h-screen font-Roboto bg-light-blue">
+  <div class="flex flex-col min-h-screen font-Roboto bg-cambodia-blue">
     <SiteNavigation />
     <RouterView />
   </div>
@@ -9,5 +9,4 @@
 import SiteNavigation from "./SiteNavigation.vue";
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
