@@ -31,6 +31,7 @@
             v-for="searchResult in mapboxSearchResults"
             :key="searchResult.id"
             class="py-2 cursor-pointer"
+            @click="previewCity(searchResult)"
           >
             {{ searchResult.place_name }}
           </li>
@@ -43,6 +44,28 @@
 <script setup>
 import { ref } from "vue";
 import axios from "axios";
+import { useRouter } from "vue-router";
+
+// Use this to route the user to a new router when clicking on the city
+const router = useRouter();
+
+const previewCity = (searchResult) => {
+  console.log(searchResult);
+
+  // Use split method to split the city and the state bt ","
+  const [city, state] = searchResult.place_name.split(",");
+
+  // Push the user to a new route using useRouter()
+  router.push({
+    name: "cityView",
+    params: { state: state.replaceAll(" ", ""), city: city },
+    query: {
+      lat: searchResult.geometry.coordinates[1],
+      lng: searchResult.geometry.coordinates[2],
+      preview: true,
+    },
+  });
+};
 
 const mapboxAPIKey =
   "pk.eyJ1IjoiamFueXNvdGgiLCJhIjoiY2xrNmh6aGxrMDFyajNkbjZtcG0zOW9ucCJ9.fJVr0w5o2-i_a2robqjz-g";
