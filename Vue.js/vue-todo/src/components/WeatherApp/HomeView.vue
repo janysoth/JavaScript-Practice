@@ -6,13 +6,13 @@
         v-model="searchQuery"
         @input="getSearchResults"
         placeholder="Search for a City or State here..."
-        class="py-2 px-1 w-full bg-transparent border-b focus:border-cambodia-blue focus:outline-none focus:shadow-[0px_1px_0_0_#004E71]"
+        class="py-2 px-1 w-full bg-transparent border-b focus:border-cambodia-red focus:outline-none focus:shadow-[0px_1px_0_0_#004E71]"
       />
 
       <!-- To Display the mapBox API Search Result -->
       <!-- Using the li tag with v-for loop -->
       <ul
-        class="absolute bg-cambodia-blue text-white w-full shadow-md py-2 px-1 top-[66px]"
+        class="absolute bg-cambodia-red text-white w-full shadow-md py-2 px-1 top-[66px]"
         v-if="mapboxSearchResults"
       >
         <!-- Show the error message -->

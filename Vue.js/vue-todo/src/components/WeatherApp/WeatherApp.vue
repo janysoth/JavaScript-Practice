@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col min-h-screen font-Roboto bg-cambodia-red">
+  <div class="flex flex-col min-h-screen font-Roboto bg-cambodia-blue">
     <SiteNavigation />
     <RouterView />
     <HomeView />
