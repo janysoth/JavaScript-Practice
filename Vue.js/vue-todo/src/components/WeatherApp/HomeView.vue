@@ -1,20 +1,12 @@
 <template>
   <main class="container text-white">
     <div class="pt-4 mb-8 relative">
-      <input
-        type="text"
-        v-model="searchQuery"
-        @input="getSearchResults"
-        placeholder="Search for a City or State here..."
-        class="py-2 px-1 w-full bg-transparent border-b focus:border-cambodia-red focus:outline-none focus:shadow-[0px_1px_0_0_#004E71]"
-      />
+      <input type="text" v-model="searchQuery" @input="getSearchResults" placeholder="Search for a City or State here..."
+        class="py-2 px-1 w-full bg-transparent border-b focus:border-cambodia-red focus:outline-none focus:shadow-[0px_1px_0_0_#004E71]" />
 
       <!-- To Display the mapBox API Search Result -->
       <!-- Using the li tag with v-for loop -->
-      <ul
-        class="absolute bg-cambodia-red text-white w-full shadow-md py-2 px-1 top-[66px]"
-        v-if="mapboxSearchResults"
-      >
+      <ul class="absolute bg-cambodia-red text-white w-full shadow-md py-2 px-1 top-[66px]" v-if="mapboxSearchResults">
         <!-- Show the error message -->
         <p v-if="searchError">Sorry, something went wrong, please try again.</p>
 
@@ -27,12 +19,8 @@
           <!-- Use v-for to re-iterate throught the mapboxSearchResults -->
           <!-- Need v-bind the key with each searchResult id -->
           <!-- previewCity(searchResult) to take the option that user click on -->
-          <li
-            v-for="searchResult in mapboxSearchResults"
-            :key="searchResult.id"
-            class="py-2 cursor-pointer"
-            @click="previewCity(searchResult)"
-          >
+          <li v-for="searchResult in mapboxSearchResults" :key="searchResult.id" class="py-2 cursor-pointer"
+            @click="previewCity(searchResult)">
             {{ searchResult.place_name }}
           </li>
         </template>
@@ -61,7 +49,7 @@ const previewCity = (searchResult) => {
     params: { state: state.replaceAll(" ", ""), city: city },
     query: {
       lat: searchResult.geometry.coordinates[1],
-      lng: searchResult.geometry.coordinates[2],
+      lng: searchResult.geometry.coordinates[0],
       preview: true,
     },
   });
