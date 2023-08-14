@@ -58,16 +58,28 @@ import { uid } from "uid";
 import { ref } from "vue";
 import BaseModal from "./BaseModal.vue";
 
+// To store the saved cities
 const savedCities = ref([]);
+
+// To reference the vue route
+// To get the params for the city
 const route = useRoute();
+
+// Use this to update the URL info
+// Ex: to remove query string from the URL
 const router = useRouter();
+
+// To Ad City to the LocalStorage
 const addCity = () => {
+  // Check to see if there's any saved cities 
+  // Then add the cities to savedCities Array
   if (localStorage.getItem("savedCities")) {
     savedCities.value = JSON.parse(
       localStorage.getItem("savedCities")
     );
   }
 
+  // Save the cities information 
   const locationObj = {
     id: uid(),
     state: route.params.state,
@@ -78,12 +90,16 @@ const addCity = () => {
     },
   };
 
+  // Push the locationObj to savedCities Array
+  // Then update this to the localStorage
   savedCities.value.push(locationObj);
   localStorage.setItem(
     "savedCities",
     JSON.stringify(savedCities.value)
   );
 
+  // To remove query string from the URL
+  // Replace the query string to the locationObj Id
   let query = Object.assign({}, route.query);
   delete query.preview;
   query.id = locationObj.id;
