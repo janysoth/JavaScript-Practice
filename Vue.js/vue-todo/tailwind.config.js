@@ -19,6 +19,7 @@ module.exports = {
         "cambodia-red": "#e00025",
         "cambodia-blue": "#032ea1",
         "light-blue": "#7EC8E3",
+        "White": "ffffff",
       },
     },
     fontFamily: {
