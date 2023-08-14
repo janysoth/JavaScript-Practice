@@ -1,8 +1,8 @@
 <template>
-    <div class="flex flex-col flex-1 items-center">
+    <div class="flex flex-col flex-1 items-center text-white">
         <!-- Banner -->
         <!-- To show the preview of the city and not yet added to the application -->
-        <div v-if="route.query.preview" class="text-white p-4 bg-weather-secondary w-full text-center">
+        <div v-if="route.query.preview" class="text-black p-4 bg-light-blue w-full text-center">
             <p>
                 You are currently previewing this city, click the "+" icon to start
                 tracking this city.
@@ -118,8 +118,7 @@
         </div>
 
         <!-- An option to remove the city -->
-        <div class="flex items-center gap-2 py-12 text-white cursor-pointer duration-150 hover:text-red-500"
-            @click="removeCity">
+        <div class="flex items-center gap-2 py-12 cursor-pointer duration-150 hover:text-red-500" @click="removeCity">
             <i class="fa-solid fa-trash" />
             <p>Remove City</p>
         </div>
