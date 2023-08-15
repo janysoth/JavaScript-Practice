@@ -1,5 +1,6 @@
 <template>
   <main class="container text-white">
+    <!-- Search Input -->
     <div class="pt-4 mb-8 relative">
       <input type="text" v-model="searchQuery" @input="getSearchResults" placeholder="Search for a City or State here..."
         class="py-2 px-1 w-full bg-transparent border-b focus:border-cambodia-red focus:outline-none focus:shadow-[0px_1px_0_0_#004E71]" />
@@ -26,6 +27,17 @@
         </template>
       </ul>
     </div>
+
+    <!-- To show saved cities weather info -->
+    <div class="flex flex-col gap-4">
+      <!-- Need to use Suspense component for Top-Level await -->
+      <Suspense>
+        <CityList />
+        <template #fallback>
+          <p>Loading...</p>
+        </template>
+      </Suspense>
+    </div>
   </main>
 </template>
 
@@ -33,6 +45,7 @@
 import { ref } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
+import CityList from "./CityList.vue";
 
 // Use this to route the user to a new router when clicking on the city
 const router = useRouter();
