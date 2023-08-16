@@ -34,7 +34,7 @@
       <Suspense>
         <CityList />
         <template #fallback>
-          <p>Loading...</p>
+          <p class="flex flex-col text-white items-center py-2">Loading...</p>
         </template>
       </Suspense>
     </div>
