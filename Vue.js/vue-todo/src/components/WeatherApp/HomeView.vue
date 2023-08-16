@@ -34,7 +34,8 @@
       <Suspense>
         <CityList />
         <template #fallback>
-          <p class="flex flex-col text-white items-center py-2">Loading...</p>
+          <!-- <p class="flex flex-col text-white items-center py-2">Loading...</p> -->
+          <CityCardSkeleton />
         </template>
       </Suspense>
     </div>
@@ -46,6 +47,7 @@ import { ref } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 import CityList from "./CityList.vue";
+import CityCardSkeleton from "./CityCardSkeleton.vue";
 
 // Use this to route the user to a new router when clicking on the city
 const router = useRouter();

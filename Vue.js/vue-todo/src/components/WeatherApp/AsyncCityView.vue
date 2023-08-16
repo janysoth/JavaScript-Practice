@@ -151,7 +151,7 @@ const getWeatherData = async () => {
         });
 
         // Flicker Delay to load the data (750 = 0.75sec)
-        await new Promise((res) => setTimeout(res, 750));
+        await new Promise((res) => setTimeout(res, 500));
 
         return weatherData.data;
     } catch (err) {
@@ -169,12 +169,13 @@ const removeCity = () => {
     const cities = JSON.parse(localStorage.getItem('savedCities'));
 
     // To remove the city from the array based on the query.id
+    // Use filter function to get a new updatedCities array
     const updatedCities = cities.filter((city) => city.id !== route.query.id);
 
     // To update the localStorage with the updatedCities
     localStorage.setItem("savedCities", JSON.stringify(updatedCities));
 
-    // Route the user back to the Home Page
+    // Route the user back to the Home Page of the Weather App
     router.push({
         name: "WeatherApp",
     });

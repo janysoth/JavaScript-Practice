@@ -105,6 +105,8 @@ const addCity = () => {
   // Replace the query string to the locationObj Id
   let query = Object.assign({}, route.query);
   delete query.preview;
+
+  // Set the locationObj id to the query.id to show in the URL
   query.id = locationObj.id;
   router.replace({ query });
 }
