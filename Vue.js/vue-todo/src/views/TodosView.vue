@@ -2,8 +2,8 @@
 import { ref, watch, computed } from "vue";
 import { uid } from "uid";
 import { Icon } from "@iconify/vue";
-import TodoCreator from "../components/TodoCreator.vue";
-import TodoItem from "../components/TodoItem.vue";
+import TodoCreator from "../components/TodoApp/TodoCreator.vue";
+import TodoItem from "../components/TodoApp/TodoItem.vue";
 
 const todoList = ref([]);
 
@@ -90,16 +90,9 @@ const deleteTodo = (todo) => {
     <ul class="todo-list" v-if="todoList.length > 0">
       <!-- Need to put :key="todo.id" to make the error disappear -->
       <!-- :todo="todo" is a prop that's defined in TodoItem.vue -->
-      <TodoItem
-        v-for="(todo, index) in todoList"
-        :todo="todo"
-        :key="todo.id"
-        :index="index"
-        @toggle-complete="toggleTodoComplete(index)"
-        @edit-todo="toggleEditTodo"
-        @update-todo="updateTodo"
-        @delete-todo="deleteTodo"
-      />
+      <TodoItem v-for="(todo, index) in todoList" :todo="todo" :key="todo.id" :index="index"
+        @toggle-complete="toggleTodoComplete(index)" @edit-todo="toggleEditTodo" @update-todo="updateTodo"
+        @delete-todo="deleteTodo" />
     </ul>
     <p v-else class="todos-msg">
       <Icon icon="noto-v1:sad-but-relieved-face" />
