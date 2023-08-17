@@ -6,7 +6,11 @@ import HeaderView from "./components/HeaderView.vue";
 <template>
   <div>
     <HeaderView />
-    <RouterView />
+    <RouterView v-slot="{ Component }">
+      <Transition name="page" mode="out-in">
+        <component :is="Component" />
+      </Transition>
+    </RouterView>
   </div>
 </template>
 
@@ -23,5 +27,15 @@ import HeaderView from "./components/HeaderView.vue";
 .container {
   max-width: 1100px;
   margin: 0 auto;
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: 600ms ease all;
+}
+
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
 }
 </style>
