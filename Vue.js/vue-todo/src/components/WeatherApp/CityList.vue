@@ -1,10 +1,10 @@
 <template>
     <div>
-        <div v-for="city in savedCities" :key="city.id">
+        <div v-for="city in savedCities" :key="city.id" class="flex items-center justify-between mb-4">
             <!-- When Click, will re-route to cityView -->
-            <CityCard :city="city" @click="goToCityView(city)" />
+            <CityCard :city="city" @click="goToCityView(city)" class="flex w-full" />
             <button @click="removeCity(city)" class="ml-4 py-1 px-2 bg-red-500 text-white rounded">
-                Delete
+                <i class="fa-solid fa-trash" />
             </button>
 
         </div>
