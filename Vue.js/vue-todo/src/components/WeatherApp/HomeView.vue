@@ -4,7 +4,14 @@
     <div class="pt-4 mb-8 relative">
       <input type="text" v-model="searchQuery" @input="getSearchResults" placeholder="Search for a City or State here..."
         class="py-2 px-1 w-full bg-transparent border-b focus:border-cambodia-red focus:outline-none focus:shadow-[0px_1px_0_0_#004E71]" />
-
+      <!-- Clear All savedCities-->
+      <div class="flex justify-center items-center mt-2 mb-2">
+        <!-- Add a button to clear saved cities -->
+        <button @click="clearSavedCities" class="flex items-center gap-2 cursor-pointer duration-150 hover:text-red-500">
+          <i class="fa-solid fa-trash" />
+          Clear Saved Cities
+        </button>
+      </div>
       <!-- To Display the mapBox API Search Result -->
       <!-- Using the li tag with v-for loop -->
       <ul class="absolute bg-cambodia-red text-white w-full shadow-md py-2 px-1 top-[66px]" v-if="mapboxSearchResults">
@@ -107,5 +114,16 @@ const getSearchResults = () => {
     // If it's not true: searchQuery is empty
     mapboxSearchResults.value = null;
   }, 300);
+};
+
+// Function to clear saved cities from localStorage
+const clearSavedCities = () => {
+  localStorage.removeItem("savedCities");
+  // Optionally, you can also reset any local variable or state used to track saved cities in the application.
+  // For example, if you have a variable `savedCities`:
+  // savedCities.value = [];
+
+  // Refresh the page
+  window.location.reload();
 };
 </script>
