@@ -3,6 +3,10 @@
         <div v-for="city in savedCities" :key="city.id">
             <!-- When Click, will re-route to cityView -->
             <CityCard :city="city" @click="goToCityView(city)" />
+            <button @click="removeCity(city)" class="ml-4 py-1 px-2 bg-red-500 text-white rounded">
+                Delete
+            </button>
+
         </div>
 
         <!-- To show message when there's no city saved -->
@@ -17,6 +21,7 @@ import axios from "axios";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import CityCard from "./CityCard.vue";
+// import { removeSavedCity } from "./HomeView.vue";
 
 // To store the savedCities
 const savedCities = ref([]);
@@ -72,6 +77,12 @@ const goToCityView = (city) => {
             lng: city.coords.lng
         },
     });
+};
+
+const removeCity = (city) => {
+    savedCities.value = savedCities.value.filter(savedCity => savedCity !== city);
+    // Update localStorage with the updated list of savedCities
+    localStorage.setItem("savedCities", JSON.stringify(savedCities.value));
 };
 
 </script>

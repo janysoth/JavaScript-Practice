@@ -126,4 +126,5 @@ const clearSavedCities = () => {
   // Refresh the page
   window.location.reload();
 };
+
 </script>
