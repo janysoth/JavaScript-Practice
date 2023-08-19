@@ -1,17 +1,13 @@
 <template>
-    <div class="flex py-3 px-3 bg-cambodia-red rounded-md shadow-md cursor-pointer mt-4 mb-4">
-        <!-- City's Information -->
-        <div class="flex flex-col flex-1">
+    <div class="city-card flex py-3 px-3 bg-cambodia-red rounded-md shadow-md cursor-pointer mt-3 mb-3"
+        @mouseover="showDeleteButton = true" @mouseleave="showDeleteButton = false">
+        <div class="city-info flex flex-col flex-1">
             <h2 class="text-3xl">{{ city.city }}</h2>
             <h3>{{ city.state }}</h3>
         </div>
 
-        <!-- City's Weather Information -->
-        <!-- self-end: put the info at the end -->
-        <div class="flex flex-col gap-2">
-            <p class="text-3xl self-end">
-                {{ Math.round(city.weather.main.temp) }}&deg;F
-            </p>
+        <div class="weather-info flex flex-col gap-2">
+            <p class="text-3xl">{{ Math.round(city.weather.main.temp) }}&deg;F</p>
             <div class="flex gap-2">
                 <span class="text-xs">
                     H: {{ Math.round(city.weather.main.temp_max) }}&deg;F
@@ -21,16 +17,29 @@
                 </span>
             </div>
         </div>
+
+        <button v-show="showDeleteButton" class="delete-button ml-4 py-1 px-2 rounded" @click="deleteCity(city)">
+            <i class="fa-solid fa-trash" />
+        </button>
     </div>
 </template>
 
 <script setup>
+import { ref, defineProps, defineEmits } from "vue";
 
-// To define prop in the component:
-defineProps({
+const props = defineProps({
     city: {
         type: Object,
-        default: () => { },
+        default: () => ({})
     }
-})
+});
+
+const showDeleteButton = ref(false);
+
+const emit = defineEmits(["delete-city"]);
+
+const deleteCity = (city) => {
+    event.stopPropagation();
+    emit("delete-city", city);
+};
 </script>

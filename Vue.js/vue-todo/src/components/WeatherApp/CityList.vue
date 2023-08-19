@@ -1,11 +1,12 @@
 <template>
     <div>
-        <div v-for="city in savedCities" :key="city.id" class="flex items-center justify-between mb-4">
+        <div v-for="city in savedCities" :key="city.id" class="flex items-center justify-between">
             <!-- When Click, will re-route to cityView -->
-            <CityCard :city="city" @click="goToCityView(city)" class="flex w-full" />
-            <button @click="removeCity(city)" class="ml-4 py-1 px-2 bg-red-500 text-white rounded">
+            <!-- <CityCard :city="city" @click="goToCityView(city)" class="flex w-full" /> -->
+            <CityCard :city="city" @delete-city="removeCity(city)" @click="goToCityView(city)" class="w-full" />
+            <!-- <button @click="removeCity(city)" class="ml-4 py-1 px-2 bg-red-500 text-white rounded">
                 <i class="fa-solid fa-trash" />
-            </button>
+            </button> -->
 
         </div>
 

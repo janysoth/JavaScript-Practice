@@ -7,9 +7,10 @@
       <!-- Clear All savedCities-->
       <div class="flex justify-center items-center mt-2 mb-2">
         <!-- Add a button to clear saved cities -->
-        <button @click="clearSavedCities" class="flex items-center gap-2 cursor-pointer duration-150 hover:text-red-500">
+        <button v-if="hasSavedCities" @click="clearSavedCities"
+          class="flex items-center gap-2 cursor-pointer duration-150 hover:text-red-500">
           <i class="fa-solid fa-trash" />
-          Clear Saved Cities
+          Clear All Saved Cities
         </button>
       </div>
       <!-- To Display the mapBox API Search Result -->
@@ -50,7 +51,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 import CityList from "./CityList.vue";
@@ -126,5 +127,13 @@ const clearSavedCities = () => {
   // Refresh the page
   window.location.reload();
 };
+
+const hasSavedCities = ref(false); // Initialize with false by default
+
+onMounted(() => {
+  // Check if there are any saved cities in localStorage
+  const savedCities = localStorage.getItem("savedCities");
+  hasSavedCities.value = savedCities && JSON.parse(savedCities).length > 0;
+});
 
 </script>
