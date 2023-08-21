@@ -1,17 +1,28 @@
 <template>
-  <h1 v-if="isShowing" v-html="title"></h1>
-  <p>Something else...</p>
+  <ul>
+    <h1>Family Members:</h1>
+    <li v-for="(member, index) in familyMembers" :key="index"> {{ index + 1 }}: {{ member.name }}</li>
+  </ul>
+  <input :value="newMember" />
+  <button :disabled="isDisabled">Add Member</button>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      title: "<h1>This is title within h1 tag.</h1>",
-      isShowing: true,
+      isDisabled: true,
+      newMember: "Vantha Khuy",
+      familyMembers: [
+        { name: "Jonny Vorn Soth" },
+        { name: "Saominea Soth" },
+        { name: "Manika Soth" },
+        { name: "Samantta Soth" },
+        { name: "Jaccika Soth" },
+      ],
     };
   }
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style></style>
