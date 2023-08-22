@@ -1,10 +1,12 @@
 <template>
-  <ul>
-    <h1>Family Members:</h1>
-    <li v-for="(member, index) in familyMembers" :key="index"> {{ index + 1 }}: {{ member.name }}</li>
-  </ul>
-  <input :value="newMember" />
-  <button :disabled="isDisabled">Add Member</button>
+  <div>
+    <ul>
+      <h1>Family Members:</h1>
+      <li v-for="(member, index) in familyMembers" :key="index"> {{ index + 1 }}: {{ member.name }}</li>
+    </ul>
+    <input v-model.trim="newMember" />
+    <button>Add Member</button>
+  </div>
 </template>
 
 <script>
