@@ -4,8 +4,10 @@
       <h1>Family Members:</h1>
       <li v-for="(member, index) in familyMembers" :key="index"> {{ index + 1 }}: {{ member.name }}</li>
     </ul>
-    <input v-model.trim="newMember" />
-    <button>Add Member</button>
+    <form @submit.prevent="newMember = `Rasry  Ma`">
+      <input v-model="newMember" />
+      <button type="submit">Add Member</button>
+    </form>
   </div>
 </template>
 
