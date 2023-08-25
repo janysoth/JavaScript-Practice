@@ -2,8 +2,14 @@
   <div>
     <ul>
       <h1>Family Members:</h1>
-      <li v-for="(member, index) in familyMembers" :key="index">{{ member.name }}</li>
+      <li v-for="(member, index) in familyMembers" :key="index">
+        <div>
+          {{ member.name }} <button @click="remove(index)">x</button>
+        </div>
+      </li>
     </ul>
+
+    <small>Total: {{ memberCount }} members</small>
     <form @submit.prevent="addNewMember">
       <input v-model="newMember" placeholder="Add new member here..." />
       <button type="submit">Add Member</button>
@@ -13,9 +19,25 @@
 
 <script>
 export default {
+
+  computed: {
+    memberCount() {
+      return this.familyMembers.length;
+    },
+    fullName: {
+      get() {
+        return `Full Name is: ${this.fname} ${this.lname}`;
+      },
+      set(fullName) {
+        alert(fullName);
+      },
+    },
+  },
   data() {
     return {
       newMember: "",
+      fname: "Jonny Vorn",
+      lname: "Soth",
       familyMembers: [
         { name: "Jonny Vorn Soth" },
         { name: "Saominea Soth" },
@@ -35,6 +57,12 @@ export default {
         this.familyMembers.push({ name: this.newMember });
         this.newMember = "";
       }
+    },
+    setFullName() {
+      this.fullName = this.newMember;
+    },
+    remove(index) {
+      this.familyMembers = this.familyMembers.filter((member, i) => i !== index);
     },
   },
 };
