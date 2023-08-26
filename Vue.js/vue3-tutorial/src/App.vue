@@ -2,7 +2,7 @@
   <div>
     <ul>
       <h1>Family Members:</h1>
-      <li v-for="(member, index) in familyMembers" :key="index">
+      <li v-for="(member, index) in familyMembers" :key="member.name">
         <div>
           {{ member.name }} <button @click="remove(index)">x</button>
         </div>
