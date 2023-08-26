@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul>
-      <h1>Family Members:</h1>
+      <h1 class="text-3xl font-bold text-red-700">Family Members:</h1>
       <li v-for="(member, index) in familyMembers" :key="member.name">
         <div>
           {{ member.name }} <button @click="remove(index)">x</button>
@@ -67,5 +67,3 @@ export default {
   },
 };
 </script>
-
-<style></style>
