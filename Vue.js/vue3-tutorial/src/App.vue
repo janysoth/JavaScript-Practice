@@ -1,4 +1,5 @@
 <template>
+  <AppHeader />
   <div class="w-full flex">
     <div class="m-auto">
       <h1 class="text-3xl font-bold text-red-700 text-center">Family Members:</h1>
@@ -21,8 +22,10 @@
 </template>
 
 <script>
-export default {
+import AppHeader from './components/AppHeader.vue';
 
+export default {
+  components: { AppHeader },
   computed: {
     memberCount() {
       return this.familyMembers.length;
@@ -50,7 +53,6 @@ export default {
       ],
     };
   },
-
   // Cannot use arrow function as it does not hold this
   // Use this for any variables in the data()
   // unshift: add to the front of the array
@@ -68,5 +70,6 @@ export default {
       this.familyMembers = this.familyMembers.filter((member, i) => i !== index);
     },
   },
+
 };
 </script>
