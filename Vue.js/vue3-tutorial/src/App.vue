@@ -1,19 +1,22 @@
 <template>
-  <div>
-    <ul>
-      <h1 class="text-3xl font-bold text-red-700">Family Members:</h1>
-      <li v-for="(member, index) in familyMembers" :key="member.name">
-        <div>
-          {{ member.name }} <button @click="remove(index)">x</button>
-        </div>
-      </li>
-    </ul>
+  <div class="w-full flex">
+    <div class="m-auto">
+      <h1 class="text-3xl font-bold text-red-700 text-center">Family Members:</h1>
+      <ul class="mt-2">
+        <li class="flex justify-between items-center" v-for="(member, index) in familyMembers" :key="member.name">
+          <div class="flex items-center">
+            <span>{{ member.name }}</span>
+          </div>
+          <button @click="remove(index)">x</button>
+        </li>
+      </ul>
 
-    <small>Total: {{ memberCount }} members</small>
-    <form @submit.prevent="addNewMember">
-      <input v-model="newMember" placeholder="Add new member here..." />
-      <button type="submit">Add Member</button>
-    </form>
+      <form class="mt-10" @submit.prevent="addNewMember">
+        <input class="border rounded mr-1" v-model="newMember" placeholder="Add new member here..." />
+        <button class="border rounded bg-gradient-to-r from-red-700 to-pink-500 text-white p-1" type="submit">Add
+          Member</button>
+      </form>
+    </div>
   </div>
 </template>
 
