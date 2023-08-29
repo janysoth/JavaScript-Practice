@@ -1,15 +1,19 @@
 <template>
-  <AppHeader />
-  <div class="w-full flex">
-    <FamilyMembers />
+  <div>
+    <AppHeader />
+    <div class="w-full flex">
+      <!-- <FamilyMembers /> -->
+      <CalendarApp />
+    </div>
   </div>
 </template>
 
 <script>
 import AppHeader from './components/AppHeader.vue';
-import FamilyMembers from './components/FamilyMembers.vue';
+import CalendarApp from './components/CalendarApp.vue';
+// import FamilyMembers from './components/FamilyMembers.vue';
 
 export default {
-  components: { AppHeader, FamilyMembers },
+  components: { AppHeader, CalendarApp },
 };
 </script>
