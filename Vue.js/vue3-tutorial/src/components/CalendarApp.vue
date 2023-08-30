@@ -1,16 +1,17 @@
 <template>
-    <div class="m-auto">
-        <h1 class="text-2xl my-2 text-center">Vue Calendar</h1>
-        <section class="mx-2 flex justify-between">
+    <div class="m-auto p-4 bg-gray-100 rounded-lg shadow-lg">
+        <h1 class="text-3xl mb-4 text-center font-semibold text-blue-700">Vue Calendar</h1>
+        <section class="flex justify-between mb-4">
             <h2 class="font-bold">{{ currentMonthName }}</h2>
             <h2 class="font-bold">{{ currentYear }}</h2>
         </section>
-        <section class="flex my-2">
-            <p class="text-center  w-[14.28%]" v-for="day in days" :key="day">{{ day }}</p>
+        <section class="flex my-2 bg-white rounded-lg shadow-md">
+            <p class="text-center w-[14.28%] py-2 border-b" v-for="day in days" :key="day">{{ day }}</p>
         </section>
         <section class="flex flex-wrap">
-            <p class="text-center w-[14.28%]" v-for="num in startDate()" :key="num"></p>
-            <p class="text-center w-[14.28%]" v-for="num in daysInMonth(currentYear, currentMonth)" :key="num">{{ num }}</p>
+            <p class="text-center w-[14.28%] p-2 border" v-for="num in startDate()" :key="num"></p>
+            <p class="text-center w-[14.28%] p-2 border" v-for="num in daysInMonth(currentYear, currentMonth)" :key="num">{{
+                num }}</p>
         </section>
     </div>
 </template>
