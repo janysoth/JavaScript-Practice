@@ -1,5 +1,5 @@
 <template>
-    <div class="m-auto p-4 bg-gray-100 rounded-lg shadow-lg">
+    <div class="m-auto p-4 bg-gray-100 rounded-lg shadow-lg my-2">
         <h1 class="text-3xl mb-4 text-center font-semibold text-blue-700">Vue Calendar</h1>
         <section class="flex justify-between mb-4">
             <h2 class="font-bold">{{ currentMonthName }}</h2>
@@ -13,6 +13,10 @@
             <p class="text-center w-[14.28%] p-2 border" v-for="num in daysInMonth(currentYear, currentMonth)" :key="num">{{
                 num }}</p>
         </section>
+        <section class="flex justify-between my-4">
+            <button class="px-2 border rounded hover:bg-red-100" @click="previousMonth">Previous</button>
+            <button class="px-2 border rounded hover:bg-red-100" @click="nextMonth">Next</button>
+        </section>
     </div>
 </template>
 
@@ -20,8 +24,7 @@
 export default {
     data() {
         return {
-            currentMonth: new Date().getMonth() + 1,
-            currentMonthName: new Date().toLocaleString('default', { month: "long" }),
+            currentMonth: new Date().getMonth(),
             currentYear: new Date().getFullYear(),
             days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
         }
@@ -30,14 +33,25 @@ export default {
     methods: {
         daysInMonth(year, month) {
 
-            const lastDay = new Date(year, month, 0).getDate();
+            const lastDay = new Date(year, month + 1, 0).getDate();
             return lastDay;
         },
 
         startDate() {
-            return new Date(this.currentYear, this.currentMonth - 1, 1).getDay();
+            return new Date(this.currentYear, this.currentMonth, 1).getDay();
         },
-    }
+        nextMonth() {
+            this.currentMonth++;
+        },
+        previousMonth() {
+            this.currentMonth--;
+        },
+    },
+    computed: {
+        currentMonthName() {
+            return new Date(this.currentYear, this.currentMonth).toLocaleString('default', { month: "long" });
+        },
+    },
 }
 </script>
 
