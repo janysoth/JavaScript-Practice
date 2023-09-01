@@ -2,6 +2,7 @@
   <div>
     <AppHeader />
     <div class="w-full flex">
+      <router-view></router-view>
       <!-- <FamilyMembers /> -->
       <CalendarApp />
     </div>
