@@ -10,8 +10,9 @@
         </section>
         <section class="flex flex-wrap">
             <p class="text-center w-[14.28%] p-2 border" v-for="num in startDate()" :key="num"></p>
-            <p class="text-center w-[14.28%] p-2 border" v-for="num in daysInMonth(currentYear, currentMonth)" :key="num">{{
-                num }}</p>
+            <p class="text-center w-[14.28%] p-2 border" v-for="num in daysInMonth()" :key="num"
+                :class="currentDateClass(num)">{{
+                    num }}</p>
         </section>
         <section class="flex justify-between my-4">
             <button class="px-2 border rounded hover:bg-red-100" @click="previousMonth">Previous</button>
@@ -24,6 +25,7 @@
 export default {
     data() {
         return {
+            currentDate: new Date().getUTCDate(),
             currentMonth: new Date().getMonth(),
             currentYear: new Date().getFullYear(),
             days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
@@ -31,9 +33,9 @@ export default {
     },
 
     methods: {
-        daysInMonth(year, month) {
+        daysInMonth() {
 
-            const lastDay = new Date(year, month + 1, 0).getDate();
+            const lastDay = new Date(this.currentYear, this.currentMonth + 1, 0).getDate();
             return lastDay;
         },
 
@@ -56,6 +58,12 @@ export default {
                 this.currentMonth--;
             }
         },
+        currentDateClass(num) {
+            const calendarFullDate = new Date(this.currentYear, this.currentMonth, num).toDateString();
+            const currentFullDate = new Date().toDateString();
+            return calendarFullDate === currentFullDate ? 'text-red-600 bg-blue-300 bold' : '';
+        },
+
     },
     computed: {
         currentMonthName() {
