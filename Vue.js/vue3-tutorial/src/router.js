@@ -1,13 +1,14 @@
-import VueRouter from 'vue-router';
+import { createRouter, createWebHashHistory } from "vue-router";
 import FamilyMembers from './components/FamilyMembers'
 import CalendarApp from './components/CalendarApp'
 
 const routes = [
-    { path: '/family-member', component: FamilyMembers },
+    { path: '/family-members', component: FamilyMembers },
     { path: '/calendar', component: CalendarApp },
 ];
 
-const router = VueRouter.createRouter({
+const router = createRouter({
+    history: createWebHashHistory(),
     routes,
 });
 
