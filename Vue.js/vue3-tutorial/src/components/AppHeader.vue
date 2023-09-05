@@ -15,6 +15,7 @@ export default {
                 { title: "Family Members", to: "/family-members" },
                 { title: "Calendar", to: "/calendar" },
                 { title: "Mark Down", to: "/markdown" },
+                { title: "Slider", to: "/slider" },
             ],
         };
     }
