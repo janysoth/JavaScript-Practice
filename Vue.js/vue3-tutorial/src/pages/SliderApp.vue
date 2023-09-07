@@ -8,8 +8,9 @@
 
         <div class="w-full" style="height:340px">
             <div class="absolute  bottom-0 flex justify-center w-full">
-                <div v-for="(slider, index) in sliders" :key="slider" class="w-4 h-4 rounded-full mx-2 cursor-pointer"
-                    :class="currentSlide == index ? 'bg-gray-600' : 'bg-gray-300'"></div>
+                <div v-for="(slider, index) in sliders" :key="slider"
+                    class="w-4 h-4 rounded-full mx-2 cursor-pointer shadow-md"
+                    :class="currentSlide == index ? 'bg-gray-600' : 'bg-gray-300'" @click="makeActive(index)"></div>
             </div>
         </div>
 
@@ -35,10 +36,16 @@ export default {
         };
     },
 
+    methods: {
+        makeActive(index) {
+            this.currentSlide = index;
+        }
+    },
+
     mounted() {
         this.interval = setInterval(() => {
             this.currentSlide = this.currentSlide == 2 ? 0 : this.currentSlide + 1;
-        }, 1000)
+        }, 2000)
     },
 
     beforeMount() {
