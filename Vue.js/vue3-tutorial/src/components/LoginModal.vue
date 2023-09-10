@@ -9,12 +9,12 @@
                         <form class="p-2 my-2" @submit.prevent="submit">
                             <div class="my-4">
                                 <label>Email or Username:</label>
-                                <input v-model="form.email" type="text" class="rounded shadow p-2 w-full my-2"
+                                <input v-model="email" type="text" class="rounded shadow p-2 w-full my-2"
                                     placeholder="Enter your Email or Username..." />
                             </div>
                             <div class="my-4">
                                 <label>Password:</label>
-                                <input v-model="form.password" type="password" class="rounded shadow p-2 w-full my-2"
+                                <input v-model="password" type="password" class="rounded shadow p-2 w-full my-2"
                                     placeholder="Enter your Password..." />
                             </div>
                             <div class="my-4">
@@ -30,23 +30,29 @@
 </template>
 
 <script>
+// import firebase from '../utilities/firebase';
+import firebase from '../utilities/firebase';
+
 export default {
     data() {
         return {
-            form: {
-                email: "",
-                password: "",
-            }
+            email: "",
+            password: "",
         };
     },
 
     methods: {
         submit() {
-
-            // Submit the form
+            firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+                .then((userCredential) => {
+                    console.log(userCredential);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         }
     },
-}
+};
 </script>
 
 <style></style>
