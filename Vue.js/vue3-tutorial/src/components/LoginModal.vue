@@ -1,6 +1,6 @@
 <template>
     <div>
-        <section @click="$emit('close-login')" class="z-20 h-screen w-screen bg-gray-500 fixed top-0 opacity-50"></section>
+        <section @click="close" class="z-20 h-screen w-screen bg-gray-500 fixed top-0 opacity-50"></section>
         <div class="absolute inset-0">
             <div class="flex h-full">
                 <div class="z-30 m-auto bg-white rounded p-2 shadow w-1/3">
@@ -19,7 +19,10 @@
                             </div>
                             <div class="my-4">
                                 <button type="submit"
-                                    class="w-full rounded shadow-md bg-gradient-to-r from-red-300 to-pink-300 text-white p-2">Submit</button>
+                                    class="w-full rounded shadow-md bg-gradient-to-r from-red-800 to-pink-600 text-white p-2">
+                                    <span v-if="!isLoading">Login</span>
+                                    <span v-else>⌛</span>
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -30,7 +33,6 @@
 </template>
 
 <script>
-// import firebase from '../utilities/firebase';
 import firebase from '../utilities/firebase';
 
 export default {
@@ -38,19 +40,28 @@ export default {
         return {
             email: "",
             password: "",
+            isLoading: false,
         };
     },
 
     methods: {
         submit() {
+            this.isLoading = true;
             firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-                .then((userCredential) => {
-                    console.log(userCredential);
+                .then(() => {
+                    this.email = "";
+                    this.password = "";
+                    this.isLoading = false;
+                    this.close();
                 })
                 .catch((error) => {
                     console.log(error);
+                    this.isLoading = false;
                 });
-        }
+        },
+        close() {
+            this.$emit('close-login');
+        },
     },
 };
 </script>
