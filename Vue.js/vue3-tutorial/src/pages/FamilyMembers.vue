@@ -12,7 +12,8 @@
         </ul>
 
         <form class="mt-10" @submit.prevent="addNewMember">
-            <input class="border rounded mr-1" v-model="newMember" placeholder="Add new member here..." />
+            <input class="border rounded mr-1" v-model="newMember" placeholder="Add new member here..."
+                ref="newMemberRef" />
             <button class="border rounded bg-gradient-to-r from-red-700 to-pink-500 text-white p-1" type="submit">Add
                 Member</button>
         </form>
@@ -65,6 +66,10 @@ export default {
         remove(index) {
             this.familyMembers = this.familyMembers.filter((member, i) => i !== index);
         },
+    },
+
+    mounted() {
+        this.$refs.newMemberRef.focus();
     },
 };
 </script>

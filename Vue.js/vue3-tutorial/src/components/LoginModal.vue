@@ -10,7 +10,7 @@
                             <div class="my-4">
                                 <label>Email or Username:</label>
                                 <input v-model="email" type="text" class="rounded shadow p-2 w-full my-2"
-                                    placeholder="Enter your Email or Username..." />
+                                    placeholder="Enter your Email or Username..." ref="emailRef" />
                             </div>
                             <div class="my-4">
                                 <label>Password:</label>
@@ -62,6 +62,10 @@ export default {
         close() {
             this.$emit('close-login');
         },
+    },
+
+    mounted() {
+        this.$refs.emailRef.focus();
     },
 };
 </script>
