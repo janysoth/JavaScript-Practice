@@ -7,8 +7,10 @@
             </div>
             <div>
                 <span v-if="user" class="mx-2">{{ user.email }}</span>
-                <button v-if="!user" class="mx-2" @click="$emit('open-login-modal')">Login</button>
-                <button v-else class="mx-2" @click="logout">Logout</button>
+                <!-- <button v-if="!user" class="mx-2" @click="$emit('open-login-modal')">Login</button>
+                <button v-else class="mx-2" @click="logout">Logout</button> -->
+                <button v-if="isLoggedIn" class="mx-2" @click="logout">Logout</button>
+                <button v-else class="mx-2" @click="$emit('open-login-modal')">Login</button>
             </div>
         </nav>
     </div>
@@ -18,6 +20,8 @@
 import firebase from '../utilities/firebase';
 
 export default {
+    props: { isLoggedIn: { type: Boolean, default: false } },
+
     data() {
         return {
             list: [
@@ -37,8 +41,14 @@ export default {
         });
     },
     methods: {
+        // logout() {
+        //     firebase.auth().signOut().then(res => { console.log(res); }).catch((e) => { console.log(e); });
+        // },
+
         logout() {
-            firebase.auth().signOut().then(res => { console.log(res); }).catch((e) => { console.log(e); });
+            firebase.auth().signOut();
+            // .then((res) => {})
+            // .catch((e) => {});
         },
     },
 };
