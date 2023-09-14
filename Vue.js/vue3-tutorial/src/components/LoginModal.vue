@@ -6,6 +6,10 @@
                 <div class="z-30 m-auto bg-white rounded p-2 shadow w-1/3">
                     <div class="p-2 border">
                         <h1 class="text-2xl text-center">Login:</h1>
+                        <section class="mt-5 text-center">
+                            <button class="border rounded px-2" @click="loginWithGoogle">Login with Google</button>
+                        </section>
+                        <p class="my-3 text-center">Or</p>
                         <form class="p-2 my-2" @submit.prevent="submit">
                             <div class="my-4">
                                 <label>Email or Username:</label>
@@ -59,8 +63,16 @@ export default {
                     this.isLoading = false;
                 });
         },
+
         close() {
             this.$emit('close-login');
+        },
+
+        loginWithGoogle() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+
+            firebase.auth()
+                .signInWithPopup(provider).then(() => { this.close() });
         },
     },
 
