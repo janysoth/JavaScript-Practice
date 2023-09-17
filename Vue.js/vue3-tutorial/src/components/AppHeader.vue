@@ -6,11 +6,14 @@
                 <router-link v-for="item in list" :key="item.to" class="mx-2" :to="item.to">{{ item.title }}</router-link>
             </div>
             <div>
-                <span v-if="user" class="mx-2">{{ user.email }}</span>
-                <!-- <button v-if="!user" class="mx-2" @click="$emit('open-login-modal')">Login</button>
-                <button v-else class="mx-2" @click="logout">Logout</button> -->
-                <button v-if="isLoggedIn" class="mx-2" @click="logout">Logout</button>
-                <button v-else class="mx-2" @click="$emit('open-login-modal')">Login</button>
+                <div class="flex items-center mx-2">
+                    <span v-if="user">{{ user.email }}</span>
+                    <ButtonComp color="red" class="px-1" buttonText="Logout" v-if="isLoggedIn" @click="logout"></ButtonComp>
+                    <!-- <button v-else class="mx-2" @click="$emit('open-login-modal')">Login</button> -->
+                    <ButtonComp color="blue" class="border rounded" buttonText="Login" v-else
+                        @click="$emit('open-login-modal')">
+                    </ButtonComp>
+                </div>
             </div>
         </nav>
     </div>
@@ -18,8 +21,12 @@
 
 <script>
 import firebase from '../utilities/firebase';
+import ButtonComp from './ButtonComp.vue';
 
 export default {
+
+    components: { ButtonComp },
+
     props: { isLoggedIn: { type: Boolean, default: false } },
 
     data() {
