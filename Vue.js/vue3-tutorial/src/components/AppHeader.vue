@@ -3,7 +3,9 @@
         <nav
             class="w-full bg-gradient-to-r from-blue-800 to-blue-600 text-white px-4 py-2 flex justify-between items-center">
             <div>
-                <router-link v-for="item in list" :key="item.to" class="mx-2" :to="item.to">{{ item.title }}</router-link>
+                <router-link v-for="item in list" :key="item.to" class="hover:text-red-500 hover:font-bold mx-2"
+                    :to="item.to">{{
+                        item.title }}</router-link>
             </div>
             <div>
                 <div class="flex items-center mx-2">
