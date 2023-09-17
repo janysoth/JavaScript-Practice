@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button class="px-2 py-2 font-semibold text-white rounded-md hover:opacity-95 focus:outline-none" :class="{
+        <button class="px-2 py-2 font-semibold text-white border rounded hover:opacity-95 focus:outline-none" :class="{
             [`bg-${color}-500`]: color,
         }" @click="onButtonClick">
             {{ buttonText }}

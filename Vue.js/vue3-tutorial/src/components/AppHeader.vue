@@ -7,10 +7,12 @@
             </div>
             <div>
                 <div class="flex items-center mx-2">
-                    <span v-if="user">{{ user.email }}</span>
-                    <ButtonComp color="red" class="px-1" buttonText="Logout" v-if="isLoggedIn" @click="logout"></ButtonComp>
+                    <span v-if="user" class="px-1">{{ user.email }}</span>
+                    <ButtonComp color="red" class="hover:opacity-60" buttonText="Logout" v-if="isLoggedIn" @click="logout">
+                    </ButtonComp>
+
                     <!-- <button v-else class="mx-2" @click="$emit('open-login-modal')">Login</button> -->
-                    <ButtonComp color="blue" class="border rounded" buttonText="Login" v-else
+                    <ButtonComp color="blue" class="hover:bg-red-500" buttonText="Login" v-else
                         @click="$emit('open-login-modal')">
                     </ButtonComp>
                 </div>
