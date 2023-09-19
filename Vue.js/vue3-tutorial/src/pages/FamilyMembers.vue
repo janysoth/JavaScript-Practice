@@ -22,20 +22,29 @@
 
 <script>
 export default {
-    data() {
+    setup() {
+        const newMember = "";
+
+        let familyMembers = [
+            { name: "Jonny Vorn Soth" },
+            { name: "Saominea Soth" },
+            { name: "Manika Soth" },
+            { name: "Samantta Soth" },
+            { name: "Jaccika Soth" },
+        ];
+
+        const fname = "Jonny Vorn";
+        const lname = "Soth";
+
+        function remove(index) {
+            familyMembers = familyMembers.filter((member, i) => i !== index);
+        }
+
         return {
-            newMember: "",
-            fname: "Jonny Vorn",
-            lname: "Soth",
-            familyMembers: [
-                { name: "Jonny Vorn Soth" },
-                { name: "Saominea Soth" },
-                { name: "Manika Soth" },
-                { name: "Samantta Soth" },
-                { name: "Jaccika Soth" },
-            ],
+            familyMembers, newMember, fname, lname, remove,
         };
     },
+
     computed: {
         memberCount() {
             return this.familyMembers.length;
@@ -63,9 +72,7 @@ export default {
         setFullName() {
             this.fullName = this.newMember;
         },
-        remove(index) {
-            this.familyMembers = this.familyMembers.filter((member, i) => i !== index);
-        },
+
     },
 
     mounted() {
