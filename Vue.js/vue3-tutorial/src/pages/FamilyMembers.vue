@@ -21,34 +21,51 @@
 </template>
 
 <script>
+import { onMounted, ref, computed } from "vue";
+
 export default {
     setup() {
-        const newMember = "";
 
-        let familyMembers = [
+        const newMemberRef = ref("");
+        const newMember = ref("");
+
+        const familyMembers = ref([
             { name: "Jonny Vorn Soth" },
             { name: "Saominea Soth" },
             { name: "Manika Soth" },
             { name: "Samantta Soth" },
             { name: "Jaccika Soth" },
-        ];
+        ]);
+
+        const memberCount = computed({
+            get: () => familyMembers.value.length
+        })
+
+        onMounted(() => {
+            newMemberRef.value.focus();
+        })
 
         const fname = "Jonny Vorn";
         const lname = "Soth";
 
         function remove(index) {
-            familyMembers = familyMembers.filter((member, i) => i !== index);
+            familyMembers.value = familyMembers.value.filter((member, i) => i !== index);
+        }
+
+        function addNewMember() {
+            if (newMember.value !== "") {
+                familyMembers.value.unshift({ name: newMember.value });
+                newMember.value = "";
+            }
         }
 
         return {
-            familyMembers, newMember, fname, lname, remove,
+            familyMembers, newMember, fname, lname, remove, addNewMember, newMemberRef, memberCount
         };
     },
 
     computed: {
-        memberCount() {
-            return this.familyMembers.length;
-        },
+
         fullName: {
             get() {
                 return `Full Name is: ${this.fname} ${this.lname}`;
@@ -63,20 +80,6 @@ export default {
     // Use this for any variables in the data()
     // unshift: add to the front of the array
     methods: {
-        addNewMember() {
-            if (this.newMember !== "") {
-                this.familyMembers.unshift({ name: this.newMember });
-                this.newMember = "";
-            }
-        },
-        setFullName() {
-            this.fullName = this.newMember;
-        },
-
-    },
-
-    mounted() {
-        this.$refs.newMemberRef.focus();
     },
 };
 </script>
