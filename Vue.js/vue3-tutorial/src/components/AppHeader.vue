@@ -41,6 +41,7 @@ export default {
                 { title: "Calendar", to: "/calendar" },
                 { title: "Mark Down", to: "/markdown" },
                 { title: "Slider", to: "/slider" },
+                { title: "Calculator", to: "/calculator" },
             ],
             user: null, // Initialize user to null
         };

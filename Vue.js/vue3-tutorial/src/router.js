@@ -5,6 +5,7 @@ import CalendarApp from './pages/CalendarApp';
 import HomePage from './pages/HomePage';
 import MarkDown from './pages/MarkDown';
 import SliderApp from './pages/SliderApp';
+import CalculatorApp from './pages/CalculatorApp';
 
 const routes = [
     { path: '/', component: HomePage },
@@ -12,6 +13,7 @@ const routes = [
     { path: '/calendar', component: CalendarApp },
     { path: '/markdown', component: MarkDown },
     { path: '/slider', component: SliderApp },
+    { path: '/calculator', component: CalculatorApp },
 ];
 
 const router = createRouter({
