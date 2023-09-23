@@ -58,9 +58,11 @@ function calculate() {
   else if (selectedOperation.value === '+') sum();
 }
 
-function clear() {
+const clear = (() => {
   currentNum.value = '';
-}
+});
+
+
 
 function multiply() {
 }
