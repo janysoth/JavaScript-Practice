@@ -4,7 +4,7 @@
             class="w-full bg-gradient-to-r from-blue-800 to-blue-600 text-white px-4 py-2 flex justify-between items-center">
             <div>
                 <router-link v-for="item in list" :key="item.to" class="hover:text-red-500 hover:font-bold mx-2"
-                    :to="item.to">{{
+                    :to="item.to" :class="{ 'text-red-500 font-bold': isActiveRoute(item.to) }">{{
                         item.title }}</router-link>
             </div>
             <div>
@@ -26,6 +26,7 @@
 <script>
 import firebase from '../utilities/firebase';
 import ButtonComp from './ButtonComp.vue';
+import { useRoute } from 'vue-router'; // Import useRoute
 
 export default {
 
@@ -61,6 +62,11 @@ export default {
             firebase.auth().signOut();
             // .then((res) => {})
             // .catch((e) => {});
+        },
+
+        isActiveRoute(route) {
+            const currentRoute = useRoute();
+            return currentRoute.path === route;
         },
     },
 };
