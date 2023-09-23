@@ -26,58 +26,51 @@
   </section>
 </template>
 
-<script>
-
+<script setup>
 import { ref } from 'vue';
 
-export default {
-  setup() {
-    const currentNum = ref("");
-    const operations = ['+', '-', '*', '/'];
-    const prevNum = ref("");
-    const selectedOperation = ref("");
+const currentNum = ref("");
+const operations = ['+', '-', '*', '/'];
+const prevNum = ref("");
+const selectedOperation = ref("");
 
-    function pressed(value) {
-      if (value === "=") calculate();
-      else if (value === "C") clear();
-      else if (operations.includes(value)) applyOperation(value);
-      else appendNumber(value);
-    }
-
-    function appendNumber(value) {
-      currentNum.value = currentNum.value + value;
-    }
-
-    function applyOperation(value) {
-      prevNum.value = currentNum.value;
-      currentNum.value = "";
-      selectedOperation.value = value;
-    }
-
-    function calculate() {
-      if (selectedOperation.value === '*') multiply();
-      else if (selectedOperation.value === '/') divide();
-      else if (selectedOperation.value === '-') subtract();
-      else if (selectedOperation.value === '+') sum();
-    }
-
-    function clear() {
-      currentNum.value = '';
-    }
-
-    function multiply() {
-    }
-    function divide() {
-    }
-    function subtract() {
-    }
-    function sum() {
-    }
-
-    return { currentNum, prevNum, pressed, calculate, applyOperation, appendNumber, clear, selectedOperation, multiply, divide, subtract, sum };
-  },
-
+function pressed(value) {
+  if (value === "=") calculate();
+  else if (value === "C") clear();
+  else if (operations.includes(value)) applyOperation(value);
+  else appendNumber(value);
 }
+
+function appendNumber(value) {
+  currentNum.value = currentNum.value + value;
+}
+
+function applyOperation(value) {
+  prevNum.value = currentNum.value;
+  currentNum.value = "";
+  selectedOperation.value = value;
+}
+
+function calculate() {
+  if (selectedOperation.value === '*') multiply();
+  else if (selectedOperation.value === '/') divide();
+  else if (selectedOperation.value === '-') subtract();
+  else if (selectedOperation.value === '+') sum();
+}
+
+function clear() {
+  currentNum.value = '';
+}
+
+function multiply() {
+}
+function divide() {
+}
+function subtract() {
+}
+function sum() {
+}
+
+
 </script>
 
-<style></style>
