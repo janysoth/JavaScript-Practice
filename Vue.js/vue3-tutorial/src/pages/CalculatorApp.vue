@@ -5,7 +5,7 @@
       <p class="text-3xl  text-right mt-10 w-40 h-10 overflow-x-scroll" style="direction:rtl">{{ currentNum }}
       </p>
 
-      <div class="h-10">
+      <div class="h-10 w-40 text-left overflow-x-scroll">
         <small v-if="selectedOperation">
           {{ prevNum }} {{ selectedOperation }} {{ currentNum }}
         </small>
@@ -34,23 +34,26 @@
 
 <script>
 
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
 export default {
   setup() {
     const currentNum = ref("");
     const operations = ['+', '-', '*', '/'];
+    const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
     const prevNum = ref("");
     const selectedOperation = ref("");
 
     function pressed(value) {
-      if (value === "=") calculate();
+      if (value === "=" || value === "Enter") calculate();
       else if (value === "C") clear();
       else if (operations.includes(value)) applyOperation(value);
-      else appendNumber(value);
+      else if (numbers.includes(value)) appendNumber(value);
     }
 
     function appendNumber(value) {
+      // if (currentNum.value !== "")
+      //   clear();
       currentNum.value = currentNum.value + value;
     }
 
@@ -71,10 +74,6 @@ export default {
       selectedOperation.value = '';
     }
 
-    function clear() {
-      currentNum.value = '';
-    }
-
     function multiply() {
       currentNum.value = prevNum.value * currentNum.value;
     }
@@ -87,6 +86,18 @@ export default {
     function sum() {
       currentNum.value = +prevNum.value + +currentNum.value;
     }
+
+    function clear() {
+      currentNum.value = '';
+      prevNum.value = '';
+      selectedOperation.value = '';
+    }
+
+    onMounted(() => {
+      window.addEventListener('keydown', (e) => {
+        pressed(e.key)
+      })
+    })
 
     return { currentNum, prevNum, pressed, calculate, applyOperation, appendNumber, clear, selectedOperation, multiply, divide, subtract, sum };
   },
