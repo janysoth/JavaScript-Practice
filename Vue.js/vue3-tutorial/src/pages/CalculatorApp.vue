@@ -2,8 +2,14 @@
   <section class="flex w-full">
     <div class="m-auto">
       <h1 class="text-2xl text-center">Calculator</h1>
-      <p class="text-3xl  text-right mt-10 mb-2  w-32 h-10 overflow-x-scroll" style="direction:rtl">{{ currentNum }}
+      <p class="text-3xl  text-right mt-10 w-40 h-10 overflow-x-scroll" style="direction:rtl">{{ currentNum }}
       </p>
+
+      <div class="h-10">
+        <small v-if="selectedOperation">
+          {{ prevNum }} {{ selectedOperation }} {{ currentNum }}
+        </small>
+      </div>
       <div class="grid grid-cols-4 gap-1">
         <button @click="pressed('1')" class="p-2 border rounded  shadow w-10 h-10">1</button>
         <button @click="pressed('2')" class="p-2 border rounded  shadow w-10 h-10">2</button>
@@ -54,11 +60,15 @@ export default {
       selectedOperation.value = value;
     }
 
+    // When the user click on the "="
     function calculate() {
       if (selectedOperation.value === '*') multiply();
       else if (selectedOperation.value === '/') divide();
       else if (selectedOperation.value === '-') subtract();
       else if (selectedOperation.value === '+') sum();
+
+      prevNum.value = '';
+      selectedOperation.value = '';
     }
 
     function clear() {
@@ -66,12 +76,16 @@ export default {
     }
 
     function multiply() {
+      currentNum.value = prevNum.value * currentNum.value;
     }
     function divide() {
+      currentNum.value = prevNum.value / currentNum.value;
     }
     function subtract() {
+      currentNum.value = prevNum.value - currentNum.value;
     }
     function sum() {
+      currentNum.value = +prevNum.value + +currentNum.value;
     }
 
     return { currentNum, prevNum, pressed, calculate, applyOperation, appendNumber, clear, selectedOperation, multiply, divide, subtract, sum };
