@@ -34,7 +34,7 @@
 
 <script>
 
-import { onMounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 
 export default {
   setup() {
@@ -89,17 +89,20 @@ export default {
       currentNum.value = +prevNum.value + +currentNum.value;
     }
 
-    function clear() {
+    const clear = (() => {
       currentNum.value = '';
       prevNum.value = '';
       selectedOperation.value = '';
-    }
-
-    onMounted(() => {
-      window.addEventListener('keydown', (e) => {
-        pressed(e.key);
-      });
     });
+
+    const handledKeydown = (e) => pressed(e.key);
+
+    onMounted(() =>
+      window.addEventListener('keydown', handledKeydown));
+
+    // To remove eventListener after leaving this page
+    onUnmounted(() =>
+      window.removeEventListener('keydown', handledKeydown));
 
     return { currentNum, prevNum, pressed, calculate, applyOperation, appendNumber, clear, selectedOperation, multiply, divide, subtract, sum };
   },
