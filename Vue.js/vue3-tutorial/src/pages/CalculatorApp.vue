@@ -2,10 +2,10 @@
   <section class="flex w-full">
     <div class="m-auto">
       <h1 class="text-2xl text-center">Calculator</h1>
-      <p class="text-3xl  text-right mt-10 w-40 h-10 overflow-x-scroll" style="direction:rtl">{{ currentNum }}
+      <p class="text-3xl  text-right mt-10 w-40 h-10" style="direction:rtl">{{ currentNum }}
       </p>
 
-      <div class="h-10 w-40 text-left overflow-x-scroll">
+      <div class="h-10 w-40 text-left">
         <small v-if="selectedOperation">
           {{ prevNum }} {{ selectedOperation }} {{ currentNum }}
         </small>
@@ -58,6 +58,8 @@ export default {
     }
 
     function applyOperation(value) {
+      // Before apply any operation, calculate firts:
+      calculate();
       prevNum.value = currentNum.value;
       currentNum.value = "";
       selectedOperation.value = value;
@@ -95,14 +97,14 @@ export default {
 
     onMounted(() => {
       window.addEventListener('keydown', (e) => {
-        pressed(e.key)
-      })
-    })
+        pressed(e.key);
+      });
+    });
 
     return { currentNum, prevNum, pressed, calculate, applyOperation, appendNumber, clear, selectedOperation, multiply, divide, subtract, sum };
   },
 
-}
+};
 </script>
 
 <style></style>
