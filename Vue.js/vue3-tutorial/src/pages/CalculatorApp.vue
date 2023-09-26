@@ -11,6 +11,10 @@
         </small>
       </div>
       <div class="grid grid-cols-4 gap-1">
+        <button @click="pressed('C')" class="p-2 border rounded  shadow w-10 h-10 ">C</button>
+        <button @click="pressed('CE')" class="p-2 border rounded  shadow w-10 h-10 ">CE</button>
+        <button @click="pressed('C')" class="p-2 border rounded  shadow w-10 h-10 ">←</button>
+        <button @click="pressed('/')" class="p-2 border rounded  shadow w-10 h-10 ">/</button>
         <button @click="pressed('1')" class="p-2 border rounded  shadow w-10 h-10">1</button>
         <button @click="pressed('2')" class="p-2 border rounded  shadow w-10 h-10">2</button>
         <button @click="pressed('3')" class="p-2 border rounded  shadow w-10 h-10">3</button>
@@ -23,10 +27,9 @@
         <button @click="pressed('8')" class="p-2 border rounded  shadow w-10 h-10">8</button>
         <button @click="pressed('9')" class="p-2 border rounded  shadow w-10 h-10">9</button>
         <button @click="pressed('*')" class="p-2 border rounded  shadow w-10 h-10">x</button>
-        <button @click="pressed('C')" class="p-2 border rounded  shadow w-10 h-10 ">C</button>
+        <button @click="pressed('.')" class="p-2 border rounded  shadow w-10 h-10 ">.</button>
         <button @click="pressed('0')" class="p-2 border rounded  shadow w-10 h-10 ">0</button>
-        <button @click="pressed('=')" class="p-2 border rounded  shadow w-10 h-10">=</button>
-        <button @click="pressed('/')" class="p-2 border rounded  shadow w-10 h-10">/</button>
+        <button @click="pressed('=')" class="p-2 border rounded  shadow col-span-2 w-21 h-10">=</button>
       </div>
     </div>
   </section>
