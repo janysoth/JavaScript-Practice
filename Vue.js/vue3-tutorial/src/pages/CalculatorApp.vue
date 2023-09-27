@@ -2,38 +2,39 @@
   <section class="flex w-full">
     <div class="m-auto">
       <h1 class="text-2xl text-center">Calculator</h1>
-      <p class="text-3xl  text-right mt-10 w-40 h-10" style="direction:rtl">{{ currentNum }}
-      </p>
+      <p class="text-3xl text-right mt-10 w-40 h-10 bg-white text-gray-800 rounded-lg shadow-md" style="direction: rtl">{{
+        currentNum }}</p>
 
       <div class="h-10 w-40 text-left">
-        <small v-if="selectedOperation">
+        <small v-if="selectedOperation" class="text-gray-600">
           {{ prevNum }} {{ selectedOperation }} {{ currentNum }}
         </small>
       </div>
       <div class="grid grid-cols-4 gap-1">
-        <button @click="pressed('C')" class="p-2 border rounded  shadow w-10 h-10 ">C</button>
-        <button @click="pressed('CE')" class="p-2 border rounded  shadow w-10 h-10 ">CE</button>
-        <button @click="deleteLast" class="p-2 border rounded  shadow w-10 h-10 ">←</button>
-        <button @click="pressed('/')" class="p-2 border rounded  shadow w-10 h-10 ">/</button>
-        <button @click="pressed('1')" class="p-2 border rounded  shadow w-10 h-10">1</button>
-        <button @click="pressed('2')" class="p-2 border rounded  shadow w-10 h-10">2</button>
-        <button @click="pressed('3')" class="p-2 border rounded  shadow w-10 h-10">3</button>
-        <button @click="pressed('+')" class="p-2 border rounded  shadow w-10 h-10">+</button>
-        <button @click="pressed('4')" class="p-2 border rounded  shadow w-10 h-10">4</button>
-        <button @click="pressed('5')" class="p-2 border rounded  shadow w-10 h-10">5</button>
-        <button @click="pressed('6')" class="p-2 border rounded  shadow w-10 h-10">6</button>
-        <button @click="pressed('-')" class="p-2 border rounded  shadow w-10 h-10">-</button>
-        <button @click="pressed('7')" class="p-2 border rounded  shadow w-10 h-10">7</button>
-        <button @click="pressed('8')" class="p-2 border rounded  shadow w-10 h-10">8</button>
-        <button @click="pressed('9')" class="p-2 border rounded  shadow w-10 h-10">9</button>
-        <button @click="pressed('*')" class="p-2 border rounded  shadow w-10 h-10">x</button>
-        <button @click="pressed('.')" class="p-2 border rounded  shadow w-10 h-10 ">.</button>
-        <button @click="pressed('0')" class="p-2 border rounded  shadow w-10 h-10 ">0</button>
-        <button @click="pressed('=')" class="p-2 border rounded  shadow col-span-2 w-21 h-10">=</button>
+        <button @click="pressed('C')" class="bg-red-500 text-white">C</button>
+        <button @click="pressed('CE')" class="bg-red-500 text-white">CE</button>
+        <button @click="deleteLast" class="bg-red-500 text-white">←</button>
+        <button @click="pressed('/')" class="bg-orange-500 text-white">/</button>
+        <button @click="pressed('1')" class="bg-blue-500 text-white">1</button>
+        <button @click="pressed('2')" class="bg-blue-500 text-white">2</button>
+        <button @click="pressed('3')" class="bg-blue-500 text-white">3</button>
+        <button @click="pressed('+')" class="bg-orange-500 text-white">+</button>
+        <button @click="pressed('4')" class="bg-blue-500 text-white">4</button>
+        <button @click="pressed('5')" class="bg-blue-500 text-white">5</button>
+        <button @click="pressed('6')" class="bg-blue-500 text-white">6</button>
+        <button @click="pressed('-')" class="bg-orange-500 text-white">-</button>
+        <button @click="pressed('7')" class="bg-blue-500 text-white">7</button>
+        <button @click="pressed('8')" class="bg-blue-500 text-white">8</button>
+        <button @click="pressed('9')" class="bg-blue-500 text-white">9</button>
+        <button @click="pressed('*')" class="bg-orange-500 text-white">×</button>
+        <button @click="pressed('.')" class="bg-red-500 text-white">.</button>
+        <button @click="pressed('0')" class="bg-blue-500 text-white">0</button>
+        <button @click="pressed('=')" class="bg-green-500 text-white col-span-2">=</button>
       </div>
     </div>
   </section>
 </template>
+
 
 <script>
 
