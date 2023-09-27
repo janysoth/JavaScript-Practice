@@ -13,7 +13,7 @@
       <div class="grid grid-cols-4 gap-1">
         <button @click="pressed('C')" class="p-2 border rounded  shadow w-10 h-10 ">C</button>
         <button @click="pressed('CE')" class="p-2 border rounded  shadow w-10 h-10 ">CE</button>
-        <button @click="pressed('C')" class="p-2 border rounded  shadow w-10 h-10 ">←</button>
+        <button @click="deleteLast" class="p-2 border rounded  shadow w-10 h-10 ">←</button>
         <button @click="pressed('/')" class="p-2 border rounded  shadow w-10 h-10 ">/</button>
         <button @click="pressed('1')" class="p-2 border rounded  shadow w-10 h-10">1</button>
         <button @click="pressed('2')" class="p-2 border rounded  shadow w-10 h-10">2</button>
@@ -98,6 +98,12 @@ export default {
       selectedOperation.value = '';
     });
 
+    const deleteLast = (() => {
+      currentNum.value = currentNum.value.toString().slice(0, -1);
+    });
+
+
+
     const handledKeydown = (e) => pressed(e.key);
 
     onMounted(() =>
@@ -107,7 +113,7 @@ export default {
     onUnmounted(() =>
       window.removeEventListener('keydown', handledKeydown));
 
-    return { currentNum, prevNum, pressed, calculate, applyOperation, appendNumber, clear, selectedOperation, multiply, divide, subtract, sum };
+    return { currentNum, prevNum, pressed, calculate, applyOperation, appendNumber, clear, selectedOperation, multiply, divide, subtract, sum, deleteLast };
   },
 
 };
