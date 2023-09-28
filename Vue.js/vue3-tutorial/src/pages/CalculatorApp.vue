@@ -11,10 +11,14 @@
         </small>
       </div>
       <div class="grid grid-cols-4 gap-1">
-        <button @click="pressed('C')" class="bg-red-500 text-white">C</button>
-        <button @click="pressed('CE')" class="bg-red-500 text-white">CE</button>
-        <button @click="deleteLast" class="bg-red-500 text-white">←</button>
-        <button @click="pressed('/')" class="bg-orange-500 text-white">/</button>
+        <!-- <button @click="pressed('C')" class="bg-red-500 text-white">C</button> -->
+        <!-- <button @click="pressed('CE')" class="bg-red-500 text-white">CE</button> -->
+        <!-- <button @click="deleteLast" class="bg-red-500 text-white">←</button> -->
+        <!-- <button @click="pressed('/')" class="bg-orange-500 text-white">/</button> -->
+        <CalculatorButton @click="pressed('C')" color="red" class="hover:opacity-60" button-text="C" />
+        <CalculatorButton @click="pressed('CE')" color="red" class="hover:opacity-60" button-text="CE" />
+        <CalculatorButton @click="deleteLast" color="red" class="hover:opacity-60" button-text="←" />
+        <CalculatorButton @click="pressed('/')" color="orange" class="hover:opacity-60" button-text="/" />
         <button @click="pressed('1')" class="bg-blue-500 text-white">1</button>
         <button @click="pressed('2')" class="bg-blue-500 text-white">2</button>
         <button @click="pressed('3')" class="bg-blue-500 text-white">3</button>
@@ -39,8 +43,12 @@
 <script>
 
 import { onMounted, onUnmounted, ref } from 'vue';
+import CalculatorButton from '@/components/CalculatorApp/CalculatorButton.vue'
 
 export default {
+  components: {
+    CalculatorButton,
+  },
   setup() {
     const currentNum = ref("");
     const operations = ['+', '-', '*', '/'];
