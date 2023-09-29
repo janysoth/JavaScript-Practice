@@ -1,14 +1,16 @@
 <template>
   <section class="flex justify-center items-center w-full">
-    <div class="m-auto">
+    <div class="mx-auto w-90 max-w-[400px] bg-lightcoral rounded-[20px] overflow-hidden border-3 border-goldenrod">
       <h1 class="text-2xl text-center">Calculator</h1>
-      <p class="text-3xl text-right mt-5 w-100 h-10 bg-white text-gray-800 rounded-lg shadow-md" style="direction: rtl">
-        {{ currentNum }}</p>
-
-      <div class="w-40 h-10 text-left">
-        <small v-if="selectedOperation" class="text-gray-600">
-          {{ prevNum }} {{ selectedOperation }} {{ currentNum }}
-        </small>
+      <div class="bg-whitesmoke text-right text-30px relative">
+        <p class="text-3xl text-right mt-5 w-00 h-10 px-2 py-2 bg-white text-gray-800 rounded-lg shadow-md"
+          style="direction: rtl">
+          {{ currentNum }}</p>
+        <div class="w-40 h-10 text-left">
+          <small v-if="selectedOperation" class="text-gray-600">
+            {{ prevNum }} {{ selectedOperation }} {{ currentNum }}
+          </small>
+        </div>
       </div>
       <div class="grid grid-cols-4 gap-1">
         <CalculatorButton @click="pressed('C')" color="red" class="hover:opacity-60" button-text="C" />
@@ -29,7 +31,7 @@
         <CalculatorButton @click="pressed('*')" color="orange" class="hover:opacity-60" button-text="x" />
         <CalculatorButton @click="pressed('.')" color="red" class="hover:opacity-60" button-text="." />
         <CalculatorButton @click="pressed('0')" color="blue" class="hover:opacity-60" button-text="0" />
-        <CalculatorButton @click="pressed('=')" color="green" class="hover:opacity-60 col-span-2" button-text="=" />
+        <CalculatorButton @click="pressed('=')" color="green" class="col-span-2 hover:opacity-60" button-text="=" />
       </div>
     </div>
   </section>

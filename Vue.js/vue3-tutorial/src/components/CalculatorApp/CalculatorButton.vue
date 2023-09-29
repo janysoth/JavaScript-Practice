@@ -6,7 +6,7 @@
       {{ buttonText }}
     </button> -->
 
-    <button @click="onButtonClick" :class="['bg-' + color + '-500 text-white w-20 h-10 rounded']">
+    <button @click="onButtonClick" :class="['bg-' + color + '-500 text-white w-20 h-10 rounded', 'calculator-button']">
       {{ buttonText }}
     </button>
   </div>
@@ -32,3 +32,17 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.calculator-button {
+  width: 100%;
+  height: 100%;
+  font-size: 1.5rem;
+}
+</style>
+
+
+
+
+
+
