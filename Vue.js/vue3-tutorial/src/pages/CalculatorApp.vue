@@ -1,10 +1,9 @@
 <template>
-  <section class="flex w-full">
+  <section class="flex justify-center items-center w-full">
     <div class="m-auto">
       <h1 class="text-2xl text-center">Calculator</h1>
       <p class="text-3xl text-right mt-5 w-100 h-10 bg-white text-gray-800 rounded-lg shadow-md" style="direction: rtl">
-        {{
-          currentNum }}</p>
+        {{ currentNum }}</p>
 
       <div class="w-40 h-10 text-left">
         <small v-if="selectedOperation" class="text-gray-600">
