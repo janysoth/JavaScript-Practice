@@ -44,6 +44,7 @@ export default {
                 { title: "Mark Down", to: "/markdown" },
                 { title: "Slider", to: "/slider" },
                 { title: "Calculator", to: "/calculator" },
+                { title: "Billing Plan", to: "/billing-plan" },
             ],
             user: null, // Initialize user to null
         };
