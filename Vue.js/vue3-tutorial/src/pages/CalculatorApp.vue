@@ -16,22 +16,22 @@
         <CalculatorButton @click="pressed('C')" color="red" class="hover:opacity-60" button-text="C" />
         <CalculatorButton @click="pressed('CE')" color="red" class="hover:opacity-60" button-text="CE" />
         <CalculatorButton @click="deleteLast" color="red" class="hover:opacity-60" button-text="←" />
-        <CalculatorButton @click="pressed('/')" color="orange" class="hover:opacity-60" button-text="/" />
+        <CalculatorButton @click="pressed('/')" color="red" class="hover:opacity-60" button-text="/" />
         <CalculatorButton @click="pressed('1')" color="blue" class="hover:opacity-60" button-text="1" />
         <CalculatorButton @click="pressed('2')" color="blue" class="hover:opacity-60" button-text="2" />
         <CalculatorButton @click="pressed('3')" color="blue" class="hover:opacity-60" button-text="3" />
-        <CalculatorButton @click="pressed('+')" color="orange" class="hover:opacity-60" button-text="+" />
+        <CalculatorButton @click="pressed('+')" color="red" class="hover:opacity-60" button-text="+" />
         <CalculatorButton @click="pressed('4')" color="blue" class="hover:opacity-60" button-text="4" />
         <CalculatorButton @click="pressed('5')" color="blue" class="hover:opacity-60" button-text="5" />
         <CalculatorButton @click="pressed('6')" color="blue" class="hover:opacity-60" button-text="6" />
-        <CalculatorButton @click="pressed('-')" color="orange" class="hover:opacity-60" button-text="-" />
+        <CalculatorButton @click="pressed('-')" color="red" class="hover:opacity-60" button-text="-" />
         <CalculatorButton @click="pressed('7')" color="blue" class="hover:opacity-60" button-text="7" />
         <CalculatorButton @click="pressed('8')" color="blue" class="hover:opacity-60" button-text="8" />
         <CalculatorButton @click="pressed('9')" color="blue" class="hover:opacity-60" button-text="9" />
-        <CalculatorButton @click="pressed('*')" color="orange" class="hover:opacity-60" button-text="x" />
+        <CalculatorButton @click="pressed('*')" color="red" class="hover:opacity-60" button-text="x" />
         <CalculatorButton @click="pressed('.')" color="red" class="hover:opacity-60" button-text="." />
         <CalculatorButton @click="pressed('0')" color="blue" class="hover:opacity-60" button-text="0" />
-        <CalculatorButton @click="pressed('=')" color="green" class="col-span-2 hover:opacity-60" button-text="=" />
+        <CalculatorButton @click="pressed('=')" color="red" class="col-span-2 hover:opacity-60" button-text="=" />
       </div>
     </div>
   </section>
