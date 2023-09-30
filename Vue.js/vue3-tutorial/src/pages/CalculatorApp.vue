@@ -12,7 +12,7 @@
           </small>
         </div>
       </div>
-      <div class="grid grid-cols-4 gap-1">
+      <div class="grid grid-cols-4 gap-1 w-[300px] h-[300px] textxl">
         <CalculatorButton @click="pressed('C')" color="red" class="hover:opacity-60" button-text="C" />
         <CalculatorButton @click="pressed('CE')" color="red" class="hover:opacity-60" button-text="CE" />
         <CalculatorButton @click="deleteLast" color="red" class="hover:opacity-60" button-text="←" />

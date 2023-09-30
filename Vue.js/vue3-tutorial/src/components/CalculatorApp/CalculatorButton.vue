@@ -6,7 +6,7 @@
       {{ buttonText }}
     </button> -->
 
-    <button @click="onButtonClick" :class="['bg-' + color + '-500 text-white w-20 h-10 rounded', 'calculator-button']">
+    <button @click="onButtonClick" :class="['bg-' + color + '-500 text-white w-full h-full text-lg rounded']">
       {{ buttonText }}
     </button>
   </div>
