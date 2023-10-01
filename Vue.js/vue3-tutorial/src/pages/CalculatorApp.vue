@@ -1,7 +1,10 @@
 <template>
   <div class="calculator m-auto">
     <table>
-      <div class="input-container"><input type="text" v-model="result" disabled></div>
+      <div class="input-container">
+        <input type="text" v-model="result" disabled>
+        <span class="text-white" v-if="prevValue">{{ prevValue }} {{ operator }} {{ result }}</span>
+      </div>
       <div>
         <tr>
           <td class="dark" @click="clear">C</td>
@@ -44,6 +47,7 @@ export default {
       result: "",
       tmpValue: 0,
       operator: undefined,
+      prevValue: undefined, // Store the previous number
     };
   },
 
@@ -80,6 +84,7 @@ export default {
       this.calculateResult();
       this.tmpValue = parseFloat(this.result);
       this.operator = operator;
+      this.prevValue = this.result; // Store the previous value
       this.result = "";
     },
 
@@ -105,6 +110,7 @@ export default {
 
         this.tmpValue = 0;
         this.operator = undefined;
+        this.prevValue = undefined;
       }
     },
 
