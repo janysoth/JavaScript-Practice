@@ -43,7 +43,7 @@
 export default {
   data: function () {
     return {
-      result: 0,
+      result: "",
       tmp_value: 0,
       reset: false,
       operator: undefined
@@ -63,7 +63,7 @@ export default {
   methods: {
 
     clear() {
-      this.result = 0;
+      this.result = "";
       this.tmp_value = 0;
       this.operator = undefined;
     },
@@ -77,17 +77,19 @@ export default {
     },
 
     addNumber(number) {
-      if (this.result == 0 || this.reset === true) {
+      if (this.reset === true) {
         this.result = '';
         this.reset = false;
       }
 
       this.result += number.toString();
     },
+
     addPoint() {
       if (!this.result.includes('.'))
         this.result += '.';
     },
+
     setOperator(operator) {
       if (this.tmp_value != 0)
         this.calculate();
@@ -96,11 +98,13 @@ export default {
       this.operator = operator;
       this.reset = true;
     },
+
     equal() {
       this.calculate();
       this.tmp_value = 0;
       this.operator = undefined;
     },
+
     calculate() {
       let value = 0;
       let firstNum = parseFloat(this.tmp_value);
