@@ -1,237 +1,215 @@
 <template>
   <div class="calculator m-auto">
-    <table cellspacing="10">
-      <tr>
-        <td colspan="4">
-          <input type="text" v-model="result" disabled>
-        </td>
-      </tr>
-      <tr>
-        <td class="button dark" @click="clear">C</td>
-        <td class="button dark" @click="invert">+/-</td>
-        <td class="button dark" @click="percent">%</td>
-        <td class="button orange" @click="setOperator('/')">/</td>
-      </tr>
-      <tr>
-        <td class="button grey" @click="addNumber(7)">7</td>
-        <td class="button grey" @click="addNumber(8)">8</td>
-        <td class="button grey" @click="addNumber(9)">9</td>
-        <td class="button orange" @click="setOperator('*')">*</td>
-      </tr>
-      <tr>
-        <td class="button grey" @click="addNumber(4)">4</td>
-        <td class="button grey" @click="addNumber(5)">5</td>
-        <td class="button grey" @click="addNumber(6)">6</td>
-        <td class="button orange" @click="setOperator('-')">-</td>
-      </tr>
-      <tr>
-        <td class="button grey" @click="addNumber(1)">1</td>
-        <td class="button grey" @click="addNumber(2)">2</td>
-        <td class="button grey" @click="addNumber(3)">3</td>
-        <td class="button orange" @click="setOperator('+')">+</td>
-      </tr>
-      <tr>
-        <td class="button-col2 grey" @click="addNumber(0)" colspan="2">0</td>
-        <td class="button grey" @click="addPoint">.</td>
-        <td class="button orange" @click="equal">=</td>
-      </tr>
+    <table>
+      <div class="input-container"><input type="text" v-model="result" disabled></div>
+      <div>
+        <tr>
+          <td class="dark" @click="clear">C</td>
+          <td class="dark" @click="toggleSign">+/-</td>
+          <td class="dark" @click="calculatePercentage">%</td>
+          <td class="orange" @click="setOperator('/')">/</td>
+        </tr>
+        <tr>
+          <td @click="appendNumber(7)">7</td>
+          <td @click="appendNumber(8)">8</td>
+          <td @click="appendNumber(9)">9</td>
+          <td class="orange" @click="setOperator('*')">x</td>
+        </tr>
+        <tr>
+          <td @click="appendNumber(4)">4</td>
+          <td @click="appendNumber(5)">5</td>
+          <td @click="appendNumber(6)">6</td>
+          <td class="orange" @click="setOperator('-')">-</td>
+        </tr>
+        <tr>
+          <td @click="appendNumber(1)">1</td>
+          <td @click="appendNumber(2)">2</td>
+          <td @click="appendNumber(3)">3</td>
+          <td class="orange" @click="setOperator('+')">+</td>
+        </tr>
+        <tr>
+          <td colspan="2" class="zeroBtn" @click="appendNumber(0)">0</td>
+          <td @click="addDecimalPoint">.</td>
+          <td class="orange" @click="calculateResult">=</td>
+        </tr>
+      </div>
     </table>
   </div>
 </template>
 
 <script>
 export default {
-  data: function () {
+  data() {
     return {
       result: "",
-      tmp_value: 0,
-      reset: false,
-      operator: undefined
-    }
+      tmpValue: 0,
+      operator: undefined,
+    };
   },
 
   mounted() {
-    // Register keyboard event listeners
-    window.addEventListener('keydown', this.handleKeyPress);
-  },
-
-  beforeMount() {
-    // Remove the event listener when the component is destroyed
-    window.removeEventListener('keydown', this.handleKeyPress);
+    window.addEventListener("keydown", this.handleKeyDown);
   },
 
   methods: {
-
     clear() {
       this.result = "";
-      this.tmp_value = 0;
+      this.tmpValue = 0;
       this.operator = undefined;
     },
 
-    invert() {
-      this.result *= -1;
+    toggleSign() {
+      this.result = (-parseFloat(this.result)).toString();
     },
 
-    percent() {
-      this.result /= 100;
+    calculatePercentage() {
+      this.result = (parseFloat(this.result) / 100).toString();
     },
 
-    addNumber(number) {
-      if (this.reset === true) {
-        this.result = '';
-        this.reset = false;
-      }
-
+    appendNumber(number) {
       this.result += number.toString();
     },
 
-    addPoint() {
-      if (!this.result.includes('.'))
-        this.result += '.';
+    addDecimalPoint() {
+      if (!this.result.includes(".")) {
+        this.result += ".";
+      }
     },
 
     setOperator(operator) {
-      if (this.tmp_value != 0)
-        this.calculate();
-
-      this.tmp_value = this.result;
+      this.calculateResult();
+      this.tmpValue = parseFloat(this.result);
       this.operator = operator;
-      this.reset = true;
+      this.result = "";
     },
 
-    equal() {
-      this.calculate();
-      this.tmp_value = 0;
-      this.operator = undefined;
-    },
+    calculateResult() {
+      if (this.operator && this.result !== "") {
+        const firstNum = this.tmpValue;
+        const secondNum = parseFloat(this.result);
 
-    calculate() {
-      let value = 0;
-      let firstNum = parseFloat(this.tmp_value);
-      let secondNum = parseFloat(this.result);
+        switch (this.operator) {
+          case "+":
+            this.result = (firstNum + secondNum).toString();
+            break;
+          case "-":
+            this.result = (firstNum - secondNum).toString();
+            break;
+          case "*":
+            this.result = (firstNum * secondNum).toString();
+            break;
+          case "/":
+            this.result = (firstNum / secondNum).toString();
+            break;
+        }
 
-      switch (this.operator) {
-        case '+':
-          value = firstNum + secondNum;
-          break;
-        case '-':
-          value = firstNum - secondNum;
-          break;
-        case '*':
-          value = firstNum * secondNum;
-          break;
-        case '/':
-          value = firstNum / secondNum;
-      }
-
-      this.result = value.toString();
-    },
-
-    handleKeyPress(event) {
-      // Check if the key pressed is a numeric keypad key (0-9), a decimal point, an operator, or the backspace key
-      if (/^[0-9.]$/.test(event.key)) {
-        event.preventDefault(); // Prevent the default behavior of keypress
-        this.handleKeyboardInput(event.key);
-      } else if (/^[+\-*/]$/.test(event.key)) {
-        event.preventDefault();
-        this.handleKeyboardOperator(event.key);
-      } else if (event.key === 'Enter') {
-        // Handle Enter key as an equals sign
-        event.preventDefault();
-        this.equal();
-      } else if (event.key === 'Escape') {
-        // Handle Escape key as a clear operation
-        event.preventDefault();
-        this.clear();
-      } else if (event.key === 'Backspace') {
-        // Handle Backspace key to delete the last digit
-        event.preventDefault();
-        this.deleteLastDigit();
+        this.tmpValue = 0;
+        this.operator = undefined;
       }
     },
 
-    handleKeyboardInput(key) {
-      if (this.reset === true) {
-        this.result = ''; // Clear the result if it needs to be reset
-        this.reset = false;
-      }
+    handleKeyDown(event) {
+      const key = event.key;
 
-      if (key === '.') {
-        this.addPoint();
+      // Check if the key is a digit (0-9)
+      if (/^\d$/.test(key)) {
+        this.appendNumber(parseInt(key));
       } else {
-        this.addNumber(key);
+        // Check for other keys
+        switch (key) {
+          case "+":
+          case "-":
+          case "*":
+          case "/":
+            this.setOperator(key);
+            break;
+          case "=":
+          case "Enter": // Support the Enter key as well
+            this.calculateResult();
+            break;
+          case ".":
+            this.addDecimalPoint();
+            break;
+          case "Escape": // Support the Escape key for clearing
+            this.clear();
+            break;
+          case "Backspace": // Support Backspace key for clearing
+            this.result = this.result.slice(0, -1);
+            break;
+          case "c":
+          case "C":
+            if (event.ctrlKey || event.metaKey) {
+              this.clear(); // Ctrl + C to clear
+            }
+            break;
+          case "%":
+            this.calculatePercentage();
+            break;
+          case "m":
+          case "M":
+            if (event.ctrlKey || event.metaKey) {
+              this.toggleSign(); // Ctrl + M to toggle sign
+            }
+            break;
+        }
       }
-    },
-
-    handleKeyboardOperator(operator) {
-      if (this.tmp_value != 0) {
-        this.calculate();
-      }
-
-      this.tmp_value = this.result;
-      this.operator = operator;
-      this.reset = true;
-    },
-
-    deleteLastDigit() {
-      if (this.result.length > 0) {
-        this.result = this.result.slice(0, -1); // Remove the last character
-      }
-    },
+    }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
 .calculator {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 100vh;
-  font-size: 3rem;
+  font-size: 2rem;
+  margin-top: 10px;
 
-
-  table {
-    /* Add a border to the table */
-    border-radius: 10px;
-    /* Add rounded corners to the table */
-    background-color: black;
-    margin-bottom: 100px;
+  .input-container {
+    width: 370px;
+    /* Set the common width for input and table */
+    margin-bottom: 10px;
   }
 
   input {
-    display: block;
-    width: 400px;
-    /* Match the button width */
-    height: 75px;
-    padding: 5px 20px 0;
-    margin-bottom: 10px;
+    width: 100%;
+    /* Make the input width 100% of its container */
+    height: 80px;
+    margin-top: 10px;
+    padding: 5px 10px;
     border: none;
     border-radius: 10px;
-    background-color: red;
-    color: #fff;
-    font-size: 4rem;
+    font-size: 3rem;
     text-align: right;
+    background-color: white;
+    color: black;
   }
 
-  .button {
-    margin: 5px;
-    /* Add margin to create spacing between buttons */
-    border-radius: 40px;
+  table {
+    width: 100%;
+    /* Make the table width 100% of its container */
+    border-spacing: 10px;
+    border-collapse: separate;
+    background-color: #333;
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  td {
     width: 80px;
     height: 80px;
     text-align: center;
+    vertical-align: middle;
     font-weight: bold;
     cursor: pointer;
+    background-color: #777;
+    color: white;
+    border-radius: 50%;
   }
 
-  .button-col2 {
-    border-radius: 40px;
-    width: 160px;
-    height: 80px;
-    text-align: center;
-    font-weight: bold;
-    cursor: pointer;
+  td:hover {
+    background-color: #999;
   }
 
   .grey {
@@ -260,5 +238,16 @@ export default {
       background-color: #fda22b;
     }
   }
+
+  .zeroBtn {
+    background-color: #777;
+    color: white;
+    border-radius: 45px;
+  }
+
+  .zeroBtn:hover {
+    background-color: #999;
+  }
+
 }
 </style>
