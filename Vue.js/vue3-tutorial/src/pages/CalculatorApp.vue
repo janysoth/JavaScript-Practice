@@ -2,8 +2,8 @@
   <div class="calculator m-auto">
     <table>
       <div class="input-container">
-        <input type="text" v-model="result" disabled>
-        <span class="text-white" v-if="prevValue">{{ prevValue }} {{ operator }} {{ result }}</span>
+        <input type="text" :value="formattedResult" disabled>
+        <span class="text-white" v-if="operator">{{ prevValue }} {{ operator }} {{ result }}</span>
       </div>
       <div>
         <tr>
@@ -71,7 +71,10 @@ export default {
     },
 
     appendNumber(number) {
-      this.result += number.toString();
+      // Check if the result length is less than 9 before appending a digit
+      if (this.result.length < 11) {
+        this.result += number.toString();
+      }
     },
 
     addDecimalPoint() {
@@ -159,8 +162,21 @@ export default {
             break;
         }
       }
-    }
-  }
+    },
+
+    formatNumberWithCommas(value) {
+      const parts = value.toString().split(".");
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      return parts.join(".");
+    },
+  },
+
+  computed: {
+    formattedResult() {
+      // Format the result with commas every 3 digits
+      return this.formatNumberWithCommas(this.result);
+    },
+  },
 };
 </script>
 
