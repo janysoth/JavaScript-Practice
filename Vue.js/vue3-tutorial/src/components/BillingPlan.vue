@@ -13,33 +13,37 @@
         <span class="text-[13px] text-gray-500">/month</span>
       </p>
       <p class="text-gray-500 mb-2">{{ plan.fee_percent }}% + {{ plan.fee_charge }}c per transaction</p>
-      <button class="btn w-[200px]">
+      <button class="btn w-[200px]" @click="selectPlan">
         <p class="mx-auto">Choose Plan</p>
       </button>
     </div>
   </div>
 </template>
 
-
 <script>
 export default {
+  props: {
+    planData: {
+      type: Object,
+      required: true
+    }
+  },
   computed: {
     plan() {
-      return {
-        'id': 'sweet',
-        'title': 'Sweet',
-        'description': 'This is a billing plan reusable component. This is an example how to create usable component.',
-        'monthly_price': 2900,
-        'fee_percent': 3.5,
-        'fee_charge': 30,
-      }
+      return this.planData;
     },
-
     monthlyPrice() {
       return Math.round(this.plan.monthly_price / 100);
     }
+  },
+  methods: {
+    selectPlan() {
+      // You can emit an event or perform an action when the user selects the plan.
+      // For example, you can emit an event to notify the parent component.
+      this.$emit('plan-selected', this.plan);
+    }
   }
-}
+};
 </script>
 
 <style></style>
