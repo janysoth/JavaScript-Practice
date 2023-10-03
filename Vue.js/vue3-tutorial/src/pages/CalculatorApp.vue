@@ -18,7 +18,7 @@
           <td @click="appendNumber(7)">7</td>
           <td @click="appendNumber(8)">8</td>
           <td @click="appendNumber(9)">9</td>
-          <td class="orange" @click="setOperator('*')">x</td>
+          <td class="orange" @click="setOperator('x')">x</td>
         </tr>
         <tr>
           <td @click="appendNumber(4)">4</td>
@@ -50,6 +50,7 @@ export default {
       tmpValue: 0,
       operator: undefined,
       prevValue: undefined, // Store the previous number
+      resultNeedsClear: false,
     };
   },
 
@@ -75,7 +76,15 @@ export default {
     appendNumber(number) {
       // Check if the result length is less than 9 before appending a digit
       if (this.result.length < 11) {
-        this.result += number.toString();
+        // this.result += number.toString();
+        // Check if the result needs to be cleared
+        if (this.resultNeedsClear) {
+          this.result = number.toString();
+          this.resultNeedsClear = false; // Reset the flag
+        } else {
+          // Append the number to the current result
+          this.result += number.toString();
+        }
       }
     },
 
@@ -91,6 +100,7 @@ export default {
       this.operator = operator;
       this.prevValue = this.result; // Store the previous value
       this.result = "";
+      this.resultNeedsClear = true;
     },
 
     calculateResult() {
@@ -105,7 +115,7 @@ export default {
           case "-":
             this.result = (firstNum - secondNum).toString();
             break;
-          case "*":
+          case "x":
             this.result = (firstNum * secondNum).toString();
             break;
           case "/":
@@ -116,6 +126,7 @@ export default {
         this.tmpValue = 0;
         this.operator = undefined;
         this.prevValue = undefined;
+        this.resultNeedsClear = true;
       }
     },
 
@@ -130,9 +141,11 @@ export default {
         switch (key) {
           case "+":
           case "-":
-          case "*":
           case "/":
             this.setOperator(key);
+            break;
+          case "*":
+            this.setOperator("x");
             break;
           case "=":
           case "Enter": // Support the Enter key as well
@@ -257,20 +270,6 @@ export default {
     &:hover {
       background-color: #555;
     }
-
-    .secondInput {
-      width: 100%;
-      /* Make the input width 100% of its container */
-      height: 80px;
-      margin-top: 10px;
-      padding: 5px 10px;
-      border: none;
-      border-radius: 10px;
-      font-size: 3rem;
-      text-align: right;
-      background-color: white;
-      color: black;
-    }
   }
 
   .orange {
@@ -290,6 +289,18 @@ export default {
 
   .zeroBtn:hover {
     background-color: #999;
+  }
+
+  .secondInput {
+    width: 100%;
+    /* Make the input width 100% of its container */
+    height: 25px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    text-align: left;
+    background-color: none;
+    color: black;
   }
 
 }
