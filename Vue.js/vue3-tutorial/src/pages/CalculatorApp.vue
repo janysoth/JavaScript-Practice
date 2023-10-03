@@ -3,7 +3,9 @@
     <table>
       <div class="input-container">
         <input type="text" :value="formattedResult" disabled>
-        <span class="text-white" v-if="operator">{{ prevValue }} {{ operator }} {{ result }}</span>
+        <div class="secondInput">
+          <span class="text-white" v-if="operator">{{ calEquation }}</span>
+        </div>
       </div>
       <div>
         <tr>
@@ -172,14 +174,19 @@ export default {
   },
 
   computed: {
+
     formattedResult() {
       // Format the result with commas every 3 digits
       return this.formatNumberWithCommas(this.result);
     },
+
+    calEquation() {
+      return `${this.prevValue} ${this.operator} ${this.result}`;
+    },
+
   },
 };
 </script>
-
 <style lang="scss" scoped>
 .calculator {
   display: flex;
@@ -249,6 +256,20 @@ export default {
 
     &:hover {
       background-color: #555;
+    }
+
+    .secondInput {
+      width: 100%;
+      /* Make the input width 100% of its container */
+      height: 80px;
+      margin-top: 10px;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 10px;
+      font-size: 3rem;
+      text-align: right;
+      background-color: white;
+      color: black;
     }
   }
 
