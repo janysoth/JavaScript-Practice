@@ -49,7 +49,7 @@ export default {
       result: "",
       tmpValue: 0,
       operator: undefined,
-      prevValue: undefined, // Store the previous number
+      prevValue: undefined,
       resultNeedsClear: false,
     };
   },
@@ -60,23 +60,21 @@ export default {
 
   methods: {
     clear() {
-      this.result = "";
-      this.tmpValue = 0;
+      this.result = this.tmpValue = "";
       this.operator = undefined;
     },
 
     toggleSign() {
-      this.result = (-parseFloat(this.result)).toString();
+      this.result = (-parseFloat(this.result) || "").toString();
     },
 
     calculatePercentage() {
-      this.result = (parseFloat(this.result) / 100).toString();
+      this.result = (parseFloat(this.result) / 100 || "").toString();
     },
 
     appendNumber(number) {
-      // Check if the result length is less than 9 before appending a digit
-      if (this.result.length < 11) {
-        // this.result += number.toString();
+      // Check if the result length is less than 11 before appending a digit
+      if (this.result.length < 10 || this.resultNeedsClear) {
         // Check if the result needs to be cleared
         if (this.resultNeedsClear) {
           this.result = number.toString();
@@ -98,29 +96,21 @@ export default {
       this.calculateResult();
       this.tmpValue = parseFloat(this.result);
       this.operator = operator;
-      this.prevValue = this.result; // Store the previous value
+      this.prevValue = this.result;
       this.result = "";
       this.resultNeedsClear = true;
     },
 
     calculateResult() {
       if (this.operator && this.result !== "") {
-        const firstNum = this.tmpValue;
+        const firstNum = this.tmpValue || 0;
         const secondNum = parseFloat(this.result);
 
         switch (this.operator) {
-          case "+":
-            this.result = (firstNum + secondNum).toString();
-            break;
-          case "-":
-            this.result = (firstNum - secondNum).toString();
-            break;
-          case "x":
-            this.result = (firstNum * secondNum).toString();
-            break;
-          case "/":
-            this.result = (firstNum / secondNum).toString();
-            break;
+          case "+": this.result = (firstNum + secondNum).toString(); break;
+          case "-": this.result = (firstNum - secondNum).toString(); break;
+          case "x": this.result = (firstNum * secondNum).toString(); break;
+          case "/": this.result = (firstNum / secondNum).toString(); break;
         }
 
         this.tmpValue = 0;
@@ -133,73 +123,52 @@ export default {
     handleKeyDown(event) {
       const key = event.key;
 
-      // Check if the key is a digit (0-9)
       if (/^\d$/.test(key)) {
         this.appendNumber(parseInt(key));
       } else {
-        // Check for other keys
         switch (key) {
           case "+":
           case "-":
-          case "/":
-            this.setOperator(key);
-            break;
-          case "*":
-            this.setOperator("x");
-            break;
+          case "/": this.setOperator(key); break;
+          case "*": this.setOperator("x"); break;
           case "=":
-          case "Enter": // Support the Enter key as well
-            this.calculateResult();
-            break;
-          case ".":
-            this.addDecimalPoint();
-            break;
-          case "Escape": // Support the Escape key for clearing
-            this.clear();
-            break;
-          case "Backspace": // Support Backspace key for clearing
-            this.result = this.result.slice(0, -1);
-            break;
+          case "Enter": this.calculateResult(); break;
+          case ".": this.addDecimalPoint(); break;
+          case "Escape": this.clear(); break;
+          case "Backspace": this.result = this.result.slice(0, -1); break;
           case "c":
           case "C":
             if (event.ctrlKey || event.metaKey) {
-              this.clear(); // Ctrl + C to clear
+              this.clear();
             }
             break;
-          case "%":
-            this.calculatePercentage();
-            break;
+          case "%": this.calculatePercentage(); break;
           case "m":
           case "M":
             if (event.ctrlKey || event.metaKey) {
-              this.toggleSign(); // Ctrl + M to toggle sign
+              this.toggleSign();
             }
             break;
         }
       }
     },
-
-    formatNumberWithCommas(value) {
-      const parts = value.toString().split(".");
-      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      return parts.join(".");
-    },
   },
 
   computed: {
-
     formattedResult() {
-      // Format the result with commas every 3 digits
-      return this.formatNumberWithCommas(this.result);
+      const parts = this.result.split(".");
+      const integerPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      const decimalPart = parts[1] ? `.${parts[1]}` : "";
+      return integerPart + decimalPart;
     },
 
     calEquation() {
-      return `${this.prevValue} ${this.operator} ${this.result}`;
+      return `${this.prevValue || ""} ${this.operator || ""} ${this.result}`;
     },
-
   },
 };
 </script>
+
 <style lang="scss" scoped>
 .calculator {
   display: flex;
