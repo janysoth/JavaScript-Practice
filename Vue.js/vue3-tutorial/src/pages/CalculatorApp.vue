@@ -59,39 +59,43 @@ export default {
   },
 
   methods: {
+
+    // Clear the calculator
     clear() {
       this.result = this.tmpValue = "";
       this.operator = undefined;
     },
 
+    // Toggle the sign of the current result
     toggleSign() {
       this.result = (-parseFloat(this.result) || "").toString();
     },
 
+    // Calculate the percentage of the current result
     calculatePercentage() {
       this.result = (parseFloat(this.result) / 100 || "").toString();
     },
 
+    // Append a number to the current result
     appendNumber(number) {
-      // Check if the result length is less than 11 before appending a digit
       if (this.result.length < 10 || this.resultNeedsClear) {
-        // Check if the result needs to be cleared
         if (this.resultNeedsClear) {
           this.result = number.toString();
-          this.resultNeedsClear = false; // Reset the flag
+          this.resultNeedsClear = false;
         } else {
-          // Append the number to the current result
           this.result += number.toString();
         }
       }
     },
 
+    // Add a decimal point to the current result
     addDecimalPoint() {
       if (!this.result.includes(".")) {
         this.result += ".";
       }
     },
 
+    // Set the operator for calculations
     setOperator(operator) {
       this.calculateResult();
       this.tmpValue = parseFloat(this.result);
@@ -101,16 +105,25 @@ export default {
       this.resultNeedsClear = true;
     },
 
+    // Calculate and display the result
     calculateResult() {
       if (this.operator && this.result !== "") {
         const firstNum = this.tmpValue || 0;
         const secondNum = parseFloat(this.result);
 
         switch (this.operator) {
-          case "+": this.result = (firstNum + secondNum).toString(); break;
-          case "-": this.result = (firstNum - secondNum).toString(); break;
-          case "x": this.result = (firstNum * secondNum).toString(); break;
-          case "/": this.result = (firstNum / secondNum).toString(); break;
+          case "+":
+            this.result = (firstNum + secondNum).toString();
+            break;
+          case "-":
+            this.result = (firstNum - secondNum).toString();
+            break;
+          case "x":
+            this.result = (firstNum * secondNum).toString();
+            break;
+          case "/":
+            this.result = (firstNum / secondNum).toString();
+            break;
         }
 
         this.tmpValue = 0;
@@ -120,6 +133,7 @@ export default {
       }
     },
 
+    // Handle keyboard input
     handleKeyDown(event) {
       const key = event.key;
 
@@ -129,20 +143,34 @@ export default {
         switch (key) {
           case "+":
           case "-":
-          case "/": this.setOperator(key); break;
-          case "*": this.setOperator("x"); break;
+          case "/":
+            this.setOperator(key);
+            break;
+          case "*":
+            this.setOperator("x");
+            break;
           case "=":
-          case "Enter": this.calculateResult(); break;
-          case ".": this.addDecimalPoint(); break;
-          case "Escape": this.clear(); break;
-          case "Backspace": this.result = this.result.slice(0, -1); break;
+          case "Enter":
+            this.calculateResult();
+            break;
+          case ".":
+            this.addDecimalPoint();
+            break;
+          case "Escape":
+            this.clear();
+            break;
+          case "Backspace":
+            this.result = this.result.slice(0, -1);
+            break;
           case "c":
           case "C":
             if (event.ctrlKey || event.metaKey) {
               this.clear();
             }
             break;
-          case "%": this.calculatePercentage(); break;
+          case "%":
+            this.calculatePercentage();
+            break;
           case "m":
           case "M":
             if (event.ctrlKey || event.metaKey) {
@@ -155,6 +183,8 @@ export default {
   },
 
   computed: {
+
+    // Format the displayed result with commas for thousands separator
     formattedResult() {
       const parts = this.result.split(".");
       const integerPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -162,6 +192,7 @@ export default {
       return integerPart + decimalPart;
     },
 
+    // Display the calculation equation
     calEquation() {
       return `${this.prevValue || ""} ${this.operator || ""} ${this.result}`;
     },
