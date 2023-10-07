@@ -11,23 +11,14 @@
                         <GoogleLogin @close-login-from-google="close" />
 
                         <p class="my-3 text-center">Or</p>
-                        <form class="p-2 my-2" @submit.prevent="submit">
-                            <!-- <div class="my-4">
-                                <label>Email or Username:</label>
-                                <input v-model="email" type="text" class="rounded shadow p-2 w-full my-2"
-                                    placeholder="Enter your Email or Username..." ref="emailRef" />
-                            </div> -->
-                            <!-- <div class="my-4">
-                                <label>Password:</label>
-                                <input v-model="password" type="password" class="rounded shadow p-2 w-full my-2"
-                                    placeholder="Enter your Password..." />
-                            </div> -->
-
-                            <!-- New Input Style -->
+                        <form class="p-2" @submit.prevent="submit">
+                            <!-- Email Address -->
                             <div class="input-group">
                                 <input type="email" v-model="email" class="input-group_input" ref="emailRef" required>
                                 <label for="email" class="input-group_label">Email Address</label>
                             </div>
+
+                            <!-- Password -->
                             <div class="input-group">
                                 <input type="password" v-model="password" class="input-group_input" required>
                                 <label for="email" class="input-group_label">Password</label>
@@ -133,6 +124,7 @@ export default {
 .input-group_input:focus+.input-group_label,
 .input-group_input:valid+.input-group_label {
     padding-inline-start: 5px;
+    padding-inline-end: 5px;
     transform: translate(10px, -14px) scale(0.8);
     background-color: #fff;
 }
