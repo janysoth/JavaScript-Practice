@@ -12,22 +12,25 @@
 
                         <p class="my-3 text-center">Or</p>
                         <form class="p-2 my-2" @submit.prevent="submit">
-                            <div class="my-4">
+                            <!-- <div class="my-4">
                                 <label>Email or Username:</label>
                                 <input v-model="email" type="text" class="rounded shadow p-2 w-full my-2"
                                     placeholder="Enter your Email or Username..." ref="emailRef" />
-                            </div>
-                            <div class="my-4">
+                            </div> -->
+                            <!-- <div class="my-4">
                                 <label>Password:</label>
                                 <input v-model="password" type="password" class="rounded shadow p-2 w-full my-2"
                                     placeholder="Enter your Password..." />
-                            </div>
+                            </div> -->
 
                             <!-- New Input Style -->
                             <div class="input-group">
-                                <input type="text" id="email" class="input-group_input" required
-                                    placeholder="Email Address">
+                                <input type="email" v-model="email" class="input-group_input" ref="emailRef" required>
                                 <label for="email" class="input-group_label">Email Address</label>
+                            </div>
+                            <div class="input-group">
+                                <input type="password" v-model="password" class="input-group_input" required>
+                                <label for="email" class="input-group_label">Password</label>
                             </div>
 
                             <div class="my-4">
@@ -90,37 +93,47 @@ export default {
 <style lang="scss" scoped>
 .input-group {
     position: relative;
+    margin-top: 1.5rem;
 }
 
 .input-group_input {
     font: inherit;
+    width: 100%;
     color: #000;
     padding: 10px;
     border: none;
     border-radius: 4px;
     outline: 2px solid #000;
     background-color: transparent;
-    transition: outline-color 500ms;
+    transition: outline-color 500ms, background-color 500ms;
+    /* Added background-color transition */
 }
 
-.input-group_input:is(:focus, :valid) {
-    outline-color: #3c50eb;
+/* Change the outline color to green when valid */
+.input-group_input:valid {
+    outline-color: #4CAF50;
+    /* Green outline color */
+    background-color: #E9F6EF;
+    /* Green background color */
+}
+
+.input-group_input:focus {
+    outline-color: #ed1111;
 }
 
 .input-group_label {
     position: absolute;
     top: 0;
     left: 0;
-    translate: 10px 10px;
+    transform: translate(10px, 10px);
     color: #000;
-    transition: translate 500ms, scale 500ms;
+    transition: transform 500ms, scale 500ms;
 }
 
 .input-group_input:focus+.input-group_label,
-.input_group_input:valid+.input-group_label {
-    padding-inline: 5px;
-    translate: 10px -14px;
-    scale: 0.8;
+.input-group_input:valid+.input-group_label {
+    padding-inline-start: 5px;
+    transform: translate(10px, -14px) scale(0.8);
     background-color: #fff;
 }
 </style>
