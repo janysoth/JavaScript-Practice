@@ -25,7 +25,8 @@
 
                             <!-- New Input Style -->
                             <div class="input-group">
-                                <input type="text" id="email" class="input-groupd_input" required>
+                                <input type="text" id="email" class="input-group_input" required
+                                    placeholder="Email Address">
                                 <label for="email" class="input-group_label">Email Address</label>
                             </div>
 
@@ -93,11 +94,11 @@ export default {
 
 .input-group_input {
     font: inherit;
-    color: #fff;
+    color: #000;
     padding: 10px;
     border: none;
     border-radius: 4px;
-    outline: 2px solid #fff;
+    outline: 2px solid #000;
     background-color: transparent;
     transition: outline-color 500ms;
 }
@@ -111,16 +112,15 @@ export default {
     top: 0;
     left: 0;
     translate: 10px 10px;
-    color: #fff;
+    color: #000;
     transition: translate 500ms, scale 500ms;
 }
 
 .input-group_input:focus+.input-group_label,
-.input-group_label,
 .input_group_input:valid+.input-group_label {
     padding-inline: 5px;
     translate: 10px -14px;
     scale: 0.8;
-    background-color: #000;
+    background-color: #fff;
 }
 </style>
