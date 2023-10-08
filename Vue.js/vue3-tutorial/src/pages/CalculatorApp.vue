@@ -42,164 +42,155 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      result: "",
-      tmpValue: 0,
-      operator: undefined,
-      prevValue: undefined,
-      resultNeedsClear: false,
-    };
-  },
+<script setup>
+import { ref, computed, onMounted } from 'vue';
 
-  mounted() {
-    window.addEventListener("keydown", this.handleKeyDown);
-  },
+// Data properties for the calculator
+const result = ref("");
+const tmpValue = ref(0);
+const operator = ref(undefined);
+const prevValue = ref(undefined);
+const resultNeedsClear = ref(false);
 
-  methods: {
+// Attach a keyboard input event listener when the component is mounted
+onMounted(() => {
+  window.addEventListener("keydown", handleKeyDown);
+});
 
-    // Clear the calculator
-    clear() {
-      this.result = this.tmpValue = "";
-      this.operator = undefined;
-    },
-
-    // Toggle the sign of the current result
-    toggleSign() {
-      this.result = (-parseFloat(this.result) || "").toString();
-    },
-
-    // Calculate the percentage of the current result
-    calculatePercentage() {
-      this.result = (parseFloat(this.result) / 100 || "").toString();
-    },
-
-    // Append a number to the current result
-    appendNumber(number) {
-      if (this.result.length < 10 || this.resultNeedsClear) {
-        if (this.resultNeedsClear) {
-          this.result = number.toString();
-          this.resultNeedsClear = false;
-        } else {
-          this.result += number.toString();
-        }
-      }
-    },
-
-    // Add a decimal point to the current result
-    addDecimalPoint() {
-      if (!this.result.includes(".")) {
-        this.result += ".";
-      }
-    },
-
-    // Set the operator for calculations
-    setOperator(operator) {
-      this.calculateResult();
-      this.tmpValue = parseFloat(this.result);
-      this.operator = operator;
-      this.prevValue = this.result;
-      this.result = "";
-      this.resultNeedsClear = true;
-    },
-
-    // Calculate and display the result
-    calculateResult() {
-      if (this.operator && this.result !== "") {
-        const firstNum = this.tmpValue || 0;
-        const secondNum = parseFloat(this.result);
-
-        switch (this.operator) {
-          case "+":
-            this.result = (firstNum + secondNum).toString();
-            break;
-          case "-":
-            this.result = (firstNum - secondNum).toString();
-            break;
-          case "x":
-            this.result = (firstNum * secondNum).toString();
-            break;
-          case "/":
-            this.result = (firstNum / secondNum).toString();
-            break;
-        }
-
-        this.tmpValue = 0;
-        this.operator = undefined;
-        this.prevValue = undefined;
-        this.resultNeedsClear = true;
-      }
-    },
-
-    // Handle keyboard input
-    handleKeyDown(event) {
-      const key = event.key;
-
-      if (/^\d$/.test(key)) {
-        this.appendNumber(parseInt(key));
-      } else {
-        switch (key) {
-          case "+":
-          case "-":
-          case "/":
-            this.setOperator(key);
-            break;
-          case "*":
-            this.setOperator("x");
-            break;
-          case "=":
-          case "Enter":
-            this.calculateResult();
-            break;
-          case ".":
-            this.addDecimalPoint();
-            break;
-          case "Escape":
-            this.clear();
-            break;
-          case "Backspace":
-            this.result = this.result.slice(0, -1);
-            break;
-          case "c":
-          case "C":
-            if (event.ctrlKey || event.metaKey) {
-              this.clear();
-            }
-            break;
-          case "%":
-            this.calculatePercentage();
-            break;
-          case "m":
-          case "M":
-            if (event.ctrlKey || event.metaKey) {
-              this.toggleSign();
-            }
-            break;
-        }
-      }
-    },
-  },
-
-  computed: {
-
-    // Format the displayed result with commas for thousands separator
-    formattedResult() {
-      const parts = this.result.split(".");
-      const integerPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      const decimalPart = parts[1] ? `.${parts[1]}` : "";
-      return integerPart + decimalPart;
-    },
-
-    // Display the calculation equation
-    calEquation() {
-      return `${this.prevValue || ""} ${this.operator || ""} ${this.result}`;
-    },
-  },
+// Clear the calculator
+const clear = () => {
+  result.value = tmpValue.value = "";
+  operator.value = undefined;
 };
-</script>
 
+// Toggle the sign of the current result
+const toggleSign = () => {
+  result.value = (-parseFloat(result.value) || "").toString();
+};
+
+// Calculate the percentage of the current result
+const calculatePercentage = () => {
+  result.value = (parseFloat(result.value) / 100 || "").toString();
+};
+
+// Append a number to the current result
+const appendNumber = (number) => {
+  if (result.value.length < 10 || resultNeedsClear.value) {
+    if (resultNeedsClear.value) {
+      result.value = number.toString();
+      resultNeedsClear.value = false;
+    } else {
+      result.value += number.toString();
+    }
+  }
+};
+
+// Add a decimal point to the current result
+const addDecimalPoint = () => {
+  if (!result.value.includes(".")) {
+    result.value += ".";
+  }
+};
+
+// Set the operator for calculations
+const setOperator = (op) => {
+  calculateResult();
+  tmpValue.value = parseFloat(result.value);
+  operator.value = op;
+  prevValue.value = result.value;
+  result.value = "";
+  resultNeedsClear.value = true;
+};
+
+// Calculate and display the result
+const calculateResult = () => {
+  if (operator.value && result.value !== "") {
+    const firstNum = tmpValue.value || 0;
+    const secondNum = parseFloat(result.value);
+
+    switch (operator.value) {
+      case "+":
+        result.value = (firstNum + secondNum).toString();
+        break;
+      case "-":
+        result.value = (firstNum - secondNum).toString();
+        break;
+      case "x":
+        result.value = (firstNum * secondNum).toString();
+        break;
+      case "/":
+        result.value = (firstNum / secondNum).toString();
+        break;
+    }
+
+    tmpValue.value = 0;
+    operator.value = undefined;
+    prevValue.value = undefined;
+    resultNeedsClear.value = true;
+  }
+};
+
+// Handle keyboard input
+const handleKeyDown = (event) => {
+  const key = event.key;
+
+  if (/^\d$/.test(key)) {
+    appendNumber(parseInt(key));
+  } else {
+    switch (key) {
+      case "+":
+      case "-":
+      case "/":
+        setOperator(key);
+        break;
+      case "*":
+        setOperator("x");
+        break;
+      case "=":
+      case "Enter":
+        calculateResult();
+        break;
+      case ".":
+        addDecimalPoint();
+        break;
+      case "Escape":
+        clear();
+        break;
+      case "Backspace":
+        result.value = result.value.slice(0, -1);
+        break;
+      case "c":
+      case "C":
+        if (event.ctrlKey || event.metaKey) {
+          clear();
+        }
+        break;
+      case "%":
+        calculatePercentage();
+        break;
+      case "m":
+      case "M":
+        if (event.ctrlKey || event.metaKey) {
+          toggleSign();
+        }
+        break;
+    }
+  }
+};
+
+// Format the displayed result with commas for thousands separator
+const formattedResult = computed(() => {
+  const parts = result.value.split(".");
+  const integerPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  const decimalPart = parts[1] ? `.${parts[1]}` : "";
+  return integerPart + decimalPart;
+});
+
+// Display the calculation equation
+const calEquation = computed(() => {
+  return `${prevValue.value || ""} ${operator.value || ""} ${result.value}`;
+});
+</script>
 <style lang="scss" scoped>
 .calculator {
   display: flex;
