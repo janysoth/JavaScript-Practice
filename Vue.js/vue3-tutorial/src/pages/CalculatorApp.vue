@@ -94,12 +94,16 @@ const addDecimalPoint = () => {
 
 // Set the operator for calculations
 const setOperator = (op) => {
-  calculateResult();
-  tmpValue.value = parseFloat(result.value);
-  operator.value = op;
-  prevValue.value = result.value;
-  result.value = "";
-  resultNeedsClear.value = true;
+  // Only set the operator when there's any value first
+  // This will prevent the user to first just any operators first
+  if (result.value) {
+    calculateResult();
+    tmpValue.value = parseFloat(result.value);
+    operator.value = op;
+    prevValue.value = result.value;
+    result.value = "";
+    resultNeedsClear.value = true;
+  }
 };
 
 // Calculate and display the result
