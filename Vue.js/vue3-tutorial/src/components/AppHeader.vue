@@ -45,6 +45,7 @@ export default {
                 { title: "Slider", to: "/slider" },
                 { title: "Calculator", to: "/calculator" },
                 { title: "Billing Plan", to: "/billing-plan-view" },
+                { title: "Reusable Modal", to: "/reusable-modal" },
             ],
             user: null, // Initialize user to null
         };

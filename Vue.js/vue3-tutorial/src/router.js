@@ -7,6 +7,7 @@ import MarkDown from './pages/MarkDown';
 import SliderApp from './pages/SliderApp';
 import CalculatorApp from './pages/CalculatorApp';
 import BillingPlanView from './pages/BillingPlanView';;
+import ReusableModal from './pages/ReusableModal';;
 
 const routes = [
     { path: '/', component: HomePage },
@@ -16,6 +17,7 @@ const routes = [
     { path: '/slider', component: SliderApp },
     { path: '/calculator', component: CalculatorApp },
     { path: '/billing-plan-view', component: BillingPlanView },
+    { path: '/reusable-modal', component: ReusableModal },
 ];
 
 const router = createRouter({
