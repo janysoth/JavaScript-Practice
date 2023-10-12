@@ -2,15 +2,27 @@
   <section class="flex flex-wrap w-full">
     <div class="m-auto">
       <h1 class="text-2xl my-5">Re-Usable Modal</h1>
-      <Modal v-if="isRedModalOpen" @close="isRedModalOpen = false">
-        <h1 class="text-red-500">Red Modal</h1>
-      </Modal>
-      <button @click="isRedModalOpen = true">Red Modal</button>
+      <Modal v-if="isModal1Open" @close="isModal1Open = false">
+        <template v-slot:title>
+          Modal 1
+        </template>
 
-      <Modal v-if="isBlueModalOpen" @close="isBlueModalOpen = false">
-        <h1 class="text-blue-500">Blue Modal</h1>
+        <template v-slot:body>
+          This is the body slot for Modal 1.
+        </template>
       </Modal>
-      <button @click="isBlueModalOpen = true">Blue Modal</button>
+      <button @click="isModal1Open = true">Modal 1</button>
+
+      <Modal v-if="isModal2Open" @close="isModal2Open = false">
+        <template v-slot:title>
+          Modal 2
+        </template>
+
+        <template v-slot:body>
+          This is the body slot for Modal 2.
+        </template>
+      </Modal>
+      <button @click="isModal2Open = true">Modal 2</button>
     </div>
   </section>
 </template>
@@ -23,10 +35,10 @@ export default {
   components: { Modal },
 
   setup() {
-    const isRedModalOpen = ref(false);
-    const isBlueModalOpen = ref(false);
+    const isModal1Open = ref(false);
+    const isModal2Open = ref(false);
 
-    return { isRedModalOpen, isBlueModalOpen };
+    return { isModal1Open, isModal2Open };
   }
 
 }
