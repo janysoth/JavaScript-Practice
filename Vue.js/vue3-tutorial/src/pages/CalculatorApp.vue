@@ -43,7 +43,8 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed } from 'vue';
+import useWindowEvent from "../utilities/composition/useWindowEvent"
 
 // Data properties for the calculator
 const result = ref("");
@@ -53,9 +54,9 @@ const prevValue = ref(undefined);
 const resultNeedsClear = ref(false);
 
 // Attach a keyboard input event listener when the component is mounted
-onMounted(() => {
-  window.addEventListener("keydown", handleKeyDown);
-});
+// onMounted(() => {
+//   window.addEventListener("keydown", handleKeyDown);
+// });
 
 // Clear the calculator
 const clear = () => {
@@ -181,6 +182,9 @@ const handleKeyDown = (event) => {
     }
   }
 };
+
+// Import the function from another file
+useWindowEvent('keydown', handleKeyDown);
 
 // Format the displayed result with commas for thousands separator
 const formattedResult = computed(() => {
