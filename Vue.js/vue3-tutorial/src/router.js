@@ -6,8 +6,9 @@ import HomePage from './pages/HomePage';
 import MarkDown from './pages/MarkDown';
 import SliderApp from './pages/SliderApp';
 import CalculatorApp from './pages/CalculatorApp';
-import BillingPlanView from './pages/BillingPlanView';;
-import ReusableModal from './pages/ReusableModal';;
+import BillingPlanView from './pages/BillingPlanView';
+import ReusableModal from './pages/ReusableModal';
+import ChatApp from './pages/ChatApp';
 
 const routes = [
     { path: '/', component: HomePage },
@@ -18,6 +19,7 @@ const routes = [
     { path: '/calculator', component: CalculatorApp },
     { path: '/billing-plan-view', component: BillingPlanView },
     { path: '/reusable-modal', component: ReusableModal },
+    { path: '/chat', component: ChatApp },
 ];
 
 const router = createRouter({
