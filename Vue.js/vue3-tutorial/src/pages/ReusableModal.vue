@@ -11,18 +11,18 @@
           This is the body slot for Modal 1.
         </template>
       </Modal>
-      <button @click="isModal1Open = true">Modal 1</button>
+      <button class="border rounded px-2 mx-4 bg-blue-500 text-white" @click="isModal1Open = true">Modal 1</button>
 
       <Modal v-if="isModal2Open" @close="isModal2Open = false">
-        <template v-slot:title>
+        <template #title>
           Modal 2
         </template>
 
-        <template v-slot:body>
+        <template #body>
           This is the body slot for Modal 2.
         </template>
       </Modal>
-      <button @click="isModal2Open = true">Modal 2</button>
+      <button class="border rounded px-2 mx-4 bg-blue-500 text-white" @click="isModal2Open = true">Modal 2</button>
     </div>
   </section>
 </template>
