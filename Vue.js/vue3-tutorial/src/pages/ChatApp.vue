@@ -9,9 +9,8 @@
             {{ chat.message }}
           </div>
         </div>
-        <div class="h-8 p-2 chat-input">
-          <input v-model="state.message" placeholder="Start Typing..." class="p-1 border rounded shadow w-full"
-            @keydown.enter="addMessage" />
+        <div class="chat-input">
+          <input v-model="state.message" placeholder="Start Typing..." @keydown.enter="addMessage" />
         </div>
       </div>
     </div>
@@ -95,5 +94,16 @@ export default {
 
 .chat-input {
   margin-top: 10px;
+  margin-bottom: -10px;
+  height: 2rem;
+  padding: 8px;
+}
+
+/* Style the chat input with a rounded border and shadow */
+.chat-input input {
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 12px;
+  width: 100%;
 }
 </style>
