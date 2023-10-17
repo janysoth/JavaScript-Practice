@@ -2,14 +2,14 @@
   <section class="flex w-full">
     <div class="m-auto w-full flex flex-wrap justify-center">
       <h1 class="text-center text-3xl my-4 w-full">Real Time Chat</h1>
-      <div class="border rounded-lg w-10/12 md:w-4/12">
-        <div class="h-64 p-2">
-          <div v-for="chat in state.chats" :key="chat.message" class="w-full"
-            :class="chat.userId === state.userId ? 'text-right' : ''">
+      <div class="border rounded-lg w-10/12 md:w-4/12 chat-container">
+        <div class="h-64 p-2 chat-messages">
+          <div v-for="chat in state.chats" :key="chat.message" class="message"
+            :class="chat.userId === state.userId ? 'sent' : 'received'">
             {{ chat.message }}
           </div>
         </div>
-        <div class="h-8 p-2">
+        <div class="h-8 p-2 chat-input">
           <input v-model="state.message" placeholder="Start Typing..." class="p-1 border rounded shadow w-full"
             @keydown.enter="addMessage" />
         </div>
@@ -60,4 +60,40 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.chat-container {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+}
+
+.message {
+  max-width: 70%;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 10px;
+  word-wrap: break-word;
+}
+
+.sent {
+  background-color: #007AFF;
+  color: #fff;
+  align-self: flex-end;
+}
+
+.received {
+  background-color: #E5E5EA;
+  color: #000;
+  align-self: flex-start;
+}
+
+.chat-input {
+  margin-top: 10px;
+}
+</style>
