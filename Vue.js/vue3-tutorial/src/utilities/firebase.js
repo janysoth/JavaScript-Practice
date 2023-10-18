@@ -17,6 +17,11 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+const db = firebase.database();
+
+// To Access the chat
+export const chatsRef = db.ref('chats');
+
 // Initialize Firebase Authentication and get a reference to the service
 firebase.auth();
 

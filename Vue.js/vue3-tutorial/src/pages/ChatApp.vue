@@ -19,7 +19,7 @@
 
 <script>
 import { onMounted, reactive } from 'vue';
-import firebase from "../utilities/firebase";
+import firebase, { chatsRef } from "../utilities/firebase";
 import 'firebase/database';
 
 export default {
@@ -27,27 +27,19 @@ export default {
     const state = reactive({
       chats: [],
       message: "",
-      collection: null,
       userId: null,
     });
 
     onMounted(async () => {
-      const db = firebase.database();
 
-      // To Access the chat
-      state.collection = db.ref('chats');
-      const data = await state.collection.once('value');
-      state.chats = data.val();
-
-      state.userId = firebase.auth().currentUser.uid;
-
-      // state.collection.on('value', (snapshot) => {
-      //   state.chats = snapshot.val();
-      // });
+      chatsRef.on('child_added', (snapshot) => {
+        state.userId = firebase.auth().currentUser.uid;
+        state.chats.push({ key: snapshot.key, ...snapshot.val() });
+      });
     });
 
     function addMessage() {
-      const newChat = state.collection.push();
+      const newChat = chatsRef.push();
 
       newChat.set({ userId: state.userId, message: state.message });
       state.message = "";
