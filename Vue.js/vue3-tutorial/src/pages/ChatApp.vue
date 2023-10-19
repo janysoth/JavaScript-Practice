@@ -95,12 +95,12 @@ export default {
 }
 
 .chat-input {
-  padding: 8px;
+  padding: 4px;
   position: sticky;
   /* Make the input sticky at the bottom */
   bottom: 0;
   width: 100%;
-  background-color: #fff;
+  background: transparent;
   z-index: 1;
   /* Place the input above the scrolling messages */
 }
@@ -111,5 +111,6 @@ export default {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   padding: 12px;
   width: 100%;
+
 }
 </style>
