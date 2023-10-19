@@ -57,11 +57,21 @@ export default {
   border: 1px solid #ccc;
   padding: 10px;
   border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  max-height: 400px;
+  position: relative;
 }
 
 .chat-messages {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  overflow-y: auto;
+  /* Allow the message field to scroll */
+  flex-grow: 1;
+  /* Let the message field take remaining vertical space */
 }
 
 .message {
@@ -85,10 +95,14 @@ export default {
 }
 
 .chat-input {
-  margin-top: 10px;
-  margin-bottom: -10px;
-  height: 2rem;
   padding: 8px;
+  position: sticky;
+  /* Make the input sticky at the bottom */
+  bottom: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 1;
+  /* Place the input above the scrolling messages */
 }
 
 /* Style the chat input with a rounded border and shadow */
