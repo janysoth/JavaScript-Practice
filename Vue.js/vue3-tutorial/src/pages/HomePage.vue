@@ -6,10 +6,11 @@
 
 <script>
 export default {
-    mounted() {
-        console.log(this.$store.state);
-    }
-
+    data() {
+        return {
+            store: this.$store.state,
+        }
+    },
 }
 </script>
 

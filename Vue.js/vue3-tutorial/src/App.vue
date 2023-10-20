@@ -29,6 +29,7 @@ export default {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         // User is signed in.
+        this.$store.commit('setIsLoggedIn');
         this.isLoggedIn = true;
         this.authUser = user;
       } else {
