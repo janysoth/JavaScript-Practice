@@ -33,8 +33,6 @@ export default {
 
     components: { ButtonComp },
 
-    props: { isLoggedIn: { type: Boolean, default: false } },
-
     data() {
         return {
             list: [
@@ -56,6 +54,12 @@ export default {
         firebase.auth().onAuthStateChanged((user) => {
             this.user = user; // Update the user data
         });
+    },
+
+    computed: {
+        isLoggedIn() {
+            return this.$store.state.isLoggedIn;
+        },
     },
     methods: {
         // logout() {

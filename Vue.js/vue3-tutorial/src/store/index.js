@@ -4,17 +4,21 @@ const store = createStore({
   state() {
     return {
       // Create data to pass through
-      isLoggedin: false,
-
-    }
+      isLoggedIn: false,
+      authUser: {},
+    };
   },
 
   // To change the value of the state
   mutations: {
-    setIsLoggedIn(state) {
-      state.isLoggedin = true;
+    setIsLoggedIn(state, payload) {
+      state.isLoggedIn = payload;
+    },
+
+    setAuthUser(state, payload) {
+      state.authUser = payload;
     }
   }
-})
+});
 
 export default store;
