@@ -18,9 +18,10 @@
 </template>
 
 <script>
-import { onMounted, reactive } from 'vue';
+import { onMounted, reactive, computed } from 'vue';
 import firebase, { chatsRef } from "../utilities/firebase";
 import 'firebase/database';
+import { useStore } from 'vuex';
 
 export default {
   setup() {
@@ -29,6 +30,9 @@ export default {
       message: "",
       userId: null,
     });
+
+    const store = useStore();
+    const user = computed(() => store.state.authUser);
 
     onMounted(async () => {
 
@@ -45,7 +49,7 @@ export default {
       state.message = "";
     }
 
-    return { state, addMessage };
+    return { state, addMessage, user };
   }
 
 };
