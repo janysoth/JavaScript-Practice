@@ -1,0 +1,32 @@
+h1 {
+  background: linear-gradient(skyblue, lightgreen);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+body {
+  background-image: url(Family_Photo.jpeg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}
+
+/* Margin = space AROUND an element, outside the border */
+/* Padding = space between the content and the border */
+
+#box1 {
+  border: 5px solid;
+  width: 250px;
+  font-size: 22px;
+  background: red;
+  margin-top: 50px;
+  margin-bottom: 50px;
+
+  /* Use the together, the elment will be center from left to right*/
+  /* Put the Element to the right  */
+  margin-left: auto;
+  /* Put the Element to the left */
+  margin-right: auto;
+
+}
