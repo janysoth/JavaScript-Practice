@@ -30,3 +30,24 @@ body {
   margin-right: auto;
 
 }
+
+/* float = positions an element to the left or right side of a container */
+/* ex: Popular for wrapping elements around images. */
+/* Images are inline element */
+/* Divs are block elements */
+
+.box {
+  width: 100px;
+  height: 100px;
+  border: 1px solid;
+  font-size: 40px;
+  text-align: center;
+  background: tomato;
+  float: left;
+}
+
+/* Use the clear property to stop the element from floating */
+/* Values: left, right, both */
+p {
+  clear: both;
+}
