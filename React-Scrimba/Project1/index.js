@@ -35,10 +35,20 @@ function Navbar() {
         </form>
       </div>
     </nav>
+  )
+};
+
+function MainContent() {
+  return (
+    <h1>I'm Learning React!</h1>
   );
+
 }
 
 ReactDOM.render(
-  <Navbar />,
+  <div>
+    <Navbar />
+    <MainContent />
+  </div>,
   document.getElementById("root")
 );
