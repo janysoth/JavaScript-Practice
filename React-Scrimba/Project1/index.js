@@ -45,10 +45,27 @@ function MainContent() {
 
 }
 
-ReactDOM.render(
-  <div>
-    <Navbar />
-    <MainContent />
-  </div>,
-  document.getElementById("root")
-);
+// ReactDOM.render(
+//   <div>
+//     <Navbar />
+//     <MainContent />
+//   </div>,
+//   document.getElementById("root")
+// );
+
+/* 
+Challenge - recreate the above line of code in vanilla JS by creating and
+appending an h1 to our div#root (without using innerHTML).
+*/
+
+// Create a new h1 element
+const h1 = document.createElement("h1");
+
+// Give it some textContent
+h1.textContent = "This is an imperative way to program";
+
+// Give it a class name of "header"
+h1.className = "header";
+
+// Append it as a child of the dive#root
+document.getElementById("root").append(h1);
