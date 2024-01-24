@@ -58,14 +58,26 @@ Challenge - recreate the above line of code in vanilla JS by creating and
 appending an h1 to our div#root (without using innerHTML).
 */
 
-// Create a new h1 element
-const h1 = document.createElement("h1");
+// // Create a new h1 element
+// const h1 = document.createElement("h1");
 
-// Give it some textContent
-h1.textContent = "This is an imperative way to program";
+// // Give it some textContent
+// h1.textContent = "This is an imperative way to program";
 
-// Give it a class name of "header"
-h1.className = "header";
+// // Give it a class name of "header"
+// h1.className = "header";
 
-// Append it as a child of the dive#root
-document.getElementById("root").append(h1);
+// // Append it as a child of the dive#root
+// document.getElementById("root").append(h1);
+
+// JSX
+const page = (
+  <div>
+    <h1 className="header">This is JSX</h1>
+    <p>This is a paragraph</p>
+  </div>
+)
+ReactDOM.render(
+  page,
+  document.getElementById("root")
+)
