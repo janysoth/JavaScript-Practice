@@ -42,4 +42,5 @@ const page = (
   </div>
 );
 
-document.getElementById("root").append(JSON.stringify(page));
+ReactDOM.render(page, document.getElementById("root"));
+// document.getElementById("root").append(JSON.stringify(page))
