@@ -12,7 +12,7 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
-import ReactLogo from './react-logo.png';
+// import ReactLogo from './react-logo.png';
 
 // const navbar = (
 //   <nav>
@@ -30,9 +30,10 @@ import ReactLogo from './react-logo.png';
 
 // ReactDOM.createRoot(document.getElementById("root")).render(navbar);
 
+// If the file is in public folder, only put "/"
 const page = (
   <div>
-    <img src={ReactLogo} width="40px" />
+    <img src="/react-logo.png" width="40px" alt="" />
     <h1>Fun Facts About React</h1>
     <ul>
       <li>Was first released in 2013</li>
