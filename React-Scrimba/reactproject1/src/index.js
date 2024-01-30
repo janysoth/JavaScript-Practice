@@ -33,7 +33,7 @@ import ReactDOM from "react-dom";
 // If the file is in public folder, only put "/"
 const page = (
   <div>
-    <img src="/react-logo.png" width="40px" alt="" />
+    <img src="/react-logo.png" width="40px" alt="React Log" />
     <h1>Fun Facts About React</h1>
     <ul>
       <li>Was first released in 2013</li>
