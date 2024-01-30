@@ -31,18 +31,21 @@ import ReactDOM from "react-dom";
 // ReactDOM.createRoot(document.getElementById("root")).render(navbar);
 
 // If the file is in public folder, only put "/"
-const page = (
-  <div>
-    <img src="/react-logo.png" width="40px" alt="React Log" />
-    <h1>Fun Facts About React</h1>
-    <ul>
-      <li>Was first released in 2013</li>
-      <li>Was originally created by Jordan Walke</li>
-      <li>Has well over 100K stars on GitHub</li>
-      <li>Is maintained by Facebook</li>
-      <li>Powers thousands of enterprise apps, including mobile apps</li>
-    </ul>
-  </div>
-);
 
-ReactDOM.render(page, document.getElementById("root"));
+function TemporaryName() {
+  return (
+    <div>
+      <img src="./react-logo.png" width="40px" />
+      <h1>Fun facts about React</h1>
+      <ul>
+        <li>Was first released in 2013</li>
+        <li>Was originally created by Jordan Walke</li>
+        <li>Has well over 100K stars on GitHub</li>
+        <li>Is maintained by Facebook</li>
+        <li>Powers thousands of enterprise apps, including mobile apps</li>
+      </ul>
+    </div>
+  )
+};
+
+ReactDOM.render(<TemporaryName />, document.getElementById("root"));
