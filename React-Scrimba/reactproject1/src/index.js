@@ -32,20 +32,18 @@ import ReactDOM from "react-dom";
 
 // If the file is in public folder, only put "/"
 
-function TemporaryName() {
+function CustomPage() {
   return (
     <div>
       <img src="./react-logo.png" width="40px" />
-      <h1>Fun facts about React</h1>
+      <h1>Reasons why I'm excited to learn React</h1>
       <ul>
-        <li>Was first released in 2013</li>
-        <li>Was originally created by Jordan Walke</li>
-        <li>Has well over 100K stars on GitHub</li>
-        <li>Is maintained by Facebook</li>
-        <li>Powers thousands of enterprise apps, including mobile apps</li>
+        <li>Well known language</li>
+        <li>Used by most of the companies in the industry</li>
+        <li>Able to create custom component.</li>
       </ul>
     </div>
   )
 };
 
-ReactDOM.render(<TemporaryName />, document.getElementById("root"));
+ReactDOM.render(<CustomPage />, document.getElementById("root"));
