@@ -35,13 +35,21 @@ import ReactDOM from "react-dom";
 function CustomPage() {
   return (
     <div>
-      <img src="./react-logo.png" width="40px" />
+      <header>
+        <nav>
+          <img src="/react-logo.png" width="40px" alt="React Logo" />
+        </nav>
+      </header>
       <h1>Reasons why I'm excited to learn React</h1>
-      <ul>
-        <li>Well known language</li>
-        <li>Used by most of the companies in the industry</li>
-        <li>Able to create custom component.</li>
-      </ul>
+      <ol>
+        <li>It's a popular library, so I'll be
+          able to fit in with the cool kids!</li>
+        <li>I'm more likely to get a job as a developer
+          if I know React</li>
+      </ol>
+      <footer>
+        <small>© 2024, Jonny Vorn Soth Development. All Rights Reserved.</small>
+      </footer>
     </div>
   )
 };
