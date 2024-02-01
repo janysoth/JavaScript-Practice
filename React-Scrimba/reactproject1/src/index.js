@@ -35,11 +35,16 @@ import ReactDOM from "react-dom";
 function CustomPage() {
   return (
     <div>
-      <header>
-        <nav>
-          <img src="/react-logo.png" width="40px" alt="React Logo" />
-        </nav>
-      </header>
+      <Header />
+      <MainContent />
+      <Footer />
+    </div>
+  )
+};
+
+function MainContent() {
+  return (
+    <div>
       <h1>Reasons why I'm excited to learn React</h1>
       <ol>
         <li>It's a popular library, so I'll be
@@ -47,11 +52,26 @@ function CustomPage() {
         <li>I'm more likely to get a job as a developer
           if I know React</li>
       </ol>
-      <footer>
-        <small>© 2024, Jonny Vorn Soth Development. All Rights Reserved.</small>
-      </footer>
     </div>
-  )
+  );
+};
+
+function Header() {
+  return (
+    <header>
+      <nav>
+        <img src="/react-logo.png" width="40px" alt="React Logo" />
+      </nav>
+    </header>
+  );
+};
+
+function Footer() {
+  return (
+    <footer>
+      <small>© 2024, Jonny Vorn Soth Development. All Rights Reserved.</small>
+    </footer>
+  );
 };
 
 ReactDOM.render(<CustomPage />, document.getElementById("root"));
