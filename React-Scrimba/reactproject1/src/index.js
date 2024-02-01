@@ -59,8 +59,13 @@ function MainContent() {
 function Header() {
   return (
     <header>
-      <nav>
-        <img src="/react-logo.png" width="40px" alt="React Logo" />
+      <nav className="nav">
+        <img src="/react-logo.png" alt="React Logo" className="nav-logo" />
+        <ul className="nav-items">
+          <li>Pricing</li>
+          <li>About</li>
+          <li>Contact</li>
+        </ul>
       </nav>
     </header>
   );
