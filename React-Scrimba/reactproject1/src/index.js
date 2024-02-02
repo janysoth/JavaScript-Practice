@@ -12,6 +12,9 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
+import Header from "./Header";
+import MainContent from "./MainContent";
+import Footer from "./Footer";
 // import ReactLogo from './react-logo.png';
 
 // const navbar = (
@@ -40,43 +43,6 @@ function CustomPage() {
       <Footer />
     </div>
   )
-};
-
-function MainContent() {
-  return (
-    <div>
-      <h1>Reasons why I'm excited to learn React</h1>
-      <ol>
-        <li>It's a popular library, so I'll be
-          able to fit in with the cool kids!</li>
-        <li>I'm more likely to get a job as a developer
-          if I know React</li>
-      </ol>
-    </div>
-  );
-};
-
-function Header() {
-  return (
-    <header>
-      <nav className="nav">
-        <img src="/react-logo.png" alt="React Logo" className="nav-logo" />
-        <ul className="nav-items">
-          <li>Pricing</li>
-          <li>About</li>
-          <li>Contact</li>
-        </ul>
-      </nav>
-    </header>
-  );
-};
-
-function Footer() {
-  return (
-    <footer>
-      <small>© 2024, Jonny Vorn Soth Development. All Rights Reserved.</small>
-    </footer>
-  );
 };
 
 ReactDOM.render(<CustomPage />, document.getElementById("root"));
