@@ -1,11 +1,13 @@
+import React  from "react"
 import reactLogo from "../assets/react.svg";
 
 function NavBar () {
   return (
-    <div>
+    <nav>
       <img src={reactLogo} className="logo"/>
-      <h1>NavBar goes here</h1>
-    </div>
+      <h3>ReacFacts</h3>
+      <h4>React Course - Project 1</h4>
+    </nav>
   )
 }
 
