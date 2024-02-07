@@ -62,3 +62,9 @@ main {
   line-height: 19px;
   padding-block: 10px;
 }
+
+/* ::marker use select all of bullets from the unordered list */
+.main--facts>li::marker {
+  color: #61DAFB;
+  font-size: 1.4em;
+}
