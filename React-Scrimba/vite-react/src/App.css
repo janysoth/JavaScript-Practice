@@ -42,9 +42,14 @@ nav {
   margin-right: 7px;
 }
 
+/* Can combine those 3 background properties into one using background follow by a space for each. */
 main {
   padding: 57px 27px;
   color: white;
+  /* background-image: url(./assets/react-icon-large.png);
+  background-repeat: no-repeat;
+  background-position: right 75%; */
+  background: url(./assets/react-icon-large.png) no-repeat right 75%;
 }
 
 .main--title {
