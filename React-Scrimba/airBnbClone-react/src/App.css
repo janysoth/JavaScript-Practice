@@ -18,6 +18,12 @@ body {
   font-weight: bold;
 }
 
+/* use rem instead of px so the browser can size accordingly */
+h2 {
+  font-size: 0.75rem;
+  font-weight: normal;
+}
+
 nav {
   height: 70px;
   display: flex;
@@ -53,7 +59,8 @@ section {
 
 .card {
   width: 175px;
-  font-size: 12px;
+  font-size: .75rem;
+  padding: 0 10px;
 }
 
 .card--image {
