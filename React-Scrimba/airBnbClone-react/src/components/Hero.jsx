@@ -1,4 +1,3 @@
-import React from "react"
 import photoGrid from "../assets/photo-grid.png"
 
 function Hero () {
