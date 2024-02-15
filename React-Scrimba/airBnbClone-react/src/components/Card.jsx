@@ -3,7 +3,7 @@ function Card (props) {
   return (
     <div className="card">
         <img 
-            src={`./assets/${props.img}`}
+            src={props.img}
             className="card--image"
             alt="Main Card Image" 
         />
