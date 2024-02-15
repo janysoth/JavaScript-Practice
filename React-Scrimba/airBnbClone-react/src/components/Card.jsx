@@ -1,11 +1,9 @@
-import katieZPhoto from "../assets/katie-zaferes.png"
-import star from "../assets/star.png"
 
 function Card (props) {
   return (
     <div className="card">
         <img 
-            src={props.img} 
+            src={`./assets/${props.img}`}
             className="card--image"
             alt="Main Card Image" 
         />
