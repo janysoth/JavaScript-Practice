@@ -3,13 +3,13 @@ function Card (props) {
   return (
     <div className="card">
         <img 
-            src={props.img}
+            src={`/images/${props.img}`}
             className="card--image"
             alt="Main Card Image" 
         />
         <div className="card--stats">
           <img 
-              src={props.star} 
+              src={`/images/${props.star}`}
               className="card--star"
               alt="Star Icon"
           />
