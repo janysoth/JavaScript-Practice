@@ -17,22 +17,24 @@ function App() {
             />
   })
 
-  const cardsElement = cardData.map(data => {
+  const cards = cardData.map(item => {
     return <Card 
-              img={data.coverImg}
+              img={item.coverImg}
               star="star.png"
-              rating={data.stats.rating}
-              reviewCount={data.stats.reviewCount}
-              location={data.location}
-              title={data.title}
-              price={data.price}
+              rating={item.stats.rating}
+              reviewCount={item.stats.reviewCount}
+              location={item.location}
+              title={item.title}
+              price={item.price}
             />
   })
   return (
     <div>
       <NavBar />
       <Hero />
-      {cardsElement}
+      <section className="cards-list">
+        {cards}
+      </section>
     </div>
   )
 }
