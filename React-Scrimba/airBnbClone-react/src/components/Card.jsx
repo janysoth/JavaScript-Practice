@@ -14,8 +14,8 @@ function Card (props) {
               alt="Star Icon"
           />
           <span>{props.rating}</span>
-          <span className="gray">({props.reviewCount}) • </span>
-          <span className="gray">{props.country}</span>
+          <span className="gray">({props.reviewCount}) • {props.location}</span>
+          {/* <span className="gray">{props.location}</span> */}
         </div>
         <h2>{props.title}</h2>
         <p><span className="bold">From ${props.price}</span> / person</p>

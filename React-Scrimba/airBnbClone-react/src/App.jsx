@@ -4,6 +4,7 @@ import Hero from "./components/Hero"
 import Card from "./components/Card"
 import Jokes from "./components/Jokes"
 import jokesData from './assets/jokesData'
+import cardData from './assets/data'
 
 // import katieZPhoto from "./assets/katie-zaferes.png"
 // import star from "./assets/star.png"
@@ -15,20 +16,23 @@ function App() {
               punchline={joke.punchline}
             />
   })
+
+  const cardsElement = cardData.map(data => {
+    return <Card 
+              img={data.coverImg}
+              star="star.png"
+              rating={data.stats.rating}
+              reviewCount={data.stats.reviewCount}
+              location={data.location}
+              title={data.title}
+              price={data.price}
+            />
+  })
   return (
     <div>
       <NavBar />
       <Hero />
-      <Card 
-        img= "katie-zaferes.png"
-        rating={5}
-        reviewCount={6}
-        country="USA"
-        star= "star.png"
-        title= "Life Lessons with Katie Zaferes"
-        price={136}
-      />
-      {jokesElement}
+      {cardsElement}
     </div>
   )
 }
