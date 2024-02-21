@@ -10,15 +10,9 @@ import cardData from './assets/data'
 // import star from "./assets/star.png"
 
 function App() {
-  const jokesElement = jokesData.map(joke => {
-    return <Jokes 
-              setup={joke.setup}
-              punchline={joke.punchline}
-            />
-  })
-
   const cards = cardData.map(item => {
-    return <Card 
+    return <Card
+              key={item.id}
               img={item.coverImg}
               star="star.png"
               rating={item.stats.rating}
@@ -26,6 +20,7 @@ function App() {
               location={item.location}
               title={item.title}
               price={item.price}
+              openSpots= {item.openSpots}
             />
   })
   return (
