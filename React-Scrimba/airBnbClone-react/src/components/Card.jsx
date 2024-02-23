@@ -1,16 +1,16 @@
 
 function Card (props) {
   let badgeText
-  if (props.item.openSpots === 0)
+  if (props.openSpots === 0)
     badgeText = "SOLD OUT"
-  else if (props.item.location === "Online")
+  else if (props.location === "Online")
     badgeText = "ONLINE"
 
   return (
     <div className="card">
         {badgeText && <div className="card--badge">{badgeText}</div>}
         <img 
-            src={`/images/${props.item.coverImg}`}
+            src={`/images/${props.coverImg}`}
             className="card--image"
             alt="Main Card Image" 
         />
@@ -20,12 +20,12 @@ function Card (props) {
               className="card--star"
               alt="Star Icon"
           />
-          <span>{props.item.stats.rating}</span>
-          <span className="gray">({props.item.stats.reviewCount}) • {props.item.location}</span>
+          <span>{props.stats.rating}</span>
+          <span className="gray">({props.stats.reviewCount}) • {props.location}</span>
           {/* <span className="gray">{props.location}</span> */}
         </div>
-        <h2>{props.item.title}</h2>
-        <p><span className="bold">From ${props.item.price}</span> / person</p>
+        <h2>{props.title}</h2>
+        <p><span className="bold">From ${props.price}</span> / person</p>
     </div>
   )
 }
