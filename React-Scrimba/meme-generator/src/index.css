@@ -57,3 +57,10 @@ main {
   border: none;
   cursor: pointer;
 }
+
+.form--input-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  /* Optional: Add some spacing between input containers */
+}
