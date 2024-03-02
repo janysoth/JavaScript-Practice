@@ -4,12 +4,12 @@ function Practice () {
     let [count, setCount] = React.useState(0)
     
     function add (){
-      setCount(count + 1)
+      setCount(prevCount =>  prevCount + 1)
     }
 
     function minus(){
       if (count > 0)
-      setCount(count - 1)
+      setCount(prevCount =>  prevCount -1 )
       else
       setCount(count = 0)
     }
