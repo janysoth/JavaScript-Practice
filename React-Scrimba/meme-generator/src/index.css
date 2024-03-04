@@ -65,6 +65,10 @@ main {
   /* Optional: Add some spacing between input containers */
 }
 
+.meme--image {
+  max-width: 100%;
+}
+
 /* Styles for Practice.jsx */
 
 .counter {
