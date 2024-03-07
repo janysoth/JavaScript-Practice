@@ -9,7 +9,7 @@ function Practice () {
         isFavorite: true
     })
 
-    let starIcon = contact.isFavorite ? '../images/star-filled.png' : '../images/star-empty.png'
+    let starIcon = contact.isFavorite ? 'star-filled.png' : 'star-empty.png'
 
     function toggleFavorite() {
         console.log('Favorite')
@@ -21,7 +21,7 @@ function Practice () {
                 <img src="./images/user.png" className="card--image" />
                 <div className="card--info">
                     <img 
-                        src={starIcon} 
+                        src={`../images/${starIcon}`} 
                         className="card--favorite"
                         onClick={toggleFavorite}
                     />
