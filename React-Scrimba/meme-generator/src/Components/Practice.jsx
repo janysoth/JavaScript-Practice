@@ -1,44 +1,39 @@
 import React from "react"
 
-// function Practice () {
-//     let [count, setCount] = React.useState(0)
-    
-//     function add (){
-//       setCount(prevCount =>  prevCount + 1)
-//     }
-
-//     function minus(){
-//       if (count > 0)
-//       setCount(prevCount =>  prevCount -1 )
-//       else
-//       setCount(count = 0)
-//     }
-//     return (
-//         <div className="counter">
-//             <button className="counter--minus" onClick={minus}>–</button>
-//             <div className="counter--count">
-//                 <h1>{count}</h1>
-//             </div>
-//             <button className="counter--plus" onClick={add}>+</button>
-//         </div>
-//     )
-// }
-
 function Practice () {
+    const [contact, setContact] = React.useState({
+        firstName: "John",
+        lastName: "Doe",
+        phone: "+1 (719) 555-1212",
+        email: "itsmyrealname@example.com",
+        isFavorite: true
+    })
 
-    const [isGoingOut, setIsGoingOut] = React.useState(true);
+    let starIcon = contact.isFavorite ? '../images/star-filled.png' : '../images/star-empty.png'
 
-    function changeMind(){
-      setIsGoingOut(prevState => !prevState)
+    function toggleFavorite() {
+        console.log('Favorite')
     }
-
+    
     return (
-        <div className="state">
-            <h1 className="state--title">Do I feel like going out tonight?</h1>
-            <button onClick={changeMind} className="state--value">
-                {isGoingOut ? "Yes" : "No"}
-            </button>
-        </div>
+        <main>
+            <article className="card">
+                <img src="./images/user.png" className="card--image" />
+                <div className="card--info">
+                    <img 
+                        src={starIcon} 
+                        className="card--favorite"
+                        onClick={toggleFavorite}
+                    />
+                    <h2 className="card--name">
+                        {contact.firstName} {contact.lastName}
+                    </h2>
+                    <p className="card--contact">{contact.phone}</p>
+                    <p className="card--contact">{contact.email}</p>
+                </div>
+                
+            </article>
+        </main>
     )
 }
 

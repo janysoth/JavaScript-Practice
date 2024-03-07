@@ -5,8 +5,8 @@ function App() {
 
   return (
     <div>
-      <Header />
-      <Meme /> 
+      {/* <Header />
+      <Meme />  */}
       <Practice />
     </div>
   )
