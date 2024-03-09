@@ -71,7 +71,7 @@ main {
 
 /* Styles for Practice.jsx */
 
-body {
+/* body {
   background-color: whitesmoke;
   margin: 0;
   font-family: "Inter", sans-serif;
@@ -82,7 +82,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
 
 .card {
   width: 200px;
