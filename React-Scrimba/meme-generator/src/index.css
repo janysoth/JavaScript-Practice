@@ -120,4 +120,14 @@ main {
   margin-block: 7px;
 }
 
+.card--favorite--button {
+  border: none;
+  background: transparent;
+}
+
+.card--favorite-button:active {
+  transform: none;
+  box-shadow: none;
+}
+
 /*-------------------------*/
