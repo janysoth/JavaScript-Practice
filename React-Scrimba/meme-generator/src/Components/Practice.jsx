@@ -55,9 +55,9 @@ function Practice () {
     const squareElements = squares.map(square => (
         <Box 
             key={square.id} 
-            id={square.id}
             on={square.on} 
-            toggle={toggleOn}
+            // toggle={toggleOn}
+            toggle={()=> toggleOn(square.id)}
         />
     ))
     

@@ -7,7 +7,7 @@ function Box (box) {
         <div 
             style={styles} 
             className="box"
-            onClick={() => box.toggle(box.id)}
+            onClick={box.toggle}
         >
         </div>
     )
