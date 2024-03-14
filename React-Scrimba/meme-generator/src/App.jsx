@@ -4,11 +4,11 @@ import Practice from "./Components/Practice"
 function App() {
 
   return (
-    <div>
+    <button>
       {/* <Header />
       <Meme />  */}
       <Practice />
-    </div>
+    </button>
   )
 }
 
