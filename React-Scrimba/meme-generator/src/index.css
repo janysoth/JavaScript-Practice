@@ -62,7 +62,7 @@ main {
   display: flex;
   flex-direction: column;
   margin-bottom: 15px;
-  /* Optional: Add some spacing between input containers */
+  /* Optional: Add some spacing between input containers
 }
 
 .meme--image {
@@ -159,7 +159,8 @@ input[type="email"] {
   display: block;
 }
 
-input[type="checkbox"] {
+input[type="checkbox"],
+input[type="radio"] {
   margin-right: 0.75rem;
 }
 
