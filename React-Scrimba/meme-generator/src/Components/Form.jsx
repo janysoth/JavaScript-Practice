@@ -5,6 +5,7 @@ export default function Form() {
       firstName: "",
       lastName: "",
       email: "",
+      comments: "",
     })
     
     console.log(formData)
@@ -40,6 +41,12 @@ export default function Form() {
                   onChange={handleChange}
                   name="email"
                   value={formData.email}
+              />
+              <textarea 
+                  placeholder="Please leave your comment here..."
+                  onChange={handleChange}
+                  name="comments"
+                  value={formData.comments}
               />
           </form>
           <h2>First Name: {formData.firstName}</h2>
