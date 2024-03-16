@@ -130,10 +130,6 @@ main {
   box-shadow: none;
 }
 
-* {
-  box-sizing: border-box;
-}
-
 .box {
   height: 100px;
   width: 100px;
@@ -143,9 +139,24 @@ main {
   border-radius: 5px;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+
+
 body {
   margin: 0;
   padding: 20px;
+}
+
+input {
+  margin-bottom: 15px;
+  height: 30px;
+  text-indent: 10px;
+  border: 1px solid #444;
+  border-radius: 5px;
+  display: block;
 }
 
 /*-------------------------*/
