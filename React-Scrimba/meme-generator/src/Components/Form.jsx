@@ -22,12 +22,22 @@ export default function App() {
     event.preventDefault()
   }
 
-  const [formData, setformData] = React.useState({
+  const [formData, setFormData] = React.useState({
     email: "",
     password: "",
-    confirmPassword: "",
-    joinNewsletter: true,
+    passwordConfirm: "",
+    joinedNewsletter: true,
   })
+
+  function handleChange(event) {
+    const { name, value, type, checked } = event.target
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      [name]: type === "checkbox" ? checked : value
+    }))
+  }
+
+  console.log(formData)
 
   return (
     <div className="form-container">
@@ -36,23 +46,34 @@ export default function App() {
           type="email"
           placeholder="Email address"
           className="form--input"
+          name="email"
+          onChange={handleChange}
+          value={formData.email}
         />
         <input
           type="password"
           placeholder="Password"
           className="form--input"
+          name="password"
+          onChange={handleChange}
+          value={formData.password}
         />
         <input
           type="password"
           placeholder="Confirm password"
           className="form--input"
+          name="passwordConfirm"
+          onChange={handleChange}
+          value={formData.passwordConfirm}
         />
 
         <div className="form--marketing">
           <input
             id="okayToEmail"
             type="checkbox"
-
+            name="joinedNewsletter"
+            onChange={handleChange}
+            checked={formData.joinedNewsletter}
           />
           <label htmlFor="okayToEmail">I want to join the newsletter</label>
         </div>
