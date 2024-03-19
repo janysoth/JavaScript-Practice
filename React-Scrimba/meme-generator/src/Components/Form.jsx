@@ -22,6 +22,13 @@ export default function App() {
     event.preventDefault()
   }
 
+  const [formData, setformData] = React.useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+    joinNewsletter: true,
+  })
+
   return (
     <div className="form-container">
       <form className="form" onSubmit={handleSubmit}>
