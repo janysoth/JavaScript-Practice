@@ -5,12 +5,12 @@ import Form from "./Components/Form"
 function App() {
 
   return (
-    <button>
+    <div>
       {/* <Header />
       <Meme />  */}
       {/* <Practice /> */}
       <Form />
-    </button>
+    </div>
   )
 }
 

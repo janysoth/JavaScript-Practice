@@ -1,137 +1,60 @@
 import React from "react"
 
-export default function Form() {
-  const [formData, setFormData] = React.useState(
-    {
-      firstName: "",
-      lastName: "",
-      email: "",
-      comments: "",
-      isFriendly: true,
-      employment: "",
-      favColor: "",
-    }
-  )
+export default function App() {
 
-  const id = React.useId()
-
-  function handleChange(event) {
-    const { name, value, type, checked } = event.target
-    setFormData(prevFormData => {
-      return {
-        ...prevFormData,
-        [name]: type === "checkbox" ? checked : value
-      }
-    })
-  }
+  /**
+   * Challenge: Connect the form to local state
+   * 
+   * 1. Create a state object to store the 4 values we need to save.
+   * 2. Create a single handleChange function that can
+   *    manage the state of all the inputs and set it up
+   *    correctly
+   * 3. When the user clicks "Sign up", check if the 
+   *    password & confirmation match each other. If
+   *    so, log "Successfully signed up" to the console.
+   *    If not, log "passwords to not match" to the console.
+   * 4. Also when submitting the form, if the person checked
+   *    the "newsletter" checkbox, log "Thanks for signing
+   *    up for our newsletter!" to the console.
+   */
 
   function handleSubmit(event) {
     event.preventDefault()
-    console.log(formData)
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor={id + "-firstName"}>First Name</label>
-      <input
-        type="text"
-        onChange={handleChange}
-        name="firstName"
-        value={formData.firstName}
-        id={id + "-firstName"}
-      />
-      <label htmlFor={id + "-lastName"}>Last Name</label>
-      <input
-        type="text"
-        onChange={handleChange}
-        name="lastName"
-        value={formData.lastName}
-        id={id + "-lastName"}
-      />
-      <label htmlFor={id+ "-email"}>Emal Address</label>
-      <input
-        type="email"
-        onChange={handleChange}
-        name="email"
-        value={formData.email}
-        id={id+ "-email"}
-      />
-      <label htmlFor={id + "-comments"}>Comments</label>
-      <textarea
-        onChange={handleChange}
-        name="comments"
-        value={formData.comments}
-        id={id + "-comments"}
-      />
-      <input
-        type="checkbox"
-        id={id + "-isFriendly"}
-        checked={formData.isFriendly}
-        onChange={handleChange}
-        name="isFriendly"
-      />
-      <label htmlFor={id + "-isFriedly"}>Are you friendly?</label>
-      <br />
-      <br />
-
-      <fieldset>
-        <legend>Current employment status</legend>
-
+    <div className="form-container">
+      <form className="form" onSubmit={handleSubmit}>
         <input
-          type="radio"
-          id={id + "-unemployed"}
-          name="employment"
-          value="Unemployed"
-          checked={formData.employment === "Unemployed"}
-          onChange={handleChange}
+          type="email"
+          placeholder="Email address"
+          className="form--input"
         />
-        <label htmlFor={id + "-unemployed"}>Unemployed</label>
-        <br />
-
         <input
-          type="radio"
-          id={id + "-part-time"}
-          name="employment"
-          value="Part-Time"
-          checked={formData.employment === "Part-Time"}
-          onChange={handleChange}
+          type="password"
+          placeholder="Password"
+          className="form--input"
         />
-        <label htmlFor={id + "-part-time"}>Part-time</label>
-        <br />
-
         <input
-          type="radio"
-          id={id + "-full-time"}
-          name="employment"
-          value="Full-Time"
-          checked={formData.employment === "Full-Time"}
-          onChange={handleChange}
+          type="password"
+          placeholder="Confirm password"
+          className="form--input"
         />
-        <label htmlFor={id + "-full-time"}>Full-time</label>
-        <br />
 
-      </fieldset>
+        <div className="form--marketing">
+          <input
+            id="okayToEmail"
+            type="checkbox"
 
-      <label htmlFor="favColor">What is your favorite color?</label>
-      <br />
-      <select 
-        id={id + "-favColor"}
-        value={formData.favColor}
-        onChange={handleChange}
-        name="favColor"
-      >
-        <option value="">-- Choose --</option>
-        <option value="red">Red</option>
-        <option value="orange">Orange</option>
-        <option value="yellow">Yellow</option>
-        <option value="green">Green</option>
-        <option value="blue">Blue</option>
-        <option value="indigo">Indigo</option>
-        <option value="violet">Violet</option>
-      </select>
-      <br/ >
-      <br/ >
-      <button>Submit</button>
-    </form>
+          />
+          <label htmlFor="okayToEmail">I want to join the newsletter</label>
+        </div>
+        <button
+          className="form--submit"
+        >
+          Sign up
+        </button>
+      </form>
+    </div>
   )
 }
