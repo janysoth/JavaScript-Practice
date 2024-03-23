@@ -7,11 +7,11 @@ function App() {
 
   return (
     <div>
-      {/* <Header />
-      <Meme /> */}
+      <Header />
+      <Meme />
       {/* <Practice /> */}
       {/* <Form /> */}
-      <ApiCall />
+      {/* <ApiCall /> */}
 
     </div>
   )
