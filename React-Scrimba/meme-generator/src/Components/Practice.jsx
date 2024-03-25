@@ -1,6 +1,7 @@
 import React from "react"
-import boxes from "../assets/boxes"
-import Box from "./Box"
+// import boxes from "../assets/boxes"
+// import Box from "./Box"
+import WindowTracker from "./WindowTracker";
 // import Star from "./Star";
 // import Header from "./Header"
 // import Body from "./Body"
@@ -41,30 +42,47 @@ import Box from "./Box"
 //     )
 // }
 
+// function Practice () {
+//     const [squares, setSquares] = React.useState(boxes)
+    
+//     const toggleOn = (id) => {
+//         setSquares(prevSquares => {
+//             return prevSquares.map(square => {
+//                 return square.id === id ? {...square, on: !square.on} : square
+//             })
+//         })
+//     }
+    
+//     const squareElements = squares.map(square => (
+//         <Box 
+//             key={square.id} 
+//             on={square.on} 
+//             // toggle={toggleOn}
+//             toggle={()=> toggleOn(square.id)}
+//         />
+//     ))
+    
+//     return (
+//         <main>
+//             {squareElements}
+//         </main>
+//     )
+// }
+
 function Practice () {
-    const [squares, setSquares] = React.useState(boxes)
-    
-    const toggleOn = (id) => {
-        setSquares(prevSquares => {
-            return prevSquares.map(square => {
-                return square.id === id ? {...square, on: !square.on} : square
-            })
-        })
+    const [show, setShow] = React.useState(true)
+
+    const toggle = () => {
+        setShow(prevShow => !prevShow)
     }
-    
-    const squareElements = squares.map(square => (
-        <Box 
-            key={square.id} 
-            on={square.on} 
-            // toggle={toggleOn}
-            toggle={()=> toggleOn(square.id)}
-        />
-    ))
-    
+
     return (
-        <main>
-            {squareElements}
-        </main>
+        <div className="container">
+            <button onClick={toggle}>
+                Toggle WindowTracker
+            </button>
+            {show && <WindowTracker/>}
+        </div>
     )
 }
 
