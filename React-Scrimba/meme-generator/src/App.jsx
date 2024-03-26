@@ -1,5 +1,5 @@
-// import Header from "./Components/Header"
-// import Meme from "./Components/Meme"
+import Header from "./Components/Header"
+import Meme from "./Components/Meme"
 // import ApiCall from "./Components/apiCall"
 // import WindowTracker from "./Components/WindowTracker";
 // import Form from "./Components/Form"
@@ -8,9 +8,9 @@ function App() {
 
   return (
     <div>
-      {/* <Header />
-      <Meme /> */}
-      <Practice />
+      <Header />
+      <Meme />
+      {/* <Practice /> */}
       {/* <Form /> */}
       {/* <ApiCall /> */}
     </div>

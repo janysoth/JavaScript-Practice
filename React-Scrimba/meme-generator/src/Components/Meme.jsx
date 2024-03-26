@@ -12,10 +12,19 @@ function Meme() {
 
   const [allMemes, setAllMemes] = React.useState([])
 
+  // React.useEffect(() => {
+  //   fetch(api)
+  //     .then(res => res.json())
+  //     .then(data => setAllMemes(data.data.memes))
+  // }, [])
+
   React.useEffect(() => {
-    fetch(api)
-    .then(res => res.json())
-    .then(data=> setAllMemes(data.data.memes))
+    async function getMemes() {
+      const res = await fetch(api)
+      const data = await res.json()
+      setAllMemes(data.data.memes)
+    }
+    getMemes()
   }, [])
 
   function getMemeImage() {

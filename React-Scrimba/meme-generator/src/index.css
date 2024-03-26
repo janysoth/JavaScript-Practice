@@ -1,4 +1,4 @@
-/* * {
+* {
   box-sizing: border-box;
 }
 
@@ -99,7 +99,7 @@ main {
 
 .top {
   top: 0;
-} */
+}
 
 /* Styles for Practice.jsx */
 
@@ -234,7 +234,7 @@ body {
   margin-right: 10px;
 } */
 
-* {
+/* * {
   box-sizing: border-box;
 }
 
@@ -259,6 +259,6 @@ button {
 
 h1 {
   text-align: center;
-}
+} */
 
 /*-------------------------*/
