@@ -18,8 +18,12 @@ export default function App() {
   )
 
   const [currentNoteId, setCurrentNoteId] = React.useState(
-    (notes[0] && notes[0].id) || ""
+    // (notes[0] && notes[0].id) || ""
+    notes[0]?.id || ""
   )
+
+  const currentNote =  notes.find(note => note.id === currentNoteId
+    ) || notes[0]
     
   // Every time the `notes` array changes, save it 
   // in localStorage.You'll need to use JSON.stringify()
@@ -80,11 +84,6 @@ export default function App() {
     event.stopPropagation()
     setNotes(oldNotes => oldNotes.filter(note => note.id !== noteId))
   }
-  function findCurrentNote() {
-    return notes.find(note => {
-      return note.id === currentNoteId
-    }) || notes[0]
-  }
 
   return (
     <main>
@@ -98,7 +97,7 @@ export default function App() {
           >
             <Sidebar
               notes={notes}
-              currentNote={findCurrentNote()}
+              currentNote={currentNote}
               setCurrentNoteId={setCurrentNoteId}
               newNote={createNewNote}
               deleteNote={deleteNote}
@@ -107,7 +106,7 @@ export default function App() {
               currentNoteId &&
               notes.length > 0 &&
               <Editor
-                currentNote={findCurrentNote()}
+                currentNote={currentNote}
                 updateNote={updateNote}
               />
             }
