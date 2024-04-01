@@ -1,7 +1,6 @@
 import React from "react"
 import Sidebar from "./components/Sidebar"
 import Editor from "./components/Editor"
-import { data } from "./assets/data"
 import Split from "react-split"
 import { nanoid } from "nanoid"
 
@@ -22,7 +21,6 @@ export default function App() {
     (notes[0] && notes[0].id) || ""
   )
     
-
   // Every time the `notes` array changes, save it 
   // in localStorage.You'll need to use JSON.stringify()
   // to turn the array into a string to save in localStorage.
