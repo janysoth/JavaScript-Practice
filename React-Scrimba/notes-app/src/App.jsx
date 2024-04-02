@@ -3,6 +3,8 @@ import Sidebar from "./components/Sidebar"
 import Editor from "./components/Editor"
 import Split from "react-split"
 import { nanoid } from "nanoid"
+import { onSnapshot } from "firebase/firestore"
+import { notesCollection } from "./firebase"
 
 export default function App() {
 
@@ -22,15 +24,24 @@ export default function App() {
     notes[0]?.id || ""
   )
 
-  const currentNote =  notes.find(note => note.id === currentNoteId
-    ) || notes[0]
-    
+  const currentNote = notes.find(note => note.id === currentNoteId
+  ) || notes[0]
+
   // Every time the `notes` array changes, save it 
   // in localStorage.You'll need to use JSON.stringify()
   // to turn the array into a string to save in localStorage.
+  // React.useEffect(() => {
+  //   localStorage.setItem("notes", JSON.stringify(notes))
+  // }, [notes])
+
   React.useEffect(() => {
-    localStorage.setItem("notes", JSON.stringify(notes))
-  }, [notes])
+    const unsubscribed = onSnapshot(notesCollection, function () {
+      // Sync up our local notes array with the snapshot data
+    })
+
+    // Return the function to clean any side effect
+    return unsubscribed
+  }, [])
 
   function createNewNote() {
     const newNote = {
@@ -67,20 +78,20 @@ export default function App() {
   function updateNote(text) {
     setNotes(oldNotes => {
       const updateNotes = oldNotes.map(oldNote => {
-        if(oldNote.id === currentNoteId) {
-          return {...oldNote, body: text}
+        if (oldNote.id === currentNoteId) {
+          return { ...oldNote, body: text }
         }
         return oldNote
       })
-      
+
       // Use the find function to get the recetly updated note
       // Then use the filter function to put the rest of notes back in order
-      return [updateNotes.find(note => note.id === currentNoteId), 
-        ...updateNotes.filter(note => note.id !== currentNoteId)]
+      return [updateNotes.find(note => note.id === currentNoteId),
+      ...updateNotes.filter(note => note.id !== currentNoteId)]
     })
   }
 
-  function deleteNote(event, noteId){
+  function deleteNote(event, noteId) {
     event.stopPropagation()
     setNotes(oldNotes => oldNotes.filter(note => note.id !== noteId))
   }
