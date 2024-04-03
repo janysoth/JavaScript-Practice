@@ -3,7 +3,7 @@ import Sidebar from "./components/Sidebar"
 import Editor from "./components/Editor"
 import Split from "react-split"
 import { nanoid } from "nanoid"
-import { onSnapshot } from "firebase/firestore";
+import { onSnapshot } from "firebase/firestore"
 import { notesCollection } from "./firebase"
 
 export default function App() {
@@ -35,7 +35,7 @@ export default function App() {
   // }, [notes])
 
   React.useEffect(() => {
-    const unsubscribed = onSnapshot(notesCollection, function () {
+    const unsubscribed = onSnapshot(notesCollection, function (snapshot) {
       // Sync up our local notes array with the snapshot data
       const notesArr = snapshot.doc.map(doc => ({
         ...doc.data(),
