@@ -2,8 +2,7 @@ import React from "react"
 import Sidebar from "./components/Sidebar"
 import Editor from "./components/Editor"
 import Split from "react-split"
-import { nanoid } from "nanoid"
-import { onSnapshot } from "firebase/firestore"
+import { onSnapshot, addDoc } from "firebase/firestore"
 import { notesCollection } from "./firebase"
 
 export default function App() {
@@ -12,12 +11,11 @@ export default function App() {
   // with the notes saved in localStorage.You'll need to
   // use JSON.parse() to turn the stringified array back
   // into a real JS array.
-  const [notes, setNotes] = React.useState(
-    // function () {
-    //   return JSON.parse(localStorage.getItem("notes")) || []
-    // }
-    () => JSON.parse(localStorage.getItem("notes")) || []
-  )
+  // function () {
+  //   return JSON.parse(localStorage.getItem("notes")) || []
+  // }
+  // () => JSON.parse(localStorage.getItem("notes")) || []
+  const [notes, setNotes] = React.useState([])
 
   const [currentNoteId, setCurrentNoteId] = React.useState(
     // (notes[0] && notes[0].id) || ""
@@ -35,26 +33,25 @@ export default function App() {
   // }, [notes])
 
   React.useEffect(() => {
-    const unsubscribed = onSnapshot(notesCollection, function (snapshot) {
+    const unsubscribe = onSnapshot(notesCollection, function (snapshot) {
       // Sync up our local notes array with the snapshot data
-      const notesArr = snapshot.doc.map(doc => ({
+      const notesArr = snapshot.docs.map(doc => ({
         ...doc.data(),
         id: doc.id
       }))
       setNotes(notesArr)
     })
 
-    // Return the function to clean any side effect
-    return unsubscribed
+    // Return the unsubscribe function to clean any side-effect
+    return unsubscribe
   }, [])
 
-  function createNewNote() {
+  async function createNewNote() {
     const newNote = {
-      id: nanoid(),
       body: "# Type your markdown note's title here"
     }
-    setNotes(prevNotes => [newNote, ...prevNotes])
-    setCurrentNoteId(newNote.id)
+    const newNoteRef = await addDoc(notesCollection, newNote)
+    setCurrentNoteId(newNoteRef.id)
   }
 
   /** Long Version of updateNote Function
