@@ -17,10 +17,10 @@ export default function App() {
   // () => JSON.parse(localStorage.getItem("notes")) || []
   const [notes, setNotes] = React.useState([])
 
-  const [currentNoteId, setCurrentNoteId] = React.useState(
-    // (notes[0] && notes[0].id) || ""
-    notes[0]?.id || ""
-  )
+  const [currentNoteId, setCurrentNoteId] = React.useState("")
+  // (notes[0] && notes[0].id) || "" is  the same code as below
+  // notes[0]?.id || ""
+
 
   const currentNote = notes.find(note => note.id === currentNoteId
   ) || notes[0]
@@ -45,6 +45,12 @@ export default function App() {
     // Return the unsubscribe function to clean any side-effect
     return unsubscribe
   }, [])
+
+  React.useEffect(() => {
+    if (!currentNoteId) {
+      setCurrentNoteId(notes[0]?.id)
+    }
+  }, [notes])
 
   async function createNewNote() {
     const newNote = {
@@ -115,14 +121,10 @@ export default function App() {
               newNote={createNewNote}
               deleteNote={deleteNote}
             />
-            {
-              currentNoteId &&
-              notes.length > 0 &&
-              <Editor
-                currentNote={currentNote}
-                updateNote={updateNote}
-              />
-            }
+            <Editor
+              currentNote={currentNote}
+              updateNote={updateNote}
+            />
           </Split>
           :
           <div className="no-notes">

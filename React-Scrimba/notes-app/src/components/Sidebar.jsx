@@ -1,8 +1,6 @@
 /* eslint-disable react/prop-types */
 export default function Sidebar(props) {
 
-
-
   const noteElements = props.notes.map((note) => (
     <div key={note.id}>
       <div
