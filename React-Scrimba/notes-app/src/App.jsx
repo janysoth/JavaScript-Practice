@@ -2,7 +2,7 @@ import React from "react"
 import Sidebar from "./components/Sidebar"
 import Editor from "./components/Editor"
 import Split from "react-split"
-import { onSnapshot, addDoc, doc, deleteDoc } from "firebase/firestore"
+import { onSnapshot, addDoc, doc, deleteDoc, setDoc } from "firebase/firestore"
 import { notesCollection, db } from "./firebase"
 
 export default function App() {
@@ -83,6 +83,7 @@ export default function App() {
   -----------------*/
 
   // Short Version of updateNote Function
+  /** 
   function updateNote(text) {
     setNotes(oldNotes => {
       const updateNotes = oldNotes.map(oldNote => {
@@ -97,6 +98,15 @@ export default function App() {
       return [updateNotes.find(note => note.id === currentNoteId),
       ...updateNotes.filter(note => note.id !== currentNoteId)]
     })
+  }
+  */
+
+  async function updateNote(text) {
+    const docRef = doc(db, "notes", currentNoteId)
+
+    // merge: true is to add the body in the note 
+    // instead of override the note entirely
+    await setDoc(docRef, { body: text }, { merge: true })
   }
 
   async function deleteNote(noteId) {
