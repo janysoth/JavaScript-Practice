@@ -63,6 +63,17 @@ export default function App() {
     }
   }, [currentNote])
 
+  React.useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (tempNoteText !==  currentNote.body) {
+        updateNote(tempNoteText)
+      }
+    },500)
+    
+    // To cancel the timeout if the useEfect happens within 500ms
+    return () => clearTimeout(timeoutId)
+  }, [tempNoteText])
+
   async function createNewNote() {
     const newNote = {
       body: "# Type your markdown note's title here",
