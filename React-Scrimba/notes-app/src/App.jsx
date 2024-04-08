@@ -25,6 +25,9 @@ export default function App() {
   const currentNote = notes.find(note => note.id === currentNoteId
   ) || notes[0]
 
+  // Sorted the notes from the most recent updateAt to the least recent
+  const sortedNotes = notes.sort((a,b) => b.updateAt - a.updateAt)
+
   // Every time the `notes` array changes, save it 
   // in localStorage.You'll need to use JSON.stringify()
   // to turn the array into a string to save in localStorage.
@@ -54,7 +57,9 @@ export default function App() {
 
   async function createNewNote() {
     const newNote = {
-      body: "# Type your markdown note's title here"
+      body: "# Type your markdown note's title here",
+      createAt: Date.now(),
+      updateAt: Date.now()
     }
     const newNoteRef = await addDoc(notesCollection, newNote)
     setCurrentNoteId(newNoteRef.id)
@@ -106,7 +111,10 @@ export default function App() {
 
     // merge: true is to add the body in the note 
     // instead of override the note entirely
-    await setDoc(docRef, { body: text }, { merge: true })
+    await setDoc(
+      docRef, 
+      { body: text, updateAt: Date.now() }, 
+      { merge: true })
   }
 
   async function deleteNote(noteId) {
@@ -125,7 +133,7 @@ export default function App() {
             className="split"
           >
             <Sidebar
-              notes={notes}
+              notes={sortedNotes}
               currentNote={currentNote}
               setCurrentNoteId={setCurrentNoteId}
               newNote={createNewNote}
