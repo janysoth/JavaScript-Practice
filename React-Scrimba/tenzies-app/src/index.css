@@ -4,8 +4,19 @@
 
 body {
   margin: 0;
+  background-color: bisque;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.dice-outer {
+  margin: 0;
   background-color: #0B2434;
   padding: 20px;
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
 }
 
 main {
