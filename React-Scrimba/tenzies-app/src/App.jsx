@@ -12,20 +12,33 @@ function App() {
     return newDice
   }
 
+  /**
+   *  * Challenge:
+ * 
+ * Create state to hold our array of numbers. (Initialize
+ * the state by calling our `allNewDice` function so it 
+ * loads all new dice as soon as the app loads)
+ * 
+ * Map over the state numbers array to generate our array
+ * of Die elements and render those in place of our
+ * manually-written 10 Die elements.
+ */
+  // Create state to hold an array of numbers. 
+  // Initialize the state by calling allNewDice functiion
+  // to load all new dice as soon as the app loads
+  const [dice, setDice] = React.useState(allNewDice())
+
+  // Map over the state numbers array to generate the array
+  // of Die elements and render those in the Die component
+  // Each mapping, it will render one Die component with the value
+  // and display those value in the main tag
+  const diceElements = dice.map(die => <Die value={die} />)
+
   return (
     <div className="dice-outer">
       <main>
         <div className="dice-container">
-          <Die value="1" />
-          <Die value="2" />
-          <Die value="3" />
-          <Die value="4" />
-          <Die value="5" />
-          <Die value="6" />
-          <Die value="5" />
-          <Die value="4" />
-          <Die value="3" />
-          <Die value="2" />
+          {diceElements}
         </div>
       </main>
     </div>
