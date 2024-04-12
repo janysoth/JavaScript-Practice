@@ -18,17 +18,12 @@ function App() {
     return newDice
   }
 
-  /**
-   *  * Challenge:
- * 
- * Create state to hold our array of numbers. (Initialize
- * the state by calling our `allNewDice` function so it 
- * loads all new dice as soon as the app loads)
- * 
- * Map over the state numbers array to generate our array
- * of Die elements and render those in place of our
- * manually-written 10 Die elements.
- */
+  function holdDice(id) {
+    setDice(oldDice => oldDice.map(die => {
+      return die.id === id ? { ...die, isHeld: !die.isHeld } : die
+    }))
+  }
+
   // Create state to hold an array of numbers. 
   // Initialize the state by calling allNewDice functiion
   // to load all new dice as soon as the app loads
@@ -39,7 +34,12 @@ function App() {
   // Each mapping, it will render one Die component with the value
   // and display those value in the main tag
   const diceElements = dice.map(die =>
-    <Die value={die.value} key={die.id} />
+    <Die
+      value={die.value}
+      key={die.id}
+      isHeld={die.isHeld}
+      holdDice={() => holdDice(die.id)}
+    />
   )
 
   function rollDice() {
