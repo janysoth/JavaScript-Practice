@@ -1,5 +1,7 @@
 import React from "react"
 import Die from "./components/Die"
+import { nanoid } from "nanoid"
+
 function App() {
 
   function allNewDice() {
@@ -7,7 +9,11 @@ function App() {
     for (let i = 0; i < 10; i++) {
       // Math.ceil function to start the number at 1
       const randomNum = Math.ceil(Math.random() * 6)
-      newDice.push(randomNum)
+      newDice.push({
+        value: randomNum,
+        isHeld: false,
+        id: nanoid(),
+      })
     }
     return newDice
   }
@@ -32,7 +38,9 @@ function App() {
   // of Die elements and render those in the Die component
   // Each mapping, it will render one Die component with the value
   // and display those value in the main tag
-  const diceElements = dice.map(die => <Die value={die} />)
+  const diceElements = dice.map(die =>
+    <Die value={die.value} key={die.id} />
+  )
 
   function rollDice() {
     setDice(allNewDice())
