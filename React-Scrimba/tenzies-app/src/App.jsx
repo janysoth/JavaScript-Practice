@@ -3,6 +3,24 @@ import Die from "./components/Die"
 import { nanoid } from "nanoid"
 
 function App() {
+
+  // Create state to hold an array of numbers. 
+  // Initialize the state by calling allNewDice functiion
+  // to load all new dice as soon as the app loads
+  const [dice, setDice] = React.useState(allNewDice())
+  const [tenzies, setTenzies] = React.useState(false)
+
+  React.useEffect(() => {
+    // .every function to return true if every items are true
+    const allHeld = dice.every(die => die.isHeld)
+    const firstValue = dice[0].value
+    const allSameValue = dice.every(die => die.value === firstValue)
+    if (allHeld && allSameValue) {
+      setTenzies(true)
+      console.log("You have won!")
+    }
+  }, [dice])
+
   // Helper function to generate new die
   function generateNewDie() {
     // Math.ceil function to start the number at 1
@@ -37,12 +55,6 @@ function App() {
     }))
   }
 
-  // Create state to hold an array of numbers. 
-  // Initialize the state by calling allNewDice functiion
-  // to load all new dice as soon as the app loads
-  const [dice, setDice] = React.useState(allNewDice())
-
-
   // Map over the state numbers array to generate the array
   // of Die elements and render those in the Die component
   // Each mapping, it will render one Die component with the value
@@ -55,7 +67,6 @@ function App() {
       holdDice={() => holdDice(die.id)}
     />
   )
-
 
   return (
     <div className="dice-outer">
