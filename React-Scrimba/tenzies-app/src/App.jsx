@@ -18,7 +18,6 @@ function App() {
     const allSameValue = dice.every(die => die.value === firstValue)
     if (allHeld && allSameValue) {
       setTenzies(true)
-      console.log("You have won!")
     }
   }, [dice])
 
@@ -49,11 +48,16 @@ function App() {
   }
 
   function rollDice() {
-    setDice(oldDice => oldDice.map(die => {
-      return die.isHeld ?
-        die :
-        generateNewDie()
-    }))
+    if(!tenzies) {
+      setDice(oldDice => oldDice.map(die => {
+        return die.isHeld ?
+          die :
+          generateNewDie()
+      }))
+    } else {
+      setTenzies(false)
+      setDice(allNewDice())
+    }
   }
 
   // Map over the state numbers array to generate the array
