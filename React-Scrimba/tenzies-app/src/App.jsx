@@ -2,6 +2,12 @@ import React from "react"
 import Die from "./components/Die"
 import { nanoid } from "nanoid"
 import Confetti from "react-confetti"
+import Dice1 from "./assets/Dice-1-b.png"
+import Dice2 from "./assets/Dice-2-b.png"
+import Dice3 from "./assets/Dice-3-b.png"
+import Dice4 from "./assets/Dice-4-b.png"
+import Dice5 from "./assets/Dice-5-b.png"
+import Dice6 from "./assets/Dice-6-b.png"
 
 function App() {
 
@@ -21,16 +27,36 @@ function App() {
     }
   }, [dice])
 
+  // // Helper function to generate new die
+  // function generateNewDie() {
+  //   // Math.ceil function to start the number at 1
+  //   const randomNum = Math.ceil(Math.random() * 6)
+  //   return {
+  //     value: randomNum,
+  //     isHeld: false,
+  //     id: nanoid(),
+  //   }
+  // }
+
   // Helper function to generate new die
   function generateNewDie() {
-    // Math.ceil function to start the number at 1
-    const randomNum = Math.ceil(Math.random() * 6)
+    const randomNum = Math.ceil(Math.random() * 6);
+    const images = [
+      Dice1,
+      Dice2,
+      Dice3,
+      Dice4,
+      Dice5,
+      Dice6,
+    ]
+    
     return {
       value: randomNum,
       isHeld: false,
       id: nanoid(),
-    }
-  }
+      imageUrl: images[randomNum - 1], // Subtract 1 from randomNum to get the correct index
+    };
+}
 
   function allNewDice() {
     const newDice = []
@@ -64,14 +90,15 @@ function App() {
   // of Die elements and render those in the Die component
   // Each mapping, it will render one Die component with the value
   // and display those value in the main tag
-  const diceElements = dice.map(die =>
-    <Die
-      value={die.value}
-      key={die.id}
-      isHeld={die.isHeld}
-      holdDice={() => holdDice(die.id)}
-    />
-  )
+const diceElements = dice.map((die) => (
+  <Die
+    value={die.value}
+    key={die.id}
+    isHeld={die.isHeld}
+    imageUrl={die.imageUrl}
+    holdDice={() => holdDice(die.id)}
+  />
+));
 
   return (
     <div className="dice-outer">
@@ -82,7 +109,7 @@ function App() {
         <div className="dice-container">
           {diceElements}
         </div>
-        <button className="roll-dice" onClick={rollDice}>{tenzies ? "New Game" : "Roll"}</button>
+        <div><button className="roll-dice" onClick={rollDice}>{tenzies ? "New Game" : "Roll"}</button></div>
       </main>
     </div>
   )

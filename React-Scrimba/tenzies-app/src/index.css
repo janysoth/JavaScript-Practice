@@ -22,7 +22,7 @@ body {
 
 main {
   background-color: #F5F5F5;
-  height: 400px;
+  height: 500px;
   max-width: 800px;
   border-radius: 5px;
   padding: 20px;
@@ -84,4 +84,22 @@ main {
 
 .roll-dice:active {
   box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
+}
+
+/* styles.css or App.css */
+.die {
+  display: inline-block;
+  margin: 10px;
+  position: relative;
+}
+
+.die-image {
+  width: 100%;
+  /* Set image width to 100% of the container */
+  height: auto;
+  /* Maintain aspect ratio */
+  max-width: 100%;
+  /* Set maximum width */
+  max-height: 100%;
+  /* Set maximum height */
 }
