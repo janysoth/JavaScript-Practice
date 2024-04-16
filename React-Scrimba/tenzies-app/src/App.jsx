@@ -49,13 +49,16 @@ function App() {
       Dice4,
       Dice5,
       Dice6,
-    ]
+    ];
+
+    // Ensure randomNum doesn't exceed the length of the images array
+    const index = randomNum - 1 < images.length ? randomNum - 1 : 0;
 
     return {
       value: randomNum,
       isHeld: false,
       id: nanoid(),
-      imageUrl: images[randomNum - 1], // Subtract 1 from randomNum to get the correct index
+      imageUrl: images[index],
     };
   }
 
