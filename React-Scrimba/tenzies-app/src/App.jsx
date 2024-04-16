@@ -16,6 +16,7 @@ function App() {
   // to load all new dice as soon as the app loads
   const [dice, setDice] = React.useState(allNewDice())
   const [tenzies, setTenzies] = React.useState(false)
+  const [rollCount, setRollCount] = React.useState(0)
 
   React.useEffect(() => {
     // .every function to return true if every items are true
@@ -49,14 +50,14 @@ function App() {
       Dice5,
       Dice6,
     ]
-    
+
     return {
       value: randomNum,
       isHeld: false,
       id: nanoid(),
       imageUrl: images[randomNum - 1], // Subtract 1 from randomNum to get the correct index
     };
-}
+  }
 
   function allNewDice() {
     const newDice = []
@@ -74,7 +75,8 @@ function App() {
   }
 
   function rollDice() {
-    if(!tenzies) {
+    setRollCount(oldRollCount => oldRollCount + 1)
+    if (!tenzies) {
       setDice(oldDice => oldDice.map(die => {
         return die.isHeld ?
           die :
@@ -83,6 +85,7 @@ function App() {
     } else {
       setTenzies(false)
       setDice(allNewDice())
+      setRollCount(0)
     }
   }
 
@@ -90,15 +93,15 @@ function App() {
   // of Die elements and render those in the Die component
   // Each mapping, it will render one Die component with the value
   // and display those value in the main tag
-const diceElements = dice.map((die) => (
-  <Die
-    value={die.value}
-    key={die.id}
-    isHeld={die.isHeld}
-    imageUrl={die.imageUrl}
-    holdDice={() => holdDice(die.id)}
-  />
-));
+  const diceElements = dice.map((die) => (
+    <Die
+      value={die.value}
+      key={die.id}
+      isHeld={die.isHeld}
+      imageUrl={die.imageUrl}
+      holdDice={() => holdDice(die.id)}
+    />
+  ));
 
   return (
     <div className="dice-outer">
@@ -109,7 +112,13 @@ const diceElements = dice.map((die) => (
         <div className="dice-container">
           {diceElements}
         </div>
-        <div><button className="roll-dice" onClick={rollDice}>{tenzies ? "New Game" : "Roll"}</button></div>
+        <div className="roll-container">
+          <div className="roll-counter">Count: {rollCount}</div>
+          <button className="roll-dice" onClick={rollDice}>
+            {tenzies ? "New Game" : "Roll"}
+          </button>
+          <div className="roll-timer">Timer</div>
+        </div>
       </main>
     </div>
   )
