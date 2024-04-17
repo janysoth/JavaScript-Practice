@@ -17,6 +17,34 @@ function App() {
   const [dice, setDice] = React.useState(allNewDice())
   const [tenzies, setTenzies] = React.useState(false)
   const [rollCount, setRollCount] = React.useState(0)
+  const [time, setTime] = React.useState(0);
+  const [timerOn, setTimerOn] = React.useState(false);
+
+  React.useEffect(() => {
+    let timer;
+
+    if (timerOn && !tenzies) {
+      timer = setInterval(() => {
+        setTime((prevTime) => prevTime + 1);
+      }, 1000);
+    }
+
+    // Clear the interval when tenzies becomes true
+    if (tenzies) {
+      clearInterval(timer);
+      setTimerOn(false);
+    }
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, [timerOn, tenzies]);
+
+  function startTimer() {
+    if (!timerOn) {
+      setTimerOn(true);
+    }
+  }
 
   React.useEffect(() => {
     // .every function to return true if every items are true
@@ -60,17 +88,18 @@ function App() {
   }
 
   function rollDice() {
-    setRollCount(oldRollCount => oldRollCount + 1)
+    setRollCount(oldRollCount => oldRollCount + 1);
+    startTimer(); // Start the timer when the user clicks Roll
     if (!tenzies) {
-      setDice(oldDice => oldDice.map(die => {
-        return die.isHeld ?
-          die :
-          generateNewDie()
-      }))
+      setDice(oldDice => oldDice.map(die =>
+        die.isHeld ? die : generateNewDie()
+      ));
     } else {
-      setTenzies(false)
-      setDice(allNewDice())
-      setRollCount(0)
+      setTenzies(false);
+      setDice(allNewDice());
+      setRollCount(0);
+      setTime(0); // Reset timer when starting a new game
+      setTimerOn(false); // Stop the timer when tenzies is true
     }
   }
 
@@ -88,6 +117,7 @@ function App() {
     />
   ));
 
+
   return (
     <div className="dice-outer">
       <main>
@@ -102,11 +132,18 @@ function App() {
           <button className="roll-dice" onClick={rollDice}>
             {tenzies ? "New Game" : "Roll"}
           </button>
-          <div className="roll-timer">Timer: 20:00</div>
+          <div className="roll-timer">Timer: {formatTime(time)}</div>
         </div>
       </main>
     </div>
   )
+}
+
+// Helper function to format time in MM:SS format
+function formatTime(time) {
+  const minutes = Math.floor(time / 60).toString().padStart(2, '0');
+  const seconds = (time % 60).toString().padStart(2, '0');
+  return `${minutes}:${seconds}`;
 }
 
 export default App
