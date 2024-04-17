@@ -95,12 +95,17 @@ function App() {
         die.isHeld ? die : generateNewDie()
       ));
     } else {
-      setTenzies(false);
-      setDice(allNewDice());
-      setRollCount(0);
-      setTime(0); // Reset timer when starting a new game
-      setTimerOn(false); // Stop the timer when tenzies is true
+      resetGame()
     }
+  }
+
+  // Helper function to reset game 
+  function resetGame() {
+    setTenzies(false);
+    setDice(allNewDice());
+    setRollCount(0);
+    setTime(0); // Reset timer when starting a new game
+    setTimerOn(false); // Stop the timer when tenzies is true
   }
 
   // Map over the state numbers array to generate the array
@@ -130,11 +135,15 @@ function App() {
           {diceElements}
         </div>
         <div className="roll-container">
-          <div className="roll-counter" style={styles}>Count: {rollCount}</div>
+          <div className="roll-counter" style={styles} onClick={resetGame}>
+            Count: {rollCount}
+          </div>
           <button className="roll-dice" onClick={rollDice}>
             {tenzies ? "New Game" : "Roll"}
           </button>
-          <div className="roll-timer" style={styles}>Timer: {formatTime(time)}</div>
+          <div className="roll-timer" style={styles} onClick={resetGame}>
+            Timer: {formatTime(time)}
+          </div>
         </div>
       </main>
     </div>
@@ -143,7 +152,7 @@ function App() {
 
 // Helper function to format time in MM:SS format
 function formatTime(time) {
-  const minutes = Math.floor(time / 60).toString().padStart(2, '0');
+  const minutes = Math.floor(time / 60).toString().padStart(1, '0');
   const seconds = (time % 60).toString().padStart(2, '0');
   return `${minutes}:${seconds}`;
 }

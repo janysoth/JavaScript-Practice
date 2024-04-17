@@ -115,6 +115,7 @@ main {
   border: solid #0B2434;
   border-radius: 10px;
   padding: 10px;
+  cursor: pointer;
 }
 
 .roll-counter {
