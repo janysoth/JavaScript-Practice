@@ -12,7 +12,7 @@ import Dice6 from "./assets/Dice-6-b.png"
 function App() {
 
   // Create state to hold an array of numbers. 
-  // Initialize the state by calling allNewDice functiion
+  // Initialize the state by calling allNewDice function
   // to load all new dice as soon as the app loads
   const [dice, setDice] = React.useState(allNewDice())
   const [tenzies, setTenzies] = React.useState(false)
@@ -28,37 +28,19 @@ function App() {
     }
   }, [dice])
 
-  // // Helper function to generate new die
-  // function generateNewDie() {
-  //   // Math.ceil function to start the number at 1
-  //   const randomNum = Math.ceil(Math.random() * 6)
-  //   return {
-  //     value: randomNum,
-  //     isHeld: false,
-  //     id: nanoid(),
-  //   }
-  // }
-
   // Helper function to generate new die
   function generateNewDie() {
-    const randomNum = Math.ceil(Math.random() * 6);
-    const images = [
-      Dice1,
-      Dice2,
-      Dice3,
-      Dice4,
-      Dice5,
-      Dice6,
-    ];
+    const randomNum = Math.floor(Math.random() * 6);
+    const images = [Dice1, Dice2, Dice3, Dice4, Dice5, Dice6];
 
     // Ensure randomNum doesn't exceed the length of the images array
-    const index = randomNum - 1 < images.length ? randomNum - 1 : 0;
+    // const index = randomNum - 1 < images.length ? randomNum - 1 : 0;
 
     return {
       value: randomNum,
       isHeld: false,
       id: nanoid(),
-      imageUrl: images[index],
+      imageUrl: images[randomNum],
     };
   }
 
