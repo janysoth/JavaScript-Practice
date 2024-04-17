@@ -117,22 +117,24 @@ function App() {
     />
   ));
 
-
+  const styles = {
+    backgroundColor: tenzies ? '#59E391' : 'red'
+  }
   return (
     <div className="dice-outer">
+      {tenzies && <Confetti />}
       <main>
-        {tenzies && <Confetti />}
         <h1 className="title">Tenzies</h1>
         <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
         <div className="dice-container">
           {diceElements}
         </div>
         <div className="roll-container">
-          <div className="roll-counter">Count: {rollCount}</div>
+          <div className="roll-counter" style={styles}>Count: {rollCount}</div>
           <button className="roll-dice" onClick={rollDice}>
             {tenzies ? "New Game" : "Roll"}
           </button>
-          <div className="roll-timer">Timer: {formatTime(time)}</div>
+          <div className="roll-timer" style={styles}>Timer: {formatTime(time)}</div>
         </div>
       </main>
     </div>
