@@ -120,7 +120,7 @@ function App() {
           <button className="roll-dice" onClick={rollDice}>
             {tenzies ? "New Game" : "Roll"}
           </button>
-          <div className="roll-timer">Timer</div>
+          <div className="roll-timer">Timer: 20:00</div>
         </div>
       </main>
     </div>

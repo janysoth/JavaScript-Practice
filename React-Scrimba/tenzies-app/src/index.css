@@ -12,12 +12,11 @@ body {
 }
 
 .dice-outer {
-  margin: 0;
+  margin: 80px;
   background-color: #0B2434;
   padding: 20px;
   display: flex;
   justify-content: center;
-  margin-top: 100px;
 }
 
 main {
@@ -29,13 +28,14 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  align-items: center;
 }
 
 .title {
   font-size: 40px;
   margin: 0;
   padding-bottom: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 .instructions {
@@ -47,8 +47,8 @@ main {
 
 .dice-container {
   display: grid;
-  grid-template: auto auto / repeat(5, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 20px;
   cursor: pointer;
   margin-bottom: 40px;
 }
@@ -77,6 +77,7 @@ main {
   font-size: 1.2rem;
   font-family: 'Karla', sans-serif;
   cursor: pointer;
+  margin: auto;
 }
 
 .roll-dice:focus {
@@ -96,32 +97,30 @@ main {
 
 .die-image {
   width: 100%;
-  /* Set image width to 100% of the container */
   height: auto;
-  /* Maintain aspect ratio */
   max-width: 100%;
-  /* Set maximum width */
   max-height: 100%;
-  /* Set maximum height */
 }
 
 .roll-container {
   display: flex;
   justify-content: space-evenly;
+}
+
+.roll-counter,
+.roll-timer {
+  font-size: 1.5rem;
+  display: flex;
   align-items: center;
+  border: solid #0B2434;
+  border-radius: 10px;
+  padding: 10px;
 }
 
 .roll-counter {
-  font-size: 1.5rem;
-  margin-right: 20px;
+  margin-right: auto;
 }
 
 .roll-timer {
-  font-size: 1.5rem;
-  margin-left: 20px;
-}
-
-.roll-dice {
   margin-left: auto;
-  /* This will push the button to the right side */
 }
