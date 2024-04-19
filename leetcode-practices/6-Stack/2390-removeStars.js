@@ -1,4 +1,5 @@
 /**
+import { Split } from 'react-split';
  * 2390 Remove Stars From a String
  * You are give a string s, which contains stars *. 
  * In one operation you can:
@@ -8,26 +9,26 @@
  */
 
 function removeStars(s) {
-  const stack = [];
+  const stack = [] // Use an array to construct the result string
 
+  // Iterate through each character in the input string
   for (let char of s) {
     if (char === '*') {
       while (stack.length && stack[stack.length - 1] === null) {
-        stack.pop(); // Remove adjacent stars
+        stack.pop() // Remove adjacent stars
       }
       if (stack.length) {
-        stack.pop(); // Remove closest non-star character to the left
-        stack.push(null); // Mark the current position as a removed star
+        stack.pop() // Remove the closest non-star character to the left
+        stack.push(null) // Mark the current position as a removed star
       }
     } else {
-      stack.push(char); // Push non-star characters onto the stack
+      stack.push(char) // Push non-star characters onto the result array
     }
   }
 
-  // Filter out the removed stars and join the remaining characters
-  return stack.filter(char => char !== null).join('');
+  // Join the result array to form the resulting string
+  return stack.join('')
 }
 
-// Test the function
-const s = "leet**cod*e";
-console.log(removeStars(s)); 
+const s = "leet**cod*e"
+console.log(removeStars(s)) 
