@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 
 const ToDoList = () => {
 
@@ -6,20 +6,30 @@ const ToDoList = () => {
   const [newTask, setNewTask] = useState("")
 
   // To show the text when type in input
-  function handleInputChange(){
+  function handleInputChange() {
     setNewTask(event.target.value)
   }
 
-  function addTask(){
-
+  function addTask() {
+    if (newTask.trim() !== "") {
+      setTasks(prevTasks => [...prevTasks, newTask])
+      setNewTask('')
+    }
   }
 
+  // The underscore in the param means this should be ignored
   function deleteTask(index) {
-
+    const updatedTasks = tasks.filter((_, currentIndex) => currentIndex !== index)
+    setTasks(updatedTasks)
   }
 
   function moveTaskUp(index) {
+    if (index > 0) {
+      const updatedTasks = [...tasks]
 
+      //De=structuring the array
+
+    }
   }
 
   function moveTaskDown(index) {
@@ -32,13 +42,13 @@ const ToDoList = () => {
       <h1>To-Do-List</h1>
 
       <div>
-        <input 
+        <input
           type="text"
           placeholder="Enter a task..."
           value={newTask}
           onChange={handleInputChange}
         />
-        <button 
+        <button
           className="add-button"
           onClick={addTask}
         >
