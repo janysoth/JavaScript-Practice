@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 
 const ToDoList = () => {
 
   const [tasks, setTasks] = useState([])
   const [newTask, setNewTask] = useState("")
-  const [isEmptyInput, setIsEmptyInput] = useState(false);
+  const [isEmptyInput, setIsEmptyInput] = useState(false)
+  const inputRef = useRef(null)
 
 
   // To show the text when type in input
@@ -19,6 +20,7 @@ const ToDoList = () => {
       setIsEmptyInput(false); // Reset to false if input is not empty
     } else {
       setIsEmptyInput(true);
+      inputRef.current.focus(); // Focus on the input
     }
   }
 
@@ -60,6 +62,7 @@ const ToDoList = () => {
       <div>
         <input
           type="text"
+          ref={inputRef}
           placeholder="Enter a task..."
           value={newTask}
           onChange={handleInputChange}
