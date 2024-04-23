@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 const ToDoList = () => {
 
-  const [tasks, setTasks] = useState(["Eat Breakfast", "Take A Shower", "Play With The Kids"])
+  const [tasks, setTasks] = useState([])
   const [newTask, setNewTask] = useState("")
 
   // To show the text when type in input
@@ -25,15 +25,26 @@ const ToDoList = () => {
 
   function moveTaskUp(index) {
     if (index > 0) {
-      const updatedTasks = [...tasks]
+      const updatedTasks = [...tasks];
 
       //De=structuring the array
+      [updatedTasks[index], updatedTasks[index - 1]] =
+        [updatedTasks[index - 1], updatedTasks[index]];
 
+      setTasks(updatedTasks);
     }
   }
 
   function moveTaskDown(index) {
+    if (index < tasks.length - 1) {
+      const updatedTasks = [...tasks];
 
+      //De=structuring the array
+      [updatedTasks[index], updatedTasks[index + 1]] =
+        [updatedTasks[index + 1], updatedTasks[index]];
+
+      setTasks(updatedTasks);
+    }
   }
 
   return (
