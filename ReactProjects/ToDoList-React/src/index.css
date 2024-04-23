@@ -88,3 +88,14 @@ flex-basis: 0%; */
   font-size: 1.4rem;
   margin-left: 10px;
 }
+
+input {
+  margin-right: 10px;
+}
+
+.empty-message {
+  font-size: 1.4rem;
+  color: hsl(0, 70%, 50%);
+  /* A shade of red for emphasis */
+  margin-top: 10px;
+}

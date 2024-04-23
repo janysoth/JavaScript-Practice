@@ -4,6 +4,8 @@ const ToDoList = () => {
 
   const [tasks, setTasks] = useState([])
   const [newTask, setNewTask] = useState("")
+  const [isEmptyInput, setIsEmptyInput] = useState(false);
+
 
   // To show the text when type in input
   function handleInputChange() {
@@ -12,8 +14,11 @@ const ToDoList = () => {
 
   function addTask() {
     if (newTask.trim() !== "") {
-      setTasks(prevTasks => [...prevTasks, newTask])
-      setNewTask('')
+      setTasks((prevTasks) => [...prevTasks, newTask]);
+      setNewTask('');
+      setIsEmptyInput(false); // Reset to false if input is not empty
+    } else {
+      setIsEmptyInput(true);
     }
   }
 
@@ -66,7 +71,7 @@ const ToDoList = () => {
           Add
         </button>
       </div>
-
+      {isEmptyInput && <p className='empty-message'>👆 Please enter a task... 👆</p>}
       <ol>
         {tasks.map((task, index) => (
           <li key={index}>
