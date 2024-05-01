@@ -48,31 +48,33 @@ const Experience = () => {
 
         <div className="experience__backend">
           <h3>Backend Development</h3>
-          <article className='experience__details'>
-            <BsPatchCheckFill />
-            <h4>Node JS</h4>
-            <small className='text-light'>Experienced</small>
-          </article>
-          <article className='experience__details'>
-            <BsPatchCheckFill />
-            <h4>PHP</h4>
-            <small className='text-light'>Intermediate</small>
-          </article>
-          <article className='experience__details'>
-            <BsPatchCheckFill />
-            <h4>MySQL</h4>
-            <small className='text-light'>Basic</small>
-          </article>
-          <article className='experience__details'>
-            <BsPatchCheckFill />
-            <h4>Python</h4>
-            <small className='text-light'>Basic</small>
-          </article>
-          <article className='experience__details'>
-            <BsPatchCheckFill />
-            <h4>MangoDB</h4>
-            <small className='text-light'>Basic</small>
-          </article>
+          <div className="experience__content">
+            <article className='experience__details'>
+              <BsPatchCheckFill />
+              <h4>Node JS</h4>
+              <small className='text-light'>Experienced</small>
+            </article>
+            <article className='experience__details'>
+              <BsPatchCheckFill />
+              <h4>PHP</h4>
+              <small className='text-light'>Intermediate</small>
+            </article>
+            <article className='experience__details'>
+              <BsPatchCheckFill />
+              <h4>MySQL</h4>
+              <small className='text-light'>Basic</small>
+            </article>
+            <article className='experience__details'>
+              <BsPatchCheckFill />
+              <h4>Python</h4>
+              <small className='text-light'>Basic</small>
+            </article>
+            <article className='experience__details'>
+              <BsPatchCheckFill />
+              <h4>MangoDB</h4>
+              <small className='text-light'>Basic</small>
+            </article>
+          </div>
         </div>
       </div>
     </section>
