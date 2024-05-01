@@ -1,12 +1,11 @@
 /**
-import { Split } from 'react-split';
  * 2390 Remove Stars From a String
  * You are give a string s, which contains stars *. 
  * In one operation you can:
  * Chose a star in s.
  * Remove the closest non-star character to its left, as well as remove the star itself.
  * Return the string after all stars have been removed.
- */
+ **/
 
 function removeStars(s) {
   const stack = [] // Use an array to construct the result string
