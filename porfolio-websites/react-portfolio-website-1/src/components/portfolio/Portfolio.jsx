@@ -19,48 +19,60 @@ const Portfolio = () => {
             <img src={IMG1} alt="" />
           </div>
           <h3>This  is  a portfolio item title</h3>
-          <a href="https://github.com/janysoth/JavaScript-Practice" className='btn' target='_blank'>GitHub</a>
-          <a href="https://dribbble.com/Alien_pixels" className='btn btn-primary' target='_blank'>Live Demo</a>
+          <div className="portfolio__item-cta">
+            <a href="https://github.com/janysoth/JavaScript-Practice" className='btn' target='_blank'>GitHub</a>
+            <a href="https://dribbble.com/Alien_pixels" className='btn btn-primary' target='_blank'>Live Demo</a>
+          </div>
         </article>
         <article className='portfolio__item'>
           <div className="portfolio__item-image">
             <img src={IMG1} alt="" />
           </div>
           <h3>This  is  a portfolio item title</h3>
-          <a href="https://github.com/janysoth/JavaScript-Practice" className='btn' target='_blank'>GitHub</a>
-          <a href="https://dribbble.com/Alien_pixels" className='btn btn-primary' target='_blank'>Live Demo</a>
+          <div className="portfolio__item-cta">
+            <a href="https://github.com/janysoth/JavaScript-Practice" className='btn' target='_blank'>GitHub</a>
+            <a href="https://dribbble.com/Alien_pixels" className='btn btn-primary' target='_blank'>Live Demo</a>
+          </div>
         </article>
         <article className='portfolio__item'>
           <div className="portfolio__item-image">
             <img src={IMG1} alt="" />
           </div>
           <h3>This  is  a portfolio item title</h3>
-          <a href="https://github.com/janysoth/JavaScript-Practice" className='btn' target='_blank'>GitHub</a>
-          <a href="https://dribbble.com/Alien_pixels" className='btn btn-primary' target='_blank'>Live Demo</a>
+          <div className="portfolio__item-cta">
+            <a href="https://github.com/janysoth/JavaScript-Practice" className='btn' target='_blank'>GitHub</a>
+            <a href="https://dribbble.com/Alien_pixels" className='btn btn-primary' target='_blank'>Live Demo</a>
+          </div>
         </article>
         <article className='portfolio__item'>
           <div className="portfolio__item-image">
             <img src={IMG1} alt="" />
           </div>
           <h3>This  is  a portfolio item title</h3>
-          <a href="https://github.com/janysoth/JavaScript-Practice" className='btn' target='_blank'>GitHub</a>
-          <a href="https://dribbble.com/Alien_pixels" className='btn btn-primary' target='_blank'>Live Demo</a>
+          <div className="portfolio__item-cta">
+            <a href="https://github.com/janysoth/JavaScript-Practice" className='btn' target='_blank'>GitHub</a>
+            <a href="https://dribbble.com/Alien_pixels" className='btn btn-primary' target='_blank'>Live Demo</a>
+          </div>
         </article>
         <article className='portfolio__item'>
           <div className="portfolio__item-image">
             <img src={IMG1} alt="" />
           </div>
           <h3>This  is  a portfolio item title</h3>
-          <a href="https://github.com/janysoth/JavaScript-Practice" className='btn' target='_blank'>GitHub</a>
-          <a href="https://dribbble.com/Alien_pixels" className='btn btn-primary' target='_blank'>Live Demo</a>
+          <div className="portfolio__item-cta">
+            <a href="https://github.com/janysoth/JavaScript-Practice" className='btn' target='_blank'>GitHub</a>
+            <a href="https://dribbble.com/Alien_pixels" className='btn btn-primary' target='_blank'>Live Demo</a>
+          </div>
         </article>
         <article className='portfolio__item'>
           <div className="portfolio__item-image">
             <img src={IMG1} alt="" />
           </div>
           <h3>This  is  a portfolio item title</h3>
-          <a href="https://github.com/janysoth/JavaScript-Practice" className='btn' target='_blank'>GitHub</a>
-          <a href="https://dribbble.com/Alien_pixels" className='btn btn-primary' target='_blank'>Live Demo</a>
+          <div className="portfolio__item-cta">
+            <a href="https://github.com/janysoth/JavaScript-Practice" className='btn' target='_blank'>GitHub</a>
+            <a href="https://dribbble.com/Alien_pixels" className='btn btn-primary' target='_blank'>Live Demo</a>
+          </div>
         </article>
       </div>
     </section>
