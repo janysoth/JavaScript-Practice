@@ -1,5 +1,5 @@
 header {
-  height: 82vh;
+  height: 120vh;
   padding-top: 7rem;
   overflow: hidden;
 }
@@ -40,7 +40,7 @@ header {
 /* ====== MAIN IMAGE (ME) ====== */
 .me {
   /* background: var(--color-primary); */
-  background: linear-gradient(var(--color-primary), transparent);
+  /* background: linear-gradient(var(--color-primary), transparent); */
   width: 20rem;
   height: 100rem;
   position: absolute;
@@ -65,7 +65,7 @@ header {
 
 @media screen and (max-width: 1024px) {
   header {
-    height: 82vh;
+    height: 62vh;
   }
 }
 
