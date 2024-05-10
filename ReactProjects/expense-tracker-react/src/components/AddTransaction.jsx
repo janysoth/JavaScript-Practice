@@ -5,8 +5,6 @@ const AddTransaction = () => {
   const [text, setText] = useState('');
   const [amount, setAmount] = useState(0);
 
-  console.log(text, amount);
-
   return (
     <div>
       <h3>Add New Transaction</h3>
