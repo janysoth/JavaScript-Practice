@@ -1,6 +1,6 @@
 import { Outlet, Navigate } from 'react-router-dom';
 
-const AutthLayout = () => {
+const AuthLayout = () => {
   const isAuthenticated = false;
 
   return (
@@ -9,13 +9,14 @@ const AutthLayout = () => {
         <Navigate to='/' />
       ) : (
         <>
-          <section>
+          <section className='flex flex-1 justify-center items-center flex-col py-10'>
             <Outlet />
           </section>
+
         </>
       )}
     </>
   )
 }
 
-export default AutthLayout
+export default AuthLayout
