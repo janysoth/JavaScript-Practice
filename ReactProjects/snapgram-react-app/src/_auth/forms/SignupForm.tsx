@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Link } from 'react-router-dom';
 
 import {
   Form,
@@ -16,6 +17,7 @@ import { useForm } from "react-hook-form";
 import { SignupValidation } from '@/lib/validation';
 import { z } from 'zod';
 import Loader from '@/components/shared/Loader';
+
 
 const SignupForm = () => {
 
@@ -119,6 +121,13 @@ const SignupForm = () => {
               </div>
             ) : "Sign Up"}
           </Button>
+
+          <p className="text-small-regular text-light-2 text-center mt-2">
+            Already have an account?
+            <Link to="/sign-in" className='text-primary-500 text-small-semibold ml-1'>
+              Log In
+            </Link>
+          </p>
         </form>
       </div >
     </Form>
