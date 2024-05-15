@@ -15,8 +15,11 @@ import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { SignupValidation } from '@/lib/validation';
 import { z } from 'zod';
+import Loader from '@/components/shared/Loader';
 
 const SignupForm = () => {
+
+  const isLoading = false;
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof SignupValidation>>({
@@ -45,7 +48,7 @@ const SignupForm = () => {
           Create a New Account
         </h2>
         <p className="text-light-3 small-medium md:base-regular mt-2">
-          To use Snapgram enter your details
+          To use Snapgram please enter your details
         </p>
 
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 w-full mt-4">
@@ -109,7 +112,13 @@ const SignupForm = () => {
           />
           {/* End of the Password input */}
 
-          <Button type="submit" className='shad-button_primary'>Submit</Button>
+          <Button type="submit" className='shad-button_primary'>
+            {isLoading ? (
+              <div className="flex-center gap-2">
+                <Loader /> Loading...
+              </div>
+            ) : "Sign Up"}
+          </Button>
         </form>
       </div >
     </Form>
