@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -41,7 +40,7 @@ const SignupForm = () => {
     const newUser = await createUserAccount(values);
 
     console.log(newUser);
-  };
+  }
 
   return (
     <Form {...form}>
