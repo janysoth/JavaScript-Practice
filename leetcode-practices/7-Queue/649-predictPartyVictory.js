@@ -13,5 +13,37 @@ Suppose every senator is smart enough and will play the best strategy for his ow
  */
 
 const predictSenateVictory = (senate) => {
+  // Initialize queues for Radiant and Dire
+  let rQueue = [];
+  let dQueue = [];
 
+  // Populate the queues with the indices of Radiant and Dire senators
+  for (let i = 0; i < senate.length; i++) {
+    if (senate[i] === 'R') {
+      rQueue.push(i);
+    } else {
+      dQueue.push(i);
+    }
+  }
+
+  // Simulate the voting rounds
+  while (rQueue.length > 0 && dQueue.length > 0) {
+    let rIndex = rQueue.shift(); // Get the first Radiant senator's index
+    let dIndex = dQueue.shift(); // Get the first Dire senator's index
+
+    if (rIndex < dIndex) {
+      // Radiant senator bans Dire senator
+      rQueue.push(rIndex + senate.length); // Requeue with updated index
+    } else {
+      // Dire senator bans Radiant senator
+      dQueue.push(dIndex + senate.length); // Requeue with updated index
+    }
+  }
+
+  // Determine the winner
+  return rQueue.length > 0 ? "Radiant" : "Dire";
 };
+
+// Example usage:
+console.log(predictSenateVictory("RD"));
+console.log(predictSenateVictory("RDD")); 
