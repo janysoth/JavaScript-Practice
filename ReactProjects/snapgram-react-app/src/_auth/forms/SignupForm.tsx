@@ -21,11 +21,11 @@ import { useCreateAccount, useSignInAccount } from '@/lib/react-query/QueriesAnd
 
 
 const SignupForm = () => {
-  const {toast} = useToast();
+  const { toast } = useToast();
 
-  const {mutateAsync: createUserAccount, isLoading: isCreatingUser} = useCreateAccount();
+  const { mutateAsync: createUserAccount, isLoading: isCreatingUser } = useCreateAccount();
 
-  const {mutateAsync: signInAccount, isLoading: isSigningIn} = useSignInAccount();
+  const { mutateAsync: signInAccount, isLoading: isSigningIn } = useSignInAccount();
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof SignupValidation>>({
@@ -43,8 +43,8 @@ const SignupForm = () => {
     // Create New User
     const newUser = await createUserAccount(values);
 
-    if(!newUser) {
-      return toast({title: 'Sign Up failed. Please Try Again.'})
+    if (!newUser) {
+      return toast({ title: 'Sign Up failed. Please Try Again.' })
     }
 
     const session = await signInAccount({
@@ -52,9 +52,11 @@ const SignupForm = () => {
       password: values.password,
     })
 
-    if(!session) {
-      return toast({title: 'Sign Up failed. Please Try Again.'})
+    if (!session) {
+      return toast({ title: 'Sign Up failed. Please Try Again.' })
     }
+
+
 
   }
 
