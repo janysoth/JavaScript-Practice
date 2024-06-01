@@ -7,6 +7,7 @@ import {
 } from '@tanstack/react-query';
 import { createPost, createUserAccount, signInAccount, signOutAccount } from '../appwrite/api';
 import { INewPost, INewUser } from '@/types';
+import { QUERY_KEYS } from './queryKeys';
 
 // Initialize the mutation function
 export const useCreateAccount = () => {
@@ -31,7 +32,16 @@ export const useSignOutAccount = () => {
 }
 
 export const useCreatePost = () => {
+
+  // Query all of the existing posts to show on the Home Page
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: (post: INewPost) => createPost(post),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_RECENT_POSTS]
+      })
+    }
   });
 }
