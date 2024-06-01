@@ -2,7 +2,6 @@ import { ID, Query } from "appwrite";
 
 import { appwriteConfig, account, databases, storage, avatars } from "./config";
 import { INewPost, INewUser } from "@/types";
-import { error } from "console";
 
 // ============================================================
 // AUTH
@@ -35,7 +34,40 @@ export async function createUserAccount(user: INewUser) {
     console.log(error);
     return error;
   }
-}
+};
+
+// ============================== GET USER
+export async function getCurrentUser() {
+  try {
+    const currentAccount = await getAccount();
+
+    if (!currentAccount) throw Error;
+
+    const currentUser = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      [Query.equal("accountId", currentAccount.$id)]
+    );
+
+    if (!currentUser) throw Error;
+
+    return currentUser.documents[0];
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+// ============================== GET ACCOUNT
+export async function getAccount() {
+  try {
+    const currentAccount = await account.get();
+
+    return currentAccount;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // ============================== SAVE USER TO DB
 export async function saveUserToDB(user: {
@@ -176,5 +208,18 @@ export async function deleteFile(fileId: string) {
   } catch (error) {
     console.log(error);
   }
+};
+
+// ============================== GET RECENT POSTS
+export async function getRecentPosts() {
+  const posts = await databases.listDocuments(
+    appwriteConfig.databaseId,
+    appwriteConfig.postCollectionId,
+    [Query.orderDesc('$createAt'), Query.limit(20)]
+  );
+
+  if (!posts) throw Error;
+
+  return posts;
 };
 
