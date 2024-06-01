@@ -1,5 +1,6 @@
 import Loader from "@/components/shared/Loader";
 import { useGetRecentPosts } from "@/lib/react-query/QueriesAndMutations";
+import { Models } from 'appwrite';
 
 const Home = () => {
 
@@ -12,8 +13,12 @@ const Home = () => {
           {isPostLoading && !posts ? (
             <Loader />
           ) : (
-            <ul>
-              Test
+            <ul className="flex flex-col flex-1 gap-9 w-full ">
+              {posts?.documents.map((post: Models.Document) => (
+                <li key={post.$id} className="flex justify-center w-full">
+                  {post.caption}
+                </li>
+              ))}
             </ul>
           )}
         </div>
