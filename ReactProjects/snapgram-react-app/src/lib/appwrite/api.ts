@@ -34,7 +34,7 @@ export async function createUserAccount(user: INewUser) {
     console.log(error);
     return error;
   }
-};
+}
 
 // ============================== GET USER
 export async function getCurrentUser() {
@@ -56,7 +56,7 @@ export async function getCurrentUser() {
     console.log(error);
     return null;
   }
-};
+}
 
 // ============================== GET ACCOUNT
 export async function getAccount() {
@@ -67,7 +67,7 @@ export async function getAccount() {
   } catch (error) {
     console.log(error);
   }
-};
+}
 
 // ============================== SAVE USER TO DB
 export async function saveUserToDB(user: {
@@ -100,7 +100,7 @@ export async function signInAccount(user: { email: string; password: string }) {
   } catch (error) {
     console.log(error);
   }
-};
+}
 
 // ============================== SIGN OUT ACCOUNT
 export async function signOutAccount() {
@@ -111,7 +111,7 @@ export async function signOutAccount() {
   } catch (error) {
     console.log(error);
   }
-};
+}
 
 // ============================================================
 // POSTS
@@ -164,7 +164,7 @@ export async function createPost(post: INewPost) {
   } catch (error) {
     console.log(error);
   }
-};
+}
 
 // ============================== UPLOAD FILE
 export async function uploadFile(file: File) {
@@ -179,10 +179,10 @@ export async function uploadFile(file: File) {
   } catch (error) {
     console.log(error);
   }
-};
+}
 
 // ============================== GET FILE URL
-export async function getFilePreview(fileId: string) {
+export function getFilePreview(fileId: string) {
   try {
     const fileUrl = storage.getFilePreview(
       appwriteConfig.storageId,
@@ -197,7 +197,7 @@ export async function getFilePreview(fileId: string) {
   } catch (error) {
     console.log(error);
   }
-};
+}
 
 // ============================== DELETE FILE
 export async function deleteFile(fileId: string) {
@@ -208,7 +208,7 @@ export async function deleteFile(fileId: string) {
   } catch (error) {
     console.log(error);
   }
-};
+}
 
 // ============================== GET RECENT POSTS
 export async function getRecentPosts() {
