@@ -21,24 +21,24 @@ const deleteMiddle = (head) => {
     return null;
   }
 
-  // Initialize two pointers: slow and fast
-  let slow = head;
-  let fast = head;
-  let prev = null;  // To keep track of the node before the slow pointer
+  // Initialize two pointers: slowPointer and fastPointer
+  let slowPointer = head;
+  let fastPointer = head;
+  let previousPointer = null;  // To keep track of the node before the slowPointer
 
-  // Move fast pointer two steps and slow pointer one step each time
-  while (fast !== null && fast.next !== null) {
-    fast = fast.next.next;
-    prev = slow;
-    slow = slow.next;
+  // Move fastPointer two steps and slowPointer one step each time
+  while (fastPointer !== null && fastPointer.next !== null) {
+    fastPointer = fastPointer.next.next;
+    previousPointer = slowPointer;
+    slowPointer = slowPointer.next;
   }
 
-  // At this point, slow pointer is pointing to the middle node
-  // We need to delete the slow node
-  if (prev !== null) {
-    prev.next = slow.next;
+  // At this point, slowPointer is pointing to the middle node
+  // We need to delete the node pointed by slowPointer
+  if (previousPointer !== null) {
+    previousPointer.next = slowPointer.next;
   }
 
-  // Return the modified head
+  // Return the modified list starting from head
   return head;
 };
