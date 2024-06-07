@@ -112,7 +112,7 @@ export async function signOutAccount(): Promise<any> {
 // POSTS
 // ============================================================
 
-export async function createPost(post: INewPost): Promise<any> {
+export async function createPost(post: INewPost) {
   try {
     // Upload image to storage
     const uploadedFile = await uploadFile(post.file[0]);
@@ -186,7 +186,7 @@ export function getFilePreview(fileId: string) {
 }
 
 // ============================== DELETE FILE
-export async function deleteFile(fileId: string): Promise<{ status: string } | null> {
+export async function deleteFile(fileId: string) {
   try {
     await storage.deleteFile(appwriteConfig.storageId, fileId);
     return { status: "ok" };
@@ -197,7 +197,7 @@ export async function deleteFile(fileId: string): Promise<{ status: string } | n
 }
 
 // ============================== GET RECENT POSTS
-export async function getRecentPosts(): Promise<any> {
+export async function getRecentPosts() {
   try {
     const posts = await databases.listDocuments(
       appwriteConfig.databaseId,
@@ -215,26 +215,28 @@ export async function getRecentPosts(): Promise<any> {
 }
 
 // ============================== LIKE POSTS
-export async function likePost(postId: string, likesArray: string[]): Promise<any> {
+export async function likePost(postId: string, likesArray: string[]) {
   try {
     const updatedPost = await databases.updateDocument(
       appwriteConfig.databaseId,
       appwriteConfig.postCollectionId,
       postId,
-      { likes: likesArray }
+      {
+        likes: likesArray
+      }
     );
 
-    if (!updatedPost) throw new Error("Failed to update likes on post");
+    if (!updatedPost) throw Error;
 
     return updatedPost;
+
   } catch (error) {
     console.error("Error liking post:", error);
-    return null;
   }
 }
 
 // ============================== SAVE POSTS
-export async function savePost(postId: string, userId: string): Promise<any> {
+export async function savePost(postId: string, userId: string) {
   try {
     const updatedPost = await databases.createDocument(
       appwriteConfig.databaseId,
@@ -248,22 +250,22 @@ export async function savePost(postId: string, userId: string): Promise<any> {
     return updatedPost;
   } catch (error) {
     console.error("Error saving post:", error);
-    return null;
   }
 }
 
 // ============================== DELETE SAVE POSTS
-export async function deleteSavedPost(savedRecordId: string): Promise<{ status: string } | null> {
+export async function deleteSavedPost(savedRecordId: string) {
   try {
-    await databases.deleteDocument(
+    const statusCode = await databases.deleteDocument(
       appwriteConfig.databaseId,
       appwriteConfig.savesCollectionId,
       savedRecordId
     );
 
+    if (!statusCode) throw Error;
+
     return { status: 'ok' };
   } catch (error) {
     console.error("Error deleting saved post:", error);
-    return null;
   }
 }
