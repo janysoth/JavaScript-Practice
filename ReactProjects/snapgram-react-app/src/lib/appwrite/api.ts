@@ -166,9 +166,9 @@ export async function uploadFile(file: File): Promise<any> {
 }
 
 // ============================== GET FILE URL
-export function getFilePreview(fileId: string): string | null {
+export function getFilePreview(fileId: string) {
   try {
-    return storage.getFilePreview(
+    const fileUrl = storage.getFilePreview(
       appwriteConfig.storageId,
       fileId,
       2000,
@@ -176,9 +176,12 @@ export function getFilePreview(fileId: string): string | null {
       "top",
       100
     );
+
+    if (!fileUrl) throw Error;
+
+    return fileUrl;
   } catch (error) {
-    console.error("Error getting file preview:", error);
-    return null;
+    console.log(error);
   }
 }
 
