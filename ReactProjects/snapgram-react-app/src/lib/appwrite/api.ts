@@ -1,5 +1,4 @@
 import { ID, Query } from "appwrite";
-
 import { appwriteConfig, account, databases, storage, avatars } from "./config";
 import { INewPost, INewUser } from "@/types";
 
@@ -8,7 +7,7 @@ import { INewPost, INewUser } from "@/types";
 // ============================================================
 
 // ============================== SIGN UP
-export async function createUserAccount(user: INewUser) {
+export async function createUserAccount(user: INewUser): Promise<any> {
   try {
     const newAccount = await account.create(
       ID.unique(),
@@ -17,7 +16,7 @@ export async function createUserAccount(user: INewUser) {
       user.name
     );
 
-    if (!newAccount) throw Error;
+    if (!newAccount) throw new Error("Failed to create new account");
 
     const avatarUrl = avatars.getInitials(user.name);
 
@@ -31,17 +30,17 @@ export async function createUserAccount(user: INewUser) {
 
     return newUser;
   } catch (error) {
-    console.log(error);
+    console.error("Error creating user account:", error);
     return error;
   }
 }
 
 // ============================== GET USER
-export async function getCurrentUser() {
+export async function getCurrentUser(): Promise<any> {
   try {
     const currentAccount = await getAccount();
 
-    if (!currentAccount) throw Error;
+    if (!currentAccount) throw new Error("No current account found");
 
     const currentUser = await databases.listDocuments(
       appwriteConfig.databaseId,
@@ -49,23 +48,22 @@ export async function getCurrentUser() {
       [Query.equal("accountId", currentAccount.$id)]
     );
 
-    if (!currentUser) throw Error;
+    if (!currentUser) throw new Error("User not found in database");
 
     return currentUser.documents[0];
   } catch (error) {
-    console.log(error);
+    console.error("Error getting current user:", error);
     return null;
   }
 }
 
 // ============================== GET ACCOUNT
-export async function getAccount() {
+export async function getAccount(): Promise<any> {
   try {
-    const currentAccount = await account.get();
-
-    return currentAccount;
+    return await account.get();
   } catch (error) {
-    console.log(error);
+    console.error("Error getting account:", error);
+    return null;
   }
 }
 
@@ -76,40 +74,37 @@ export async function saveUserToDB(user: {
   name: string;
   imageUrl: URL;
   username?: string;
-}) {
+}): Promise<any> {
   try {
-    const newUser = await databases.createDocument(
+    return await databases.createDocument(
       appwriteConfig.databaseId,
       appwriteConfig.userCollectionId,
       ID.unique(),
       user
     );
-
-    return newUser;
   } catch (error) {
-    console.log(error);
+    console.error("Error saving user to DB:", error);
+    return null;
   }
 }
 
 // ============================== SIGN IN ACCOUNT
-export async function signInAccount(user: { email: string; password: string }) {
+export async function signInAccount(user: { email: string; password: string }): Promise<any> {
   try {
-    const session = await account.createEmailPasswordSession(user.email, user.password);
-
-    return session;
+    return await account.createEmailPasswordSession(user.email, user.password);
   } catch (error) {
-    console.log(error);
+    console.error("Error signing in account:", error);
+    return null;
   }
 }
 
 // ============================== SIGN OUT ACCOUNT
-export async function signOutAccount() {
+export async function signOutAccount(): Promise<any> {
   try {
-    const session = await account.deleteSession("current");
-
-    return session;
+    return await account.deleteSession("current");
   } catch (error) {
-    console.log(error);
+    console.error("Error signing out account:", error);
+    return null;
   }
 }
 
@@ -117,24 +112,20 @@ export async function signOutAccount() {
 // POSTS
 // ============================================================
 
-export async function createPost(post: INewPost) {
+export async function createPost(post: INewPost): Promise<any> {
   try {
     // Upload image to storage
     const uploadedFile = await uploadFile(post.file[0]);
+    if (!uploadedFile) throw new Error("Failed to upload file");
 
-    if (!uploadedFile) throw Error;
-
-    // Get file url
+    // Get file URL
     const fileUrl = getFilePreview(uploadedFile.$id);
-
     if (!fileUrl) {
-      deleteFile(uploadedFile.$id);
-
-      throw Error;
+      await deleteFile(uploadedFile.$id);
+      throw new Error("Failed to get file URL");
     }
 
     // Convert tags into an array
-    // Replace any empty space with a comma
     const tags = post.tags?.replace(/ /g, '').split(",") || [];
 
     // Save post to DB
@@ -152,66 +143,58 @@ export async function createPost(post: INewPost) {
       }
     );
 
-    // Check if there's no newPost
     if (!newPost) {
       await deleteFile(uploadedFile.$id);
-      throw Error;
+      throw new Error("Failed to create new post");
     }
 
-    // If everything is succeeded
     return newPost;
-
   } catch (error) {
-    console.log(error);
+    console.error("Error creating post:", error);
+    return null;
   }
 }
 
 // ============================== UPLOAD FILE
-export async function uploadFile(file: File) {
+export async function uploadFile(file: File): Promise<any> {
   try {
-    const uploadedFile = await storage.createFile(
-      appwriteConfig.storageId,
-      ID.unique(),
-      file
-    );
-
-    return uploadedFile;
+    return await storage.createFile(appwriteConfig.storageId, ID.unique(), file);
   } catch (error) {
-    console.log(error);
+    console.error("Error uploading file:", error);
+    return null;
   }
 }
 
 // ============================== GET FILE URL
-export function getFilePreview(fileId: string) {
+export function getFilePreview(fileId: string): string | null {
   try {
-    const fileUrl = storage.getFilePreview(
+    return storage.getFilePreview(
       appwriteConfig.storageId,
       fileId,
       2000,
       2000,
       "top",
-      100,
+      100
     );
-
-    return fileUrl;
   } catch (error) {
-    console.log(error);
+    console.error("Error getting file preview:", error);
+    return null;
   }
 }
 
 // ============================== DELETE FILE
-export async function deleteFile(fileId: string) {
+export async function deleteFile(fileId: string): Promise<{ status: string } | null> {
   try {
     await storage.deleteFile(appwriteConfig.storageId, fileId);
-
     return { status: "ok" };
   } catch (error) {
-    console.log(error);
+    console.error("Error deleting file:", error);
+    return null;
   }
 }
 
 // ============================== GET RECENT POSTS
-export async function getRecentPosts() {
+export async function getRecentPosts(): Promise<any> {
   try {
     const posts = await databases.listDocuments(
       appwriteConfig.databaseId,
@@ -219,71 +202,65 @@ export async function getRecentPosts() {
       [Query.orderDesc("$createdAt"), Query.limit(20)]
     );
 
-    if (!posts) throw Error;
+    if (!posts) throw new Error("Failed to fetch recent posts");
 
     return posts;
   } catch (error) {
-    console.log(error);
+    console.error("Error getting recent posts:", error);
+    return null;
   }
 }
 
 // ============================== LIKE POSTS
-export async function likePost(postId: string, likesArray: string[]) {
+export async function likePost(postId: string, likesArray: string[]): Promise<any> {
   try {
     const updatedPost = await databases.updateDocument(
       appwriteConfig.databaseId,
       appwriteConfig.postCollectionId,
       postId,
-      {
-        likes: likesArray
-      }
+      { likes: likesArray }
     );
 
-    if (!updatedPost) throw Error;
+    if (!updatedPost) throw new Error("Failed to update likes on post");
 
     return updatedPost;
   } catch (error) {
-    console.log(error)
+    console.error("Error liking post:", error);
+    return null;
   }
 }
 
 // ============================== SAVE POSTS
-export async function savePost(postId: string, userId: string) {
+export async function savePost(postId: string, userId: string): Promise<any> {
   try {
     const updatedPost = await databases.createDocument(
       appwriteConfig.databaseId,
       appwriteConfig.savesCollectionId,
       ID.unique(),
-      {
-        user: userId,
-        post: postId,
-      }
+      { user: userId, post: postId }
     );
 
-    if (!updatedPost) throw Error;
+    if (!updatedPost) throw new Error("Failed to save post");
 
     return updatedPost;
   } catch (error) {
-    console.log(error)
+    console.error("Error saving post:", error);
+    return null;
   }
 }
 
 // ============================== DELETE SAVE POSTS
-export async function deleteSavedPost(savedRecordId: string) {
+export async function deleteSavedPost(savedRecordId: string): Promise<{ status: string } | null> {
   try {
-    const statusCode = await databases.deleteDocument(
+    await databases.deleteDocument(
       appwriteConfig.databaseId,
       appwriteConfig.savesCollectionId,
-      savedRecordId,
+      savedRecordId
     );
-
-    if (!statusCode) throw Error;
 
     return { status: 'ok' };
   } catch (error) {
-    console.log(error)
+    console.error("Error deleting saved post:", error);
+    return null;
   }
 }
-
-
-
