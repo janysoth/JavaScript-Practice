@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ID, Query } from "appwrite";
+
 import { appwriteConfig, account, databases, storage, avatars } from "./config";
 import { INewPost, INewUser } from "@/types";
 
@@ -7,7 +9,7 @@ import { INewPost, INewUser } from "@/types";
 // ============================================================
 
 // ============================== SIGN UP
-export async function createUserAccount(user: INewUser): Promise<any> {
+export async function createUserAccount(user: INewUser) {
   try {
     const newAccount = await account.create(
       ID.unique(),
@@ -16,7 +18,7 @@ export async function createUserAccount(user: INewUser): Promise<any> {
       user.name
     );
 
-    if (!newAccount) throw new Error("Failed to create new account");
+    if (!newAccount) throw Error;
 
     const avatarUrl = avatars.getInitials(user.name);
 
@@ -30,17 +32,17 @@ export async function createUserAccount(user: INewUser): Promise<any> {
 
     return newUser;
   } catch (error) {
-    console.error("Error creating user account:", error);
+    console.log(error);
     return error;
   }
 }
 
 // ============================== GET USER
-export async function getCurrentUser(): Promise<any> {
+export async function getCurrentUser() {
   try {
     const currentAccount = await getAccount();
 
-    if (!currentAccount) throw new Error("No current account found");
+    if (!currentAccount) throw Error;
 
     const currentUser = await databases.listDocuments(
       appwriteConfig.databaseId,
@@ -48,22 +50,23 @@ export async function getCurrentUser(): Promise<any> {
       [Query.equal("accountId", currentAccount.$id)]
     );
 
-    if (!currentUser) throw new Error("User not found in database");
+    if (!currentUser) throw Error;
 
     return currentUser.documents[0];
   } catch (error) {
-    console.error("Error getting current user:", error);
+    console.log(error);
     return null;
   }
 }
 
 // ============================== GET ACCOUNT
-export async function getAccount(): Promise<any> {
+export async function getAccount() {
   try {
-    return await account.get();
+    const currentAccount = await account.get();
+
+    return currentAccount;
   } catch (error) {
-    console.error("Error getting account:", error);
-    return null;
+    console.log(error);
   }
 }
 
@@ -74,37 +77,40 @@ export async function saveUserToDB(user: {
   name: string;
   imageUrl: URL;
   username?: string;
-}): Promise<any> {
+}) {
   try {
-    return await databases.createDocument(
+    const newUser = await databases.createDocument(
       appwriteConfig.databaseId,
       appwriteConfig.userCollectionId,
       ID.unique(),
       user
     );
+
+    return newUser;
   } catch (error) {
-    console.error("Error saving user to DB:", error);
-    return null;
+    console.log(error);
   }
 }
 
 // ============================== SIGN IN ACCOUNT
-export async function signInAccount(user: { email: string; password: string }): Promise<any> {
+export async function signInAccount(user: { email: string; password: string }) {
   try {
-    return await account.createEmailPasswordSession(user.email, user.password);
+    const session = await account.createEmailPasswordSession(user.email, user.password);
+
+    return session;
   } catch (error) {
-    console.error("Error signing in account:", error);
-    return null;
+    console.log(error);
   }
 }
 
 // ============================== SIGN OUT ACCOUNT
-export async function signOutAccount(): Promise<any> {
+export async function signOutAccount() {
   try {
-    return await account.deleteSession("current");
+    const session = await account.deleteSession("current");
+
+    return session;
   } catch (error) {
-    console.error("Error signing out account:", error);
-    return null;
+    console.log(error);
   }
 }
 
@@ -116,16 +122,20 @@ export async function createPost(post: INewPost) {
   try {
     // Upload image to storage
     const uploadedFile = await uploadFile(post.file[0]);
-    if (!uploadedFile) throw new Error("Failed to upload file");
 
-    // Get file URL
+    if (!uploadedFile) throw Error;
+
+    // Get file url
     const fileUrl = getFilePreview(uploadedFile.$id);
+
     if (!fileUrl) {
-      await deleteFile(uploadedFile.$id);
-      throw new Error("Failed to get file URL");
+      deleteFile(uploadedFile.$id);
+
+      throw Error;
     }
 
     // Convert tags into an array
+    // Replace any empty space with a comma
     const tags = post.tags?.replace(/ /g, '').split(",") || [];
 
     // Save post to DB
@@ -143,25 +153,32 @@ export async function createPost(post: INewPost) {
       }
     );
 
+    // Check if there's no newPost
     if (!newPost) {
       await deleteFile(uploadedFile.$id);
-      throw new Error("Failed to create new post");
+      throw Error;
     }
 
+    // If everything is succeeded
     return newPost;
+
   } catch (error) {
-    console.error("Error creating post:", error);
-    return null;
+    console.log(error);
   }
 }
 
 // ============================== UPLOAD FILE
-export async function uploadFile(file: File): Promise<any> {
+export async function uploadFile(file: File) {
   try {
-    return await storage.createFile(appwriteConfig.storageId, ID.unique(), file);
+    const uploadedFile = await storage.createFile(
+      appwriteConfig.storageId,
+      ID.unique(),
+      file
+    );
+
+    return uploadedFile;
   } catch (error) {
-    console.error("Error uploading file:", error);
-    return null;
+    console.log(error);
   }
 }
 
@@ -174,10 +191,8 @@ export function getFilePreview(fileId: string) {
       2000,
       2000,
       "top",
-      100
+      100,
     );
-
-    if (!fileUrl) throw Error;
 
     return fileUrl;
   } catch (error) {
@@ -189,10 +204,10 @@ export function getFilePreview(fileId: string) {
 export async function deleteFile(fileId: string) {
   try {
     await storage.deleteFile(appwriteConfig.storageId, fileId);
+
     return { status: "ok" };
   } catch (error) {
-    console.error("Error deleting file:", error);
-    return null;
+    console.log(error);
   }
 }
 
@@ -205,12 +220,11 @@ export async function getRecentPosts() {
       [Query.orderDesc("$createdAt"), Query.limit(20)]
     );
 
-    if (!posts) throw new Error("Failed to fetch recent posts");
+    if (!posts) throw Error;
 
     return posts;
   } catch (error) {
-    console.error("Error getting recent posts:", error);
-    return null;
+    console.log(error);
   }
 }
 
@@ -229,9 +243,8 @@ export async function likePost(postId: string, likesArray: string[]) {
     if (!updatedPost) throw Error;
 
     return updatedPost;
-
   } catch (error) {
-    console.error("Error liking post:", error);
+    console.log(error)
   }
 }
 
@@ -242,14 +255,17 @@ export async function savePost(postId: string, userId: string) {
       appwriteConfig.databaseId,
       appwriteConfig.savesCollectionId,
       ID.unique(),
-      { user: userId, post: postId }
+      {
+        user: userId,
+        post: postId,
+      }
     );
 
-    if (!updatedPost) throw new Error("Failed to save post");
+    if (!updatedPost) throw Error;
 
     return updatedPost;
   } catch (error) {
-    console.error("Error saving post:", error);
+    console.log(error)
   }
 }
 
@@ -259,13 +275,16 @@ export async function deleteSavedPost(savedRecordId: string) {
     const statusCode = await databases.deleteDocument(
       appwriteConfig.databaseId,
       appwriteConfig.savesCollectionId,
-      savedRecordId
+      savedRecordId,
     );
 
     if (!statusCode) throw Error;
 
     return { status: 'ok' };
   } catch (error) {
-    console.error("Error deleting saved post:", error);
+    console.log(error)
   }
 }
+
+
+
