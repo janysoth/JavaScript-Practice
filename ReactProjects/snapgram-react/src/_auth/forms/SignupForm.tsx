@@ -10,14 +10,17 @@ import { Button } from "@/components/ui/button"
 import { useForm } from "react-hook-form"
 import { SignupValidation } from "@/lib/validation/index"
 import Loader from "@/components/shared/Loader"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useToast } from "@/components/ui/use-toast"
 import { useCreateUserAccount, useSignInAccount } from "@/lib/react-query/queriesAndMutations"
+import { useUserContext } from "@/context/AuthContext"
 
 
 const SignupForm = () => {
 
   const { toast } = useToast();
+  const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
+  const navigate = useNavigate();
 
   const { mutateAsync: createUserAccount, isLoading: isCreatingUser } = useCreateUserAccount();
 
@@ -50,14 +53,18 @@ const SignupForm = () => {
     });
 
     if (!session) {
-      toast({ title: "Something went wrong. Please login your new account", });
-
-      navigate("/sign-in");
-
-      return;
+      return toast({ title: "Something went wrong. Please login your new account", });
     }
 
+    const isLoggedIn = await checkAuthUser();
 
+    if (isLoggedIn) {
+      form.reset();
+
+      navigate("/");
+    } else {
+      return toast({ title: "Login failed. Please try again.", });
+    }
   }
 
   return (

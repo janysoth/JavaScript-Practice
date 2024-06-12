@@ -39,7 +39,7 @@ const SignupForm = () => {
 
       if (!newUser) {
         toast({ title: "Sign up failed. Please try again.", });
-        
+
         return;
       }
 
@@ -50,9 +50,9 @@ const SignupForm = () => {
 
       if (!session) {
         toast({ title: "Something went wrong. Please login your new account", });
-        
+
         navigate("/sign-in");
-        
+
         return;
       }
 
@@ -64,7 +64,7 @@ const SignupForm = () => {
         navigate("/");
       } else {
         toast({ title: "Login failed. Please try again.", });
-        
+
         return;
       }
     } catch (error) {
