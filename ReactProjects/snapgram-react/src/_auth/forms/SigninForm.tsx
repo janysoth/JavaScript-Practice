@@ -1,7 +1,7 @@
 import * as z from "zod";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -9,9 +9,17 @@ import { Button } from "@/components/ui/button";
 import Loader from "@/components/shared/Loader";
 
 import { SigninValidation } from '@/lib/validation';
+import { useToast } from "@/components/ui/use-toast";
+import { useUserContext } from "@/context/AuthContext";
+import { useSignInAccount } from "@/lib/react-query/queriesAndMutations";
 
 
 const SigninForm = () => {
+  const { toast } = useToast();
+  const navigate = useNavigate();
+  const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
+
+  const { mutateAsync: signInAccount, isPending } = useSignInAccount();
 
   const form = useForm<z.infer<typeof SigninValidation>>({
     resolver: zodResolver(SigninValidation),
@@ -21,11 +29,28 @@ const SigninForm = () => {
     },
   });
 
-  const isLoading = false;
-  const isUserLoading = false;
+  const handleSignin = async (user: z.infer<typeof SigninValidation>) => {
+    const session = await signInAccount({
+      email: user.email,
+      password: user.password
+    });
 
+    if (!session) {
+      return toast({ title: "Login failed. Please try again." });
+    }
 
-  const handleSignin = () => { }
+    const isLoggedIn = await checkAuthUser();
+
+    if (isLoggedIn) {
+      form.reset();
+
+      navigate("/");
+    } else {
+      toast({ title: "Login failed. Please try again.", });
+
+      return;
+    }
+  }
 
   return (
     <Form {...form}>
@@ -70,7 +95,7 @@ const SigninForm = () => {
           />
 
           <Button type="submit" className="shad-button_primary">
-            {isLoading || isUserLoading ? (
+            {isUserLoading ? (
               <div className="flex-center gap-2">
                 <Loader /> Loading...
               </div>
@@ -80,7 +105,7 @@ const SigninForm = () => {
           </Button>
 
           <p className="text-small-regular text-light-2 text-center mt-2">
-            Don&apos;t have an account?
+            Don't have an account?
             <Link
               to="/sign-up"
               className="text-primary-500 text-small-semibold ml-1">
