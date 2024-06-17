@@ -18,9 +18,10 @@ import { useToast } from "../ui/use-toast"
 
 type PostFormProps = {
   post?: Models.Document;
+  action: 'Create' | 'Update';
 };
 
-const PostForm = ({ post }: PostFormProps) => {
+const PostForm = ({ post, action }: PostFormProps) => {
   const { user } = useUserContext();
   const navigate = useNavigate();
   const { toast } = useToast();
