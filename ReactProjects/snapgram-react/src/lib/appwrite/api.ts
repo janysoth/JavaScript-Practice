@@ -265,3 +265,18 @@ export async function deleteSavedPost(savedRecordId: string) {
     console.log(error, "deletePost failed.")
   }
 }
+
+// ============================== GET POST BY ID
+export async function getPostById(postId: string) {
+  try {
+    const post = await databases.getDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,
+      postId,
+    )
+
+    return post;
+  } catch (error) {
+    console.log(error, "getPostById failed.");
+  }
+}
