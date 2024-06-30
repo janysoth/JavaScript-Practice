@@ -89,15 +89,15 @@ const AuthForm = ({ type }: { type: string }) => {
 
               <CustomInput
                 control={form.control}
-                name='username'
-                label='username'
-                placeholder='Enter your username'
+                name='email'
+                label='Email'
+                placeholder='Enter your email'
               />
 
               <CustomInput
                 control={form.control}
                 name='password'
-                label='password'
+                label='Password'
                 placeholder='Enter your password'
               />
               <Button type="submit">Submit</Button>
