@@ -16,5 +16,26 @@ The path does not need to start or end at the root or a leaf, but it must go dow
  * @return {number}
  */
 var pathSum = function (root, targetSum) {
+  if (!root) return 0;
 
+  // Helper function to count paths with sum starting from the current node
+  function countPathsWithSum(node, targetSum) {
+    if (!node) return 0;
+
+    let count = 0;
+    if (node.val === targetSum) count++;
+
+    count += countPathsWithSum(node.left, targetSum - node.val);
+    count += countPathsWithSum(node.right, targetSum - node.val);
+
+    return count;
+  }
+
+  // Main function to traverse the tree
+  let result = countPathsWithSum(root, targetSum);
+
+  result += pathSum(root.left, targetSum);
+  result += pathSum(root.right, targetSum);
+
+  return result;
 };
