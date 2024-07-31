@@ -14,6 +14,9 @@ import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHt
 import mergedResolvers from "./resolvers/index.js";
 import mergedTypeDefs from "./typeDefs/index.js";
 
+// To use .env file
+dotenv.config();
+
 // Create an app from express
 const app = express();
 
