@@ -30,7 +30,9 @@ const longestZigZag = function (root) {
 
   const dfs = (node, direction, length) => {
     if (!node) return;
+
     maxLength = Math.max(maxLength, length);
+
     if (direction === 'left') {
       dfs(node.left, 'right', length + 1);
       dfs(node.right, 'left', 1);
@@ -40,8 +42,10 @@ const longestZigZag = function (root) {
     }
   };
 
-  dfs(root.left, 'right', 1);
-  dfs(root.right, 'left', 1);
+  if (root) {
+    dfs(root.left, 'right', 1);
+    dfs(root.right, 'left', 1);
+  }
 
   return maxLength;
 };
