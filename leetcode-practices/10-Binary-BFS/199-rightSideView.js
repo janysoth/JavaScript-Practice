@@ -17,22 +17,27 @@ function TreeNode(val, left, right) {
 const rightSideView = function (root) {
   if (!root) return [];
 
-  const rightView = [];
-  const queue = [root];
+  const result = [];
+  // Use a simple queue initialized with the root
+  let queue = [root];
 
   while (queue.length > 0) {
-    const levelSize = queue.length;
-    let lastNodeValue = null;
+    // Prepare for the next level
+    const nextQueue = [];
 
-    for (let i = 0; i < levelSize; i++) {
-      const currentNode = queue.shift();
-      lastNodeValue = currentNode.val;
+    // Capture the value of the rightmost node at this level
+    result.push(queue[queue.length - 1].val);
 
-      if (currentNode.left) queue.push(currentNode.left);
-      if (currentNode.right) queue.push(currentNode.right);
+    // Traverse nodes in the current level
+    for (let node of queue) {
+      // Add left child first, then right child
+      if (node.left) nextQueue.push(node.left);
+      if (node.right) nextQueue.push(node.right);
     }
 
-    rightView.push(lastNodeValue);
+    // Move to the next level
+    queue = nextQueue;
   }
-  return rightView;
+
+  return result;
 };
