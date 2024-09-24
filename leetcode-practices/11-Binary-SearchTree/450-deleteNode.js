@@ -23,27 +23,20 @@ If the node is found, delete the node.
 const deleteNode = function (root, key) {
   if (!root) return null;
 
-  // Find the node to delete
-  if (key < root.val) {
+  if (key < root.val)
     root.left = deleteNode(root.left, key);
-  } else if (key > root.val) {
+  else if (key > root.val)
     root.right = deleteNode(root.right, key);
-  } else {
-    // Node with only one child or no child
+  else {
     if (!root.left) return root.right;
     if (!root.right) return root.left;
 
-    // Node with two children: Get the inorder successor (smallest in the right subtree)
-    const findMin = (node) => {
-      while (node.left) node = node.left;
-      return node;
-    };
+    // Find the in-order successor (smallest in the right subtree)
+    let minNode = root.right;
+    while (minNode.left) minNode = minNode.left;
 
-    let successor = findMin(root.right);
-    root.val = successor.val;
-
-    // Delete the inorder successor
-    root.right = deleteNode(root.right, successor.val);
+    root.val = minNode.val;
+    root.right = deleteNode(root.right, minNode.val);
   }
 
   return root;
