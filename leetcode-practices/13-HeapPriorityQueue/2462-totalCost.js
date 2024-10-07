@@ -20,32 +20,44 @@ Return the total cost to hire exactly k workers.
  */
 
 const totalCost = function (costs, k, candidates) {
-  let leftHeap = new MinPriorityQueue();
-  let rightHeap = new MinPriorityQueue();
+  const leftHeap = new MinPriorityQueue();
+  const rightHeap = new MinPriorityQueue();
+
+  let left = 0;
+  let right = costs.length - 1;
 
   // Add the first 'candidates' workers to the left heap
-  for (let i = 0; i < candidates; i++) {
-    leftHeap.enqueue(costs[i], costs[i]);
+  while (left < candidates) {
+    leftHeap.enqueue(costs[left], costs[left]);
+    left++;
   }
 
-  // Add the last 'candidates' workers to the right heap
-  for (let i = costs.length - 1; i >= Math.max(candidates, costs.length - candidates); i--) {
-    rightHeap.enqueue(costs[i], costs[i]);
+  // Add the last 'candidates' workers to the right heap (avoid overlapping with left heap)
+  while (right >= costs.length - candidates && right >= left) {
+    rightHeap.enqueue(costs[right], costs[right]);
+    right--;
   }
 
   let totalCost = 0;
 
   // Choose workers k times
   for (let i = 0; i < k; i++) {
-    if (leftHeap.isEmpty()) {
+    // Get the cheaper option from the two heaps
+    if (leftHeap.isEmpty() || (!rightHeap.isEmpty() && rightHeap.front().element < leftHeap.front().element)) {
       totalCost += rightHeap.dequeue().element;
-    } else if (rightHeap.isEmpty()) {
-      totalCost += leftHeap.dequeue().element;
+
+      // Add the next worker from the right side to the right heap if available
+      if (right >= left) {
+        rightHeap.enqueue(costs[right], costs[right]);
+        right--;
+      }
     } else {
-      if (leftHeap.front().element <= rightHeap.front().element) {
-        totalCost += leftHeap.dequeue().element;
-      } else {
-        totalCost += rightHeap.dequeue().element;
+      totalCost += leftHeap.dequeue().element;
+
+      // Add the next worker from the left side to the left heap if available
+      if (left <= right) {
+        leftHeap.enqueue(costs[left], costs[left]);
+        left++;
       }
     }
   }
