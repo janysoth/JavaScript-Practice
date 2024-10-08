@@ -35,13 +35,12 @@ const guessNumber = function (n) {
     const mid = Math.floor((low + high) / 2);
     const result = guess(mid);
 
-    if (result === 0) {
+    if (result === 0)
       return mid; // Found the number
-    } else if (result === 1) {
+    else if (result === 1)
       low = mid + 1; // Target is higher, move to the right half
-    } else {
+    else
       high = mid - 1; // Target is lower, move to the left half
-    }
   }
 
   return -1; // Fallback, though the problem guarantees a solution exists
