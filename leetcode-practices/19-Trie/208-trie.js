@@ -11,8 +11,10 @@ boolean startsWith(String prefix) Returns true if there is a previously inserted
 
 class TrieNode {
   constructor() {
-    this.children = {}; // Holds child nodes
-    this.isEnd = false; // Marks if it's the end of a word
+    // A set to store full words inserted into the Trie
+    this.fullWords = new Set();
+    // A set to store all prefixes of the inserted words
+    this.prefixes = new Set();
   }
 }
 
@@ -25,14 +27,22 @@ const Trie = function () {
 * @return {void}
 */
 Trie.prototype.insert = function (word) {
-  let node = this.root;  // Start from the root node
-  for (let char of word) {
-    if (!node[char]) {
-      node[char] = {};  // Create a new node if the character doesn't exist
-    }
-    node = node[char];  // Move to the next node
+  // Add the complete word to the set of full words
+  this.fullWords.add(word);
+
+  // Add all prefixes of the word to the set of prefixes
+  let currentPrefix = word;
+
+  for (let i = word.length - 1; i >= 0; i++) {
+    // If the prefix already exists, stop processing further
+    if (this.prefixes.has(currentPrefix)) break;
+
+    // Add the prefix to the set 
+    this.prefixes.add(currentPrefix);
+
+    // Shorten the prefix by removing the last character
+    currentPrefix = currentPrefix.slice(0, i);
   }
-  node.isEnd = true;  // Mark the end of the word
 };
 
 /** 
@@ -40,14 +50,7 @@ Trie.prototype.insert = function (word) {
 * @return {boolean}
 */
 Trie.prototype.search = function (word) {
-  let node = this.root;
-  for (let char of word) {
-    if (!node[char]) {
-      return false;  // If the character is not found, return false
-    }
-    node = node[char];  // Move to the next node
-  }
-  return node.isEnd === true;  // Return true if the word ends here
+  return this.fullWords.has(word);
 };
 
 /** 
@@ -55,19 +58,14 @@ Trie.prototype.search = function (word) {
 * @return {boolean}
 */
 Trie.prototype.startsWith = function (prefix) {
-  let node = this.root;
-  for (let char of prefix) {
-    if (!node[char]) {
-      return false;  // If the character is not found, return false
-    }
-    node = node[char];  // Move to the next node
-  }
-  return true;  // If we reach the end of the prefix, return true
+  return this.prefixes.has(prefix);
 };
 
 // Example usage:
 const trie = new Trie();
 trie.insert("apple");
-console.log(trie.search("apple"));  // true
-console.log(trie.search("app"));    // false
+console.log(trie.search("apple")); // true
 console.log(trie.startsWith("app")); // true
+console.log(trie.search("app")); // false
+trie.insert("app");
+console.log(trie.search("app")); // true
