@@ -21,17 +21,10 @@ const suggestedProducts = function (products, searchWord) {
     // Update the prefix with the current character
     prefix += char;
 
-    let suggestions = [];
+    // Filter products that match the prefix and limit to 3 suggestions
+    const suggestions = products.filter(product => product.startsWith(prefix));
 
-    for (let product of products) {
-      if (product.startsWith(prefix))
-        suggestions.push(product);
-
-      // Limit to 3 suggestions
-      if (suggestions.length === 3) break;
-    }
-
-    result.push(suggestions);
+    result.push(suggestions.slice(0, 3));
   }
 
   return result;
